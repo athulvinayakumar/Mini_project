@@ -1,0 +1,416 @@
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f8fafb;
+  /* overflow: hidden; */
+}
+
+p {
+  color: #b3b3b3;
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+a {
+  -webkit-transition: .3s all ease;
+  -o-transition: .3s all ease;
+  transition: .3s all ease;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+.content {
+  padding: 7rem 0;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+@media (max-width: 991.98px) {
+  .content .bg {
+    height: 500px;
+  }
+}
+
+.content .contents, .content .bg {
+  width: 50%;
+}
+
+@media (max-width: 1199.98px) {
+  .content .contents, .content .bg {
+    width: 100%;
+  }
+}
+
+.content .contents .form-group, .content .bg .form-group {
+  overflow: hidden;
+  margin-bottom: 0;
+  padding: 15px 15px;
+  border-bottom: none;
+  box-shadow: 0px 9px 16px -2px #0000001a;
+  position: relative;
+  border-radius: 5px;
+  background: #edf2f5;
+  border-bottom: 1px solid #e6edf1;
+}
+
+.content .contents .form-group label, .content .bg .form-group label {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-transition: .3s all ease;
+  -o-transition: .3s all ease;
+  transition: .3s all ease;
+}
+
+.content .contents .form-group input, .content .bg .form-group input {
+  background: transparent;
+}
+
+
+
+
+
+.content .contents .form-group.last, .content .bg .form-group.last {
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  margin-top: 2%;
+  height: 65px;
+}
+
+
+.content .contents .form-group.focus, .content .bg .form-group.focus {
+  background: #fff;
+}
+
+#password::placeholder {
+  font-size: 13px;
+}
+#l-password::placeholder {
+  font-size: 13px;
+}
+
+#username::placeholder{
+  font-size: 13px;
+}
+#l-username::placeholder {
+  font-size: 13px;
+}
+
+#email::placeholder {
+  font-size: 13px;
+}
+
+#confirm-password::placeholder {
+  font-size: 13px;
+}
+
+.content .contents .form-control, .content .bg .form-control {
+  border: none;
+  padding: 0;
+  font-size: 20px;
+  border-radius: 0;
+}
+
+.content .contents .form-control:active, .content .contents .form-control:focus, .content .bg .form-control:active, .content .bg .form-control:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.content .bg {
+  background-size: cover;
+  background-position: center;
+}
+
+.content a {
+  color: #888;
+  text-decoration: underline;
+}
+
+.content .btn {
+  height: 54px;
+  padding-left: 30px;
+  padding-right: 30px;
+  box-shadow: 0px 9px 16px -2px #00000075;
+}
+
+.content .forgot-pass {
+  position: relative;
+  top: 2px;
+  font-size: 14px;
+}
+
+
+.control {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.control .caption {
+  position: relative;
+  top: .2rem;
+  color: #888;
+}
+
+.control input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.control_check {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background: #e6e6e6;
+  border-radius: 4px;
+  box-shadow: 0px 9px 16px -2px #00000021;
+}
+
+.control--radio .control_check {
+  border-radius: 50%;
+}
+
+.control:hover input~.control_check,
+.control input:focus~.control_check {
+  background: #ccc;
+  box-shadow: 0px 9px 16px -2px #0000002e;
+}
+
+.control input:checked~.control_check {
+  background: #6c63ff;
+}
+
+
+.control input:disabled~.control_check {
+  background: #e6e6e6;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.control_check:after {
+  font-family: 'Material Icons';
+  content: '\e876';
+  position: absolute;
+  display: none;
+  font-size: 16px;
+  -webkit-transition: .3s all ease;
+  -o-transition: .3s all ease;
+  transition: .3s all ease;
+}
+
+.control input:checked~.control_check:after {
+  display: block;
+  color: #fff;
+}
+
+.control--checkbox .control_check:after {
+  top: 50%;
+  left: 50%;
+  margin-top: -1px;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.control--checkbox input:disabled~.control_check:after {
+  border-color: #7b7b7b;
+}
+
+.control--checkbox input:disabled:checked~.control_check {
+  background-color: #7e0cf5;
+  opacity: .2;
+}
+
+.forms {
+  position: relative;
+}
+
+.form-signup {
+  display: none;
+  position: absolute;
+  top: -50px;
+  -webkit-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.form-signin {
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.text-danger {
+  display: none;
+  font-size: 14px;
+}
+
+
+
+#alert-danger-ue {
+  top: 1%;
+  position: absolute;
+  width: 30%;
+  margin-left: 1%;
+  display: none;
+  -webkit-animation-name: fadeInLeftWarning;
+  animation-name: fadeInLeftWarning;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.btn-close {
+  float: right;
+  border: none;
+  background-color: transparent;
+}
+
+@-webkit-keyframes fadeInLeftWarning {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInLeftWarning {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.valid {
+  color: #44E444;
+}
+
+.invalid {
+  color: #FF0000;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#check-bad, #check-bconfirm {
+  visibility: hidden;
+  color: red;
+  font-size: 20px;
+  position: absolute;
+ 
+}
+
+#check-good, #check-gconfirm {
+  visibility: hidden;
+  color: green;
+  font-size: 20px;
+  position: absolute;
+}
+
+.btn-change {
+  width: 100%;
+}
+#user-in{
+  color: white !important;
+  font-weight: 600;
+  font-size: 0.8em;
+}
+#user-in:hover{
+  color: #ff4c4c !important;
+}

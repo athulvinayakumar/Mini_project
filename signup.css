@@ -1,0 +1,119 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+#head_details {
+    background-color: rgba(0, 0, 0, 0.685);
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 850px;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+#web_name {
+    font-size: 30px;
+    color: white;
+}
+
+#link {
+    padding-right: 30px;
+    padding-bottom: 10px;
+}
+
+#a {
+    text-decoration: none;
+    padding: 10px 10px 10px 10px;
+    color: black;
+    font-size: 19px;
+    color: white;
+}
+
+body {
+    background-image: url("https://media.istockphoto.com/photos/leather-shoes-in-a-store-picture-id1180155226?b=1&k=20&m=1180155226&s=170667a&w=0&h=zO7LBuLp3TIUBoKzTMzgsSPdBaTmjmb91fbvTQXqBq0=");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+fieldset {
+    margin-left: 35%;
+    border-radius: 10px;
+    margin-top: 5%;
+    background-color: rgba(0, 0, 0, 0.795);
+    width: 400px;
+}
+
+.button {
+    height: 30px;
+    width: 100px;
+    background-color: rgba(0, 128, 0, 0.808);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    border: none;
+}
+
+.button:hover {
+    background-color: green;
+}
+
+.text {
+    height: 35px;
+    width: 300px;
+    border-radius: 3px;
+    padding: 10px;
+    margin-left: 30px;
+    font-size: 15px;
+    border: 2px solid;
+}
+h1 {
+    font-size: 40px;
+    color: white;
+    text-align: center;
+}
+
+hr {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+p {
+    color: white;
+    font-size: 15px;
+}
+
+#img {
+    height: 35px;
+    width: 35px;
+    border-radius: 20px;
+}
+
+a {
+    color: wheat;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+#paragraph1
+{
+    /* margin-left: 55px; */
+    text-align: center;
+}
+
+#paragraph2
+{
+    margin-left: 250px;
+    margin-top: -15px;
+}
+#message1,#message2,#message3,#message4,#message5,#message6,#message7,#login_error
+{
+    height: 17px;
+    font-size: bold 20px;
+    text-align: center;
+    color: red;
+    padding-bottom: 4px; 
+}
+

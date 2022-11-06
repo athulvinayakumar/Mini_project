@@ -1,0 +1,90 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+body {
+    background-image: url("https://imgs.search.brave.com/yLRDcvWovZ-DYiWCkmZjTheC0_uE7gNhb-rSXp46M5c/rs:fit:800:538:1/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9tZW4t/cy1hY2Nlc3Nvcmll/cy0yNTg0NzMwMi5q/cGc");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+fieldset {
+    margin-left: 500px;
+    border-radius: 10px;
+    margin-top: 150px;
+    background-color: rgba(0, 0, 0, 0.795);
+    width: 600px;
+}
+
+.button {
+    height: 30px;
+    width: 120px;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    border: none;
+}
+
+.button:hover {
+    background-color: blue;
+    color: white;
+}
+
+.text {
+    height: 35px;
+    width: 350px;
+    border-radius: 3px;
+    padding: 10px;
+    border: none;
+    margin-left: 110px;
+    font-size: 15px;
+}
+h1 {
+    font-size: 60px;
+    color: white;
+    text-align: center;
+}
+
+hr {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+p {
+    color: white;
+    font-size: 15px;
+}
+
+#img {
+    height: 35px;
+    width: 35px;
+    border-radius: 20px;
+}
+
+a {
+    color: wheat;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}
+#paragraph1
+{
+    margin-left: 55px;
+}
+#paragraph2
+{
+    margin-left: 430px;
+    margin-top: -15px;
+}
+#message1,#message2
+{
+    height: 17px;
+    font-size: bold 20px;
+    text-align: center;
+    color: red;
+    padding-bottom: 4px;
+    
+}
