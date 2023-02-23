@@ -1,10 +1,8 @@
-<?php
+<!-- <?php
 session_start();
 include 'db.php';
-if (!isset($_SESSION['Username'])) {
-    header('location:login.php');
-}
-?>
+
+?> -->
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -32,8 +30,13 @@ if (!isset($_SESSION['Username'])) {
     <link rel="stylesheet" href="./css/style2.css">
     <!-- Style-CSS -->
     <!-- font-awesome-icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
     <link href="font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- //font-awesome-icons -->
@@ -43,6 +46,89 @@ if (!isset($_SESSION['Username'])) {
     <!-- //Fonts -->
 
 </head>
+<script>
+        $(document).ready(function() {
+            var check = 0;
+            var check1 = 0;
+            var check2 = 0;
+            $("#Name").keyup(function() {
+                var name = document.getElementById("Name").value
+                var c_name = /^[a-z ]{3,20}$/i;
+                var r_name = c_name.test(name)
+                if (r_name == false) {
+                    $("#name2").text("*Enter a valid Name");
+                    check=1;
+                } else {
+                    check=0;
+                    $("#name2").text("");
+
+                }
+            })
+
+            $("#inputemail").keyup(function() {
+                var email = document.getElementById("inputemail").value
+                var c_email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+                var r_email = c_email.test(email)
+                if (r_email == false) {
+                    check1=1;
+                    $("#inputemail2").text("*Enter a valid Email");
+                } else {
+                   
+                                check1=0;
+                                $("#inputemail2").text("");
+                            }
+            })
+            $("#inputmob").keyup(function() {
+                var mobile = document.getElementById("inputmob").value
+                var c_mobile = /^[6-9][0-9]{9}$/;
+                var r_mobile = c_mobile.test(mobile)
+                if (r_mobile == false) {
+                    $("#inputmob2").text("*Enter a valid mobile number");
+                   check2=1;
+                } else {
+                    check2=0;
+                    $("#inputmob2").text("");
+
+
+                }
+            })
+            $("#msg").keyup(function() {
+                var mobile = document.getElementById("msg").value
+                var c_mobile = /^[a-zA-Z. ']{3,30}$/;
+                var r_mobile = c_mobile.test(mobile)
+                if (r_mobile == false) {
+                    $("#msg2").text("*Enter a valid message");
+                   check2=1;
+                } else {
+                    check2=0;
+                    $("#msg2").text("");
+
+
+                }
+            })
+            $("#btn").click(function() {
+                var mobile = document.getElementById("inputmob").value
+                var name = document.getElementById("Name").value
+                var email = document.getElementById("inputemail").value
+                if (mobile.length == 0) {
+                    alert("Please fill all the fields");
+                } else if (name.length == 0) {
+                    alert("Please fill all the fields");
+
+
+                } else if (email.length == 0) {
+                    alert("Please fill all the fields");
+
+                } else {
+                }
+                if (check == 1 || check1 == 1 || check2 == 1) {
+                    alert("please fill all field correctly");
+                } else {
+                    
+                }
+            })
+        })
+    </script>
 
 <body>
 
@@ -61,8 +147,10 @@ if (!isset($_SESSION['Username'])) {
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2">
                         <li class=""><a href="index.php">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="product.php">Product</a></li>
+                        <li><a href="contact.php">Contact</a></li>
+
                         <!-- <li>
                             <label for="drop-2" class="toggle">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span> </label>
                             <a href="#">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span></a>
@@ -73,9 +161,22 @@ if (!isset($_SESSION['Username'])) {
                                 <li><a href="shop-single.html">Single Page</a></li>
                             </ul>
                         </li> -->
-                        <a href="#" id="user-in"><?php echo strtoupper($_SESSION['Username']); ?></a>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="logout.php">logout</a></li>
+                        <?php if (isset($_SESSION['Username'])) { ?>
+                            <a href="#" id="user-in"><?php echo strtoupper($_SESSION['Username']); ?></a>
+                            <li><a href="logout.php">logout</a></li>
+
+                        <?php } else { ?>
+                            <li><a href="./login.php">Signin</a></li>
+                        <?php
+                        }
+                        ?>
+                        <?php if (isset($_SESSION['Username'])) { ?>
+                            <li>|</li>
+                            <li><a href="cart.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
+                        <?php } else { ?>
+                            <li><a href="login.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
+                        <?php } ?>
+
 
                     </ul>
                 </nav>
@@ -95,37 +196,35 @@ if (!isset($_SESSION['Username'])) {
             <h3 class="tittle text-center"><span class="sub-tittle">Find Us</span> Contact Us</h3>
             <div class="row contact-main-info mt-5">
                 <div class="col-md-6 contact-right-content">
-                    <form action="#" method="post">
-                        <input type="text" name="Name" placeholder="Name" required="">
-                        <input type="email" class="email" name="Email" placeholder="Email" required="">
-                        <input type="text" name="Phone no" placeholder="Phone" required="">
-                        <textarea name="Message" placeholder="Message" required=""></textarea>
+                    <form action="#" method="post" class="col-lg-10 offset-lg-7">
+                        <input type="text" name="Name" id="Name" placeholder="Name" autocomplete="off" required="">
+                        <div id="name2" style=color:red></div>
+                        <input type="email" class="email" name="Email" id="inputemail" placeholder="Email" autocomplete="off" required="">
+                        <div id="inputemail2"></div>
+                        <input type="text" name="Phone_no" id="inputmob" placeholder="Phone" autocomplete="off"  required="">
+                        <div id="inputmob2"></div>
+                        <textarea name="Message" placeholder="Message"  id="msg" autocomplete="off"  required=""></textarea>
+                        <div id="msg2"></div>
                         <div class="read mt-3">
-                            <input type="submit" value="Submit">
+                            <input type="submit" name="sub" class="offset-lg-4 btn-primary" id="btn" value="Submit">
                         </div>
                     </form>
+                    <?php
+                    if(isset($_POST['sub'])){
+                        $name=$_POST['Name'];
+                        $email=$_POST['Email'];
+                        $phone=$_POST['Phone_no'];
+                        $msg=$_POST['Message'];
+                        $usr_id=$_SESSION['usr_id'];
+                        if($name!=null&&$email!=null&&$phone!=null&&$msg!=null){
+                            $con=mysqli_connect("localhost","root","","shoes");
+                            $sql="INSERT INTO `contact`(`usr_id`, `usr_name`, `usr_email`, `usr_phone`, `usr_msg`) VALUES ('$usr_id','$name','$email','$phone','$msg')";
+                            mysqli_query($con,$sql);
+                            echo"<script>alert('Messages sent successfully')</script>";
+                        }
+                    }
+                    ?>
                 </div>
-                <div class="col-md-6 contact-left-content">
-                    <div class="address-con">
-                        <h4 class="mb-2"><span class="fa fa-phone-square" aria-hidden="true"></span> Phone</h4>
-                        <p>9847321560</p>
-                        <p>9847321560</p>
-                    </div>
-                    <div class="address-con my-4">
-                        <h4 class="mb-2"><span class="fa fa-envelope-o" aria-hidden="true"></span> Email </h4>
-                        <p><a href="mailto:info@example.com">info@example.com</a></p>
-                        <p><a href="mailto:info@example.com">info@example.com</a></p>
-                    </div>
-                    <div class="address-con mb-4">
-                    </div>
-                    <div class="address-con">
-                        <h4 class="mb-2"><span class="fa fa-map-marker" aria-hidden="true"></span> Location </h4>
-
-                        <p>United States</p>
-                    </div>
-
-                </div>
-
             </div>
         </div>
     </section>
@@ -176,14 +275,14 @@ if (!isset($_SESSION['Username'])) {
                         </form>
                     </div>
                     <div class="row mt-lg-4 bottom-w3layouts-sec-nav mx-0">
-                        <div class="col-md-4 footer-grid_section_w3layouts">
+          <div class="col-md-4 footer-grid_section_w3layouts">
                             <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Information</h3>
                             <ul class="list-unstyled w3layouts-icons">
                                 <li>
-                                    <a href="index.html">Home</a>
+                                    <a href="#">Home</a>
                                 </li>
                                 <li class="mt-3">
-                                    <a href="about.html">About Us</a>
+                                    <a href="#">About Us</a>
                                 </li>
                                 <!-- <li class="mt-3">
                                     <a href="#">Gallery</a>
@@ -192,7 +291,7 @@ if (!isset($_SESSION['Username'])) {
                                     <a href="#">Services</a>
                                 </li>
                                 <li class="mt-3">
-                                    <a href="contact.html">Contact Us</a>
+                                    <a href="#">Contact Us</a>
                                 </li>
                             </ul>
                         </div>
@@ -253,7 +352,7 @@ if (!isset($_SESSION['Username'])) {
             </div>
     </footer>
     <!-- //footer -->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
 
 </html>

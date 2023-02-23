@@ -20,15 +20,15 @@
     function unames() {
 
         var name = document.getElementById("first").value;
-        var letters = /[A-Z][a-z]* [A-Z][a-z]*/;
+        var letters = /^[A-Z][a-z]+$/;;
          if (!letters.test(name)) { 
-            document.getElementById("message1").innerHTML = "Firstname and should Start with capital Letter";
+            document.getElementById("message1").innerHTML = "Firstname should Start with capital Letter";
             flag1=0;
         } else {
             document.getElementById("message1").innerHTML = "";
             flag1=1;
         }
-    }1 
+    }
 
     
     function users() {
@@ -104,13 +104,13 @@
     function adds() {
     
         var user = document.getElementById("fourth").value;
-        var letters = /^[A-Za-z]+$/;
+        var letters = /[A-Z][a-z]* [A-Z][a-z]*/;
         if(user=='')
         {
             document.getElementById("message4").innerHTML = "";
         }
         else if (!letters.test(user)) {
-            document.getElementById("message4").innerHTML = "Address field required alphabet characters";
+            document.getElementById("message4").innerHTML = "Address should contain two Words starting should be captial";
             flag7=0;
         }
         else{

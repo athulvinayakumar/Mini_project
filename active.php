@@ -9,4 +9,5 @@ if(mysqli_query($connection,$sql))
     echo("<script>alert('item activated successfully')</script>");
 }
 header("Location: edit_details.php");
+
 ?>

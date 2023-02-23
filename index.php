@@ -1,9 +1,7 @@
 <?php
 session_start();
 include 'db.php';
-if (!isset($_SESSION['Username'])) {
-    header('location:login.php');
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -34,6 +32,7 @@ if (!isset($_SESSION['Username'])) {
     <!-- font-awesome-icons -->
     <link href="font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
 
     <!-- //font-awesome-icons -->
@@ -61,8 +60,10 @@ if (!isset($_SESSION['Username'])) {
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2">
                         <li class=""><a href="index.php">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="product.php">Product</a></li>
+                        <li><a href="contact.php">Contact</a></li>
+
                         <!-- <li>
                             <label for="drop-2" class="toggle">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span> </label>
                             <a href="#">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span></a>
@@ -73,11 +74,35 @@ if (!isset($_SESSION['Username'])) {
                                 <li><a href="shop-single.html">Single Page</a></li>
                             </ul>
                         </li> -->
-                        <a href="#" id="user-in"><?php echo strtoupper($_SESSION['Username']); ?></a>
-                        <li><a href="contact.php">Contact</a></li>
-                        <li><a href="logout.php">logout</a></li>
+                        <?php if (isset($_SESSION['Username'])) { ?>
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?php echo strtoupper($_SESSION['Username']); ?>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="logout.php">logout</a></li>
+                                    <li><a class="dropdown-item" href="changepsw.php">Change Password</a></li>
+                                    <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
+                                    
+                                </ul>
+                            </li>
 
-                    </ul> 
+                        <?php } else { ?>
+                            <li><a href="./login.php">Signin</a></li>
+                        <?php
+                        }
+                        ?>
+
+                        <?php if (isset($_SESSION['Username'])) { ?>
+                            <li>|</li>
+                            <li><a href="cart.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
+                        <?php } else { ?>
+                            <li><a href="login.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
+                        <?php } ?>
+
+
+
+                    </ul>
                 </nav>
                 <!-- //nav -->
             </div>
@@ -89,8 +114,9 @@ if (!isset($_SESSION['Username'])) {
             <p>Trending of the week</p>
             <h3 class="mb-4">Casual Shoes for Men</h3>
             <div class="ban-buttons">
-                <a href="shop-single.html" class="btn">Shop Now</a>
-                <a href="single.html" class="btn active">Read More</a>
+                <a href="product.php" class="btn">Shop Now</a>
+                <!-- <a href="single.html" class="btn active">Read More</a> -->
+
             </div>
         </div>
         <!--// banner-inner -->
@@ -100,45 +126,41 @@ if (!isset($_SESSION['Username'])) {
     <section class="about py-5">
         <div class="container pb-lg-3">
             <h3 class="tittle text-center">New Arrivals</h3>
-            <div class="row">
-                <?php
-                $con = mysqli_connect("localhost", "root", "", "shoes");
-                $mysql = "SELECT * FROM `admins` WHERE status = '0'";
-                $result = mysqli_query($con, $mysql);
-                while ($row = mysqli_fetch_array($result)) {
-                ?>
-                <div class="col-md-4 product-men my-5">
-                    <div class="product-shoe-info shoe text-center">
-                        <div class="men-thumb-item">
-                            <img src="./product_img/<?=$row['image']?>" class="img-fluid" alt="">
-                            <span class="product-new-top">New</span>
-                        </div>
-                        <div class="item-info-product">
-                            <h4>
-                                <a href="#"><?=$row['prdnm']?></a>
-                            </h4>
+            <form action="#" method="post">
+                <div class="row">
+                    <?php
+                    $con = mysqli_connect("localhost", "root", "", "shoes");
+                    $mysql = "SELECT * FROM `admins` WHERE status = '0'";
+                    $result = mysqli_query($con, $mysql);
+                    while ($row = mysqli_fetch_array($result)) {
+                    ?>
+                        <div class="col-md-4 product-men my-5">
+                            <a href="product_details.php?id=<?= $row['prdid'] ?>">
+                                <div class="product-shoe-info shoe text-center">
+                                    <div class="men-thumb-item">
+                                        <img src="./product_img/<?= $row['image'] ?>" class="img-fluid" alt=""><br>
+                                        <span class="product-new-top">New</span>
+                                    </div>
+                                    <div class="item-info-product">
+                                        <h4>
+                                            <a href="#"><?= $row['prdnm'] ?></a>
+                                        </h4>
 
-                            <div class="product_price">
-                                <div class="grid-price">
-                                    <span class="money">₹<?=$row['prdpr']?></span>
+                                        <div class="product_price">
+                                            <div class="grid-price">
+                                                <span class="money">₹<?= $row['prdpr'] ?></span>
+                                            </div>
+                                        </div>
+                                        <!-- <button class="btn btn-success cart_btn" name="cart_btn">Add to Cart</button> -->
+                                    </div>
                                 </div>
-                            </div>
-                            <ul class="stars">
-                                <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                                <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
-                            </ul>
-                            <button class="btn btn-success cart_btn">Add to Cart</button>
+                            </a>
                         </div>
-                    </div>
+                    <?php
+                    }
+                    ?>
                 </div>
-                <?php
-                }
-                ?>
-            </div>
-
+            </form>
         </div>
     </section>
     <!-- //ab -->
@@ -189,7 +211,7 @@ if (!isset($_SESSION['Username'])) {
         </div>
     </section>
     <!-- //ab -->
-    
+
     <!-- footer -->
     <footer>
         <div class="container">
@@ -239,10 +261,10 @@ if (!isset($_SESSION['Username'])) {
                             <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Information</h3>
                             <ul class="list-unstyled w3layouts-icons">
                                 <li>
-                                    <a href="index.html">Home</a>
+                                    <a href="#">Home</a>
                                 </li>
                                 <li class="mt-3">
-                                    <a href="about.html">About Us</a>
+                                    <a href="#">About Us</a>
                                 </li>
                                 <!-- <li class="mt-3">
                                     <a href="#">Gallery</a>
@@ -251,7 +273,7 @@ if (!isset($_SESSION['Username'])) {
                                     <a href="#">Services</a>
                                 </li>
                                 <li class="mt-3">
-                                    <a href="contact.html">Contact Us</a>
+                                    <a href="#">Contact Us</a>
                                 </li>
                             </ul>
                         </div>
@@ -314,10 +336,11 @@ if (!isset($_SESSION['Username'])) {
     <!-- //footer -->
 
 </body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
-    $(".cart_btn").click(function(){
+    $(".cart_btn").click(function() {
         alert("Success")
     })
 </script>

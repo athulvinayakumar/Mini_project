@@ -2,7 +2,7 @@
 session_start();
 include 'db.php';
 if (!isset($_SESSION['Username'])) {
-  header('location:loginpage.php?name=login');
+  header('location:login.php');
 }
 ?>
 
@@ -39,6 +39,10 @@ if (!isset($_SESSION['Username'])) {
           <tr>
             <td><button id='View' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> View Users</button></td>
           </tr>
+          <tr>
+            <td><button id='usr_msg' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> User Message</button></td>
+          </tr>
+          
           <tr>
             <td><button id='home-page' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i> Home Page</button></td>
           </tr>
@@ -82,8 +86,8 @@ if (!isset($_SESSION['Username'])) {
           <div class="mb-3">
             <h6>Product Color</h6>
             <label for="" class="form-label"></label>
-            <input type="text" class="form-control" name="p_color" id="d" aria-describedby="helpId" onkeyup="colour()" autocomplete="off">
-            <div id="message4"></div>
+            <input type="text" class="form-control" name="p_color" id="a" aria-describedby="helpId" onkeyup="colour()" autocomplete="off">
+            <div id="message5"></div>
           </div>
           <div class="mb-3">
             <h6>Product Brand</h6>
@@ -116,25 +120,6 @@ if (!isset($_SESSION['Username'])) {
   <script src="admin.js"></script>
 </body>
 
-<?php
-// include('db.php');
-// $targetDir = "product_img/";
-// if (isset($_POST['submit'])) {
-//   $pimage = $_FILES["img"]["name"];
-//   $pname = $_POST['vk'];
-//   $color = $_POST['p_color'];
-//   $brand = $_POST['p_brand'];
-//   $price = $_POST['ak'];
-//   $size = $_POST['siz'];
-//   $targetFilePath = $targetDir . $pimage;
-//   $sql = "INSERT INTO `admins`(`prdnm`, `prdpr`, `color`, `brand`, `prdsiz`, `image`, `status`) VALUES('$pname','$price',' $color','$brand','$size','$pimage','0')";
-//   $query = mysqli_query($connection, $sql);
-//   move_uploaded_file($_FILES["img"]["tmp_name"], $targetFilePath);
-//   if ($query) {
-//     echo "<script>alert('Registration successful!!')</script>";
-//   }
-// }
-?>
 
 <script>
   $("#Product").click(function() {
@@ -145,6 +130,12 @@ if (!isset($_SESSION['Username'])) {
   })
   $("#logout").click(function() {
     window.location.href = "logout.php";
+  })
+  $("#View").click(function() {
+    window.location.href = "view_user.php";
+  })
+  $("#usr_msg").click(function() {
+    window.location.href = "usr_msg.php";
   })
 </script>
 

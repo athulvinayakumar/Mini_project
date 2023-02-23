@@ -414,3 +414,6 @@ h2 {
 #user-in:hover{
   color: #ff4c4c !important;
 }
+.img-fluid{
+  height: 304px !important;
+}

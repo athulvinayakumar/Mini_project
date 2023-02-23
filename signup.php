@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
 
     if (!empty($name) && !empty($usrnm) && !empty($pssrd) && !empty($nmbr) && !empty($eml) && !empty($addr)) {
 
-        $sqlquery = "INSERT INTO auth VALUES (null,'$name','$usrnm','$pssrd','$nmbr','$eml','$addr',0)";
+        $sqlquery = "INSERT INTO auth VALUES (null,'$name','$usrnm','$pssrd','$nmbr','$eml','$addr',0,0,'true')";
         if ($connection->query($sqlquery) === TRUE) {
             echo "New record created successfully";
             header('Location: login.php');
@@ -36,6 +36,8 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="signup.css">
     <title>Vk Shoes</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="signup.js"></script>

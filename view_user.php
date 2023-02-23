@@ -21,43 +21,38 @@
 </head>
 
 <body>
-    <h4 style="text-align:center;">Edit Details</h4>
+    <h4 style="text-align:center;">User Details</h4>
     <form action="#" method="POST">
         <table class="table table-dark table-striped">
             <tr>
                 <!-- <th>Product Id</th> -->
-                <th>Product Name</th>
-                <th>Product Price</th>
-                <th>Product Color</th>
-                <th>Product Brand</th>
-                <th>Product Size</th>
-                <th>Product Image</th>
-                <th>Action</th>
-                <th>Update</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Role</th>
             </tr>
             <?php
             $con = mysqli_connect("localhost", "root", "", "shoes");
-            $mysql = "SELECT * FROM `admins` ";
+            $mysql = "SELECT * FROM `auth` ";
             $result = mysqli_query($con, $mysql);
             while ($row = mysqli_fetch_array($result)) {
             ?>
                 <tr>
-                    <!-- <td><?= $row['prdid'] ?></td> -->
-                    <td><?= $row['prdnm'] ?></td>
-                    <td><?= $row['prdpr'] ?></td>
-                    <td><?= $row['color'] ?></td>
-                    <td><?= $row['brand'] ?></td>
-                    <td><?= $row['prdsiz'] ?></td>
-                    <td><img class="product_img" src="./product_img/<?= $row['image'] ?>"></td>
-                    <td><a href="update_details.php?id=<?= $row['prdid'] ?>" class="btn btn-success">Edit</a></td>
+                    <td><?= $row['name'] ?></td>
+                    <td><?= $row['username'] ?></td>
+                    <td><?= $row['mobile number'] ?></td>
+                    <td><?= $row['email'] ?></td>
+                    <td><?= $row['address'] ?></td>
                     <?php
-                    if ($row['status'] == 0) {
+                    if ($row['role'] == 1) {
                     ?>
-                        <td><a href="inactive.php?id=<?= $row['prdid'] ?>" class="btn btn-primary status_btn">Disable</a></td>
+                        <td><span>Admin</span></td>
                     <?php
-                    } elseif ($row['status'] == 1) {
+                    } elseif ($row['role'] == 0) {
                     ?>
-                        <td><a href="active.php?id=<?= $row['prdid'] ?>" class="btn btn-primary status_btn">Enable</a></td>
+                        <td><span>Normal</span></td>
                     <?php
                     }
                     ?>

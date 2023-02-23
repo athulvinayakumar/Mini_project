@@ -3,17 +3,18 @@
     margin: 0px;
 }
 body {
-    background-image: url("https://imgs.search.brave.com/yLRDcvWovZ-DYiWCkmZjTheC0_uE7gNhb-rSXp46M5c/rs:fit:800:538:1/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9tZW4t/cy1hY2Nlc3Nvcmll/cy0yNTg0NzMwMi5q/cGc");
+    background-image: url("./images/men-s-accessories-25847302.webp");
+    /* background-image: url("https://imgs.search.brave.com/yLRDcvWovZ-DYiWCkmZjTheC0_uE7gNhb-rSXp46M5c/rs:fit:800:538:1/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9tZW4t/cy1hY2Nlc3Nvcmll/cy0yNTg0NzMwMi5q/cGc"); */
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 fieldset {
-    margin-left: 500px;
-    border-radius: 10px;
-    margin-top: 150px;
+    margin-left: 500px !important;
+    border-radius: 10px !important;
+    margin-top: 150px !important;
     background-color: rgba(0, 0, 0, 0.795);
-    width: 600px;
+    width: 600px !important;
 }
 
 .button {
@@ -77,7 +78,7 @@ a:hover {
 #paragraph2
 {
     margin-left: 430px;
-    margin-top: -15px;
+    margin-top: -34px;
 }
 #message1,#message2
 {
@@ -87,4 +88,8 @@ a:hover {
     color: red;
     padding-bottom: 4px;
     
+}
+.bg-color{
+    background-color: transparent;
+    /* opacity: 0.5; */
 }
