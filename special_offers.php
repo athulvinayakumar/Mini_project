@@ -1,7 +1,6 @@
 <?php
 session_start();
 include 'db.php';
-error_reporting(E_ERROR | E_PARSE);
 
 ?>
 <!DOCTYPE html>
@@ -41,13 +40,24 @@ error_reporting(E_ERROR | E_PARSE);
     <!-- /Fonts -->
     <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
-        <link rel="stylesheet" href="./css/product.css">
+    <link rel="stylesheet" href="./css/product.css">
+    <style>
+        .menu li a {
+            color: black !important;
+        }
+        .menu li a:hover{
+            color: red !important;
+        }
+        #user-in{
+            color: black !important;
+        }
+    </style>
 </head>
 
 <body>
 
     <!-- mian-content -->
-    <div class="main-banner h-44" style="background-image: url('./images/banner.jpg'); min-height:546px;" id="home">
+    <div class="main-banner h-44" style="background-image: url('./images/sale_bg.jpg'); min-height:546px;" id="home">
         <!-- header -->
         <header class="header bg-transparent">
             <div class="container-fluid px-lg-5">
@@ -100,10 +110,7 @@ error_reporting(E_ERROR | E_PARSE);
         <!-- //header -->
         <!--/banner-->
         <div class="banner-info">
-            <?php if($_SESSION['Username']!=null){?>
-
-                <a href="special_offers.php"><img src="./images/offer.png" alt="" style="width: 70%;margin-top: -26%;"></a>
-           <?php } ?>
+            <a href=""><img src="./images/offer.png" alt="" style="width: 70%;margin-top: -26%;"></a>
         </div>
         <!--// banner-inner -->
 
@@ -112,38 +119,75 @@ error_reporting(E_ERROR | E_PARSE);
     <section class="gallery">
         <div class="container">
             <div class="title">
-                <h1>Products</h1>
-            </div> 
+                <h1>Special Offers</h1>
+            </div>
             <div class="gallery-items">
-                <?php
-                $con = mysqli_connect("localhost", "root", "", "shoes");
-                $mysql = "SELECT * FROM `admins` WHERE status = '0'";
-                $result = mysqli_query($con, $mysql);
-                while ($row = mysqli_fetch_array($result)) {
-                ?>
-                    <a href="product_details.php?id=<?= $row['prdid'] ?>"><div class="item col-md-3 product-men my-5">
+                <a href="#">
+                    <div class="item col-md-4 product-men my-5">
                         <div class="product-shoe-info shoe text-center">
                             <div class="men-thumb-item">
-                                <img src="./product_img/<?= $row['image'] ?>" class="img-fluid" alt="">
+                                <img src="./images/special_offer/smart_watch.jpeg" class="img-fluid" alt="">
                                 <span class="product-new-top">New</span>
                             </div>
                             <div class="item-info-product">
                                 <h4>
-                                    <a href="#"><?= $row['prdnm'] ?></a>
+                                    <a href="#">Smart Watch</a>
                                 </h4>
 
                                 <div class="product_price">
                                     <div class="grid-price">
-                                        <span class="money">₹<?= $row['prdpr'] ?></span>
+                                        <span class="money">₹1500</span>
                                     </div>
                                 </div>
-                                <a href="add_cart.php?id=<?=$row['prdid']?>" class="btn btn-success cart_btn">Add to Cart</a>
+                                <a href="#" class="btn btn-success cart_btn">Add to Cart</a>
                             </div>
                         </div>
-                    </div></a>
-                <?php
-                }
-                ?>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="item col-md-4 product-men my-5">
+                        <div class="product-shoe-info shoe text-center">
+                            <div class="men-thumb-item">
+                                <img src="./images/special_offer/smart_watch.jpeg" class="img-fluid" alt="">
+                                <span class="product-new-top">New</span>
+                            </div>
+                            <div class="item-info-product">
+                                <h4>
+                                    <a href="#">Smart Watch</a>
+                                </h4>
+
+                                <div class="product_price">
+                                    <div class="grid-price">
+                                        <span class="money">₹1500</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-success cart_btn">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="item col-md-4 product-men my-5">
+                        <div class="product-shoe-info shoe text-center">
+                            <div class="men-thumb-item">
+                                <img src="./images/special_offer/smart_watch.jpeg" class="img-fluid" alt="">
+                                <span class="product-new-top">New</span>
+                            </div>
+                            <div class="item-info-product">
+                                <h4>
+                                    <a href="#">Smart Watch</a>
+                                </h4>
+
+                                <div class="product_price">
+                                    <div class="grid-price">
+                                        <span class="money">₹1500</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-success cart_btn">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
             <div class="pagination d-flex justify-content-center">
                 <div class="prev">Prev</div>
@@ -197,7 +241,7 @@ error_reporting(E_ERROR | E_PARSE);
                         </form>
                     </div>
                     <div class="row mt-lg-4 bottom-w3layouts-sec-nav mx-0">
-          <div class="col-md-4 footer-grid_section_w3layouts">
+                        <div class="col-md-4 footer-grid_section_w3layouts">
                             <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Information</h3>
                             <ul class="list-unstyled w3layouts-icons">
                                 <li>

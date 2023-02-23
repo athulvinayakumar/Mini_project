@@ -147,7 +147,7 @@ include 'db.php';
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2">
                         <li class=""><a href="index.php">Home</a></li>
-                        <li><a href="#">About</a></li>
+                        <li><a href="about.php">About</a></li>
                         <li><a href="product.php">Product</a></li>
                         <li><a href="contact.php">Contact</a></li>
 
