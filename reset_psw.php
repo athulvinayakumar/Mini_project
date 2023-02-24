@@ -1,5 +1,4 @@
-<?php session_start() ;
-//include('DatabaseCon.php');
+<?php session_start();
 include('db.php');
 ?>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">

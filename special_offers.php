@@ -75,16 +75,6 @@ include 'db.php';
                         <li><a href="product.php">Product</a></li>
                         <li><a href="contact.php">Contact</a></li>
 
-                        <!-- <li>
-                            <label for="drop-2" class="toggle">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span> </label>
-                            <a href="#">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span></a>
-                            <input type="checkbox" id="drop-2" />
-                            <ul>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="shop.html">Shop Now</a></li>
-                                <li><a href="shop-single.html">Single Page</a></li>
-                            </ul>
-                        </li> -->
                         <?php if (isset($_SESSION['Username'])) { ?>
                             <a href="#" id="user-in"><?php echo strtoupper($_SESSION['Username']); ?></a>
                             <li><a href="logout.php">logout</a></li>

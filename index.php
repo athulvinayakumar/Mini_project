@@ -151,7 +151,7 @@ include 'db.php';
                                                 <span class="money">₹<?= $row['prdpr'] ?></span>
                                             </div>
                                         </div>
-                                        <!-- <button class="btn btn-success cart_btn" name="cart_btn">Add to Cart</button> -->
+                                        <button class="btn btn-success cart_btn" name="cart_btn">Add to Cart</button>
                                     </div>
                                 </div>
                             </a>

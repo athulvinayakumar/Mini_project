@@ -206,9 +206,6 @@ error_reporting(E_ERROR | E_PARSE);
                                 <li class="mt-3">
                                     <a href="#">About Us</a>
                                 </li>
-                                <!-- <li class="mt-3">
-                                    <a href="#">Gallery</a>
-                                </li> -->
                                 <li class="mt-3">
                                     <a href="#">Services</a>
                                 </li>
@@ -263,7 +260,7 @@ error_reporting(E_ERROR | E_PARSE);
 
                         </div>
                         <div class="cpy-right text-left row">
-                            <p class="col-md-10">© 2022 VK All rights reserved | Design by
+                            <p class="col-md-10">© 2022 VK All rights reserved 
                             </p>
                             <!-- move top icon -->
                             <!-- <a href="#home" class="move-top text-right col-md-2"><span class="fa fa-long-arrow-up" aria-hidden="true"></span></a> -->

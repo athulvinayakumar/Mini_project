@@ -18,7 +18,10 @@ if (isset($_POST['submit'])) {
                 if ($row["role"] == 1) {
                     $_SESSION['Username'] = $log_username;
                     header('Location: adminpanel.php');
-                } else {
+                } else if ($row["role"] == 2) {
+                    $_SESSION['Username'] = $log_username;
+                    header('Location: seller.php');
+                }else{
                     header('Location: index.php');
                 }
             }
