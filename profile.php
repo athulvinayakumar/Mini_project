@@ -52,7 +52,7 @@ $row=mysqli_fetch_array($result);
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="inputEmail4"
+                                        <input type="email" class="form-control" id="inputEmail4" 
                                             value="<?= $row['email'] ?>" disabled>
                                     </div>
                                     <div class="col-md-4">

@@ -40,22 +40,22 @@ $row = mysqli_fetch_array($result);
                                     <h4 class="mb-4 mt-0">Contact detail</h4>
                                     <div class="col-md-4">
                                         <label class="form-label">Name </label> <label class="form-label error" id="f_error"></label>
-                                        <input type="text" name="fname" id="fname" class="form-control" placeholder="" aria-label="Name" value="<?= $row['name'] ?>" required>
+                                        <input type="text" name="fname" id="fname" class="form-control" placeholder="" aria-label="Name" autocomplete="off" value="<?= $row['name'] ?>" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label">Username </label> <label class="form-label error" id="s_error"></label>
-                                        <input type="text" name="uname" id="uname" class="form-control" placeholder="" aria-label="Last name" value="<?= $row['username'] ?>" required>
+                                        <input type="text" name="uname" id="uname" class="form-control" placeholder="" aria-label="Last name" autocomplete="off" value="<?= $row['username'] ?>" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label">Email </label> <label class="form-label error" id="e_error"></label>
-                                        <input type="email" name="email" id="email" class="form-control" placeholder="" aria-label="Phone number" value="<?= $row['email'] ?>" required>
+                                        <input type="email" name="email" id="email" class="form-control" placeholder="" aria-label="Phone number" autocomplete="off" value="<?= $row['email'] ?>" required>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputEmail4" class="form-label">Phone</label> <label class="form-label error" id="h_error"></label>
+                                        <label for="inputEmail4" class="form-label">Phone</label> <label class="form-label error" autocomplete="off" id="h_error"></label>
                                         <input type="text" name="phone" class="form-control" id="phone" value="<?= $row['mobile number'] ?>" required>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="inputEmail4" class="form-label">Address</label> <label class="form-label error" id="h_error"></label>
+                                        <label for="inputEmail4" class="form-label">Address</label> <label class="form-label error"  autocomplete="off" id="h_error"></label>
                                         <input type="text" name="address" class="form-control" id="address" value="<?= $row['address'] ?>" required>
                                     </div>
 

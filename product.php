@@ -76,8 +76,17 @@ error_reporting(E_ERROR | E_PARSE);
                             </ul>
                         </li> -->
                         <?php if (isset($_SESSION['Username'])) { ?>
-                            <a href="#" id="user-in"><?php echo strtoupper($_SESSION['Username']); ?></a>
-                            <li><a href="logout.php">logout</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?php echo strtoupper($_SESSION['Username']); ?>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
+                                    <li><a class="dropdown-item" href="changepsw.php">Change Password</a></li>
+                                    <li><a class="dropdown-item" href="logout.php">logout</a></li>
+                                    
+                                </ul>
+                            </li>
 
                         <?php } else { ?>
                             <li><a href="./login.php">Signin</a></li>

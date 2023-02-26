@@ -64,25 +64,16 @@ include 'db.php';
                         <li><a href="product.php">Product</a></li>
                         <li><a href="contact.php">Contact</a></li>
 
-                        <!-- <li>
-                            <label for="drop-2" class="toggle">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span> </label>
-                            <a href="#">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span></a>
-                            <input type="checkbox" id="drop-2" />
-                            <ul>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="shop.html">Shop Now</a></li>
-                                <li><a href="shop-single.html">Single Page</a></li>
-                            </ul>
-                        </li> -->
+                     
                         <?php if (isset($_SESSION['Username'])) { ?>
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <?php echo strtoupper($_SESSION['Username']); ?>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="logout.php">logout</a></li>
-                                    <li><a class="dropdown-item" href="changepsw.php">Change Password</a></li>
                                     <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
+                                    <li><a class="dropdown-item" href="changepsw.php">Change Password</a></li>
+                                    <li><a class="dropdown-item" href="logout.php">logout</a></li>
                                     
                                 </ul>
                             </li>

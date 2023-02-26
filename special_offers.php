@@ -1,7 +1,8 @@
 <?php
 session_start();
-include 'db.php';
-
+$con = mysqli_connect("localhost", "root", "", "shoes");
+$mysql = "SELECT * FROM `tbl_special`";
+$result = mysqli_query($con, $mysql);
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -45,10 +46,12 @@ include 'db.php';
         .menu li a {
             color: black !important;
         }
-        .menu li a:hover{
+
+        .menu li a:hover {
             color: red !important;
         }
-        #user-in{
+
+        #user-in {
             color: black !important;
         }
     </style>
@@ -112,7 +115,7 @@ include 'db.php';
                 <h1>Special Offers</h1>
             </div>
             <div class="gallery-items">
-                <a href="#">
+                <!-- <a href="#">
                     <div class="item col-md-4 product-men my-5">
                         <div class="product-shoe-info shoe text-center">
                             <div class="men-thumb-item">
@@ -133,8 +136,8 @@ include 'db.php';
                             </div>
                         </div>
                     </div>
-                </a>
-                <a href="#">
+                </a> -->
+                <!-- <a href="#">
                     <div class="item col-md-4 product-men my-5">
                         <div class="product-shoe-info shoe text-center">
                             <div class="men-thumb-item">
@@ -155,35 +158,41 @@ include 'db.php';
                             </div>
                         </div>
                     </div>
-                </a>
-                <a href="#">
-                    <div class="item col-md-4 product-men my-5">
-                        <div class="product-shoe-info shoe text-center">
-                            <div class="men-thumb-item">
-                                <img src="./images/special_offer/smart_watch.jpeg" class="img-fluid" alt="">
-                                <span class="product-new-top">New</span>
-                            </div>
-                            <div class="item-info-product">
-                                <h4>
-                                    <a href="#">Smart Watch</a>
-                                </h4>
-
-                                <div class="product_price">
-                                    <div class="grid-price">
-                                        <span class="money">₹1500</span>
-                                    </div>
+                </a> -->
+                <?php
+                while ($row = mysqli_fetch_array($result)) {
+                ?>
+                    <a href="#">
+                        <div class="item col-md-4 product-men my-5">
+                            <div class="product-shoe-info shoe text-center">
+                                <div class="men-thumb-item">
+                                    <img src="product_img/<?= $row['pr_image'] ?>" class="img-fluid" alt="">
+                                    <span class="product-new-top">New</span>
                                 </div>
-                                <a href="#" class="btn btn-success cart_btn">Add to Cart</a>
+                                <div class="item-info-product">
+                                    <h4>
+                                        <a href="#"><?= $row['pr_name'] ?></a>
+                                    </h4>
+
+                                    <div class="product_price">
+                                        <div class="grid-price">
+                                            <span class="money"><?= $row['pr_price'] ?></span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="btn btn-success cart_btn">Add to Cart</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-            <div class="pagination d-flex justify-content-center">
-                <div class="prev">Prev</div>
-                <div class="page">Page <span class="page-num"></span></div>
-                <div class="next">Next</div>
-            </div>
+                    </a>
+        <?php
+                }
+        ?>
+        </div>
+        <div class="pagination d-flex justify-content-center">
+            <div class="prev">Prev</div>
+            <div class="page">Page <span class="page-num"></span></div>
+            <div class="next">Next</div>
+        </div>
         </div>
     </section>
     <!-- footer -->

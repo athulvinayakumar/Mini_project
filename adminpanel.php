@@ -34,6 +34,9 @@ if (!isset($_SESSION['Username'])) {
             <td><button id='Add-item' class="panel_btns"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Item</button></td>
           </tr>
           <tr>
+            <td><button id='Add-special' class="panel_btns"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Special Offers</button></td>
+          </tr>
+          <tr>
             <td> <button id='Product' class="panel_btns"><i class="fa fa-user-circle" aria-hidden="true"></i> Products</button></td>
           </tr>
           <tr>
@@ -55,7 +58,7 @@ if (!isset($_SESSION['Username'])) {
     </div>
 
 
-    <!-- add movies container -->
+    <!-- add  container -->
 
     <div class="col-md-6 " id="add-movies-container">
       <div class="p-5 bg-light">
@@ -124,6 +127,9 @@ if (!isset($_SESSION['Username'])) {
 <script>
   $("#Product").click(function() {
     window.location.href = "edit_details.php";
+  })
+  $("#Add-special").click(function() {
+    window.location.href = "edit_special.php";
   })
   $("#home-page").click(function() {
     window.location.href = "index.php";
