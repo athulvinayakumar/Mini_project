@@ -86,7 +86,7 @@ if (!isset($_SESSION['Username'])) {
             <div id="message4"></div>
           </div>
           <div class="mb-3">
-            <h6>Product Color</h6>
+            <h6>Product Discription</h6>
             <label for="" class="form-label"></label>
             <input type="text" class="form-control" name="p_color" id="a" aria-describedby="helpId" onkeyup="colour()" autocomplete="off">
             <div id="message5"></div>
