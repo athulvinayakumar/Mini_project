@@ -43,9 +43,8 @@ if (!isset($_SESSION['Username'])) {
             <td><button id='View' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> View Users</button></td>
           </tr>
           <tr>
-            <td><button id='usr_msg' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> User Message</button></td>
-          </tr>
-          
+            <td><button id='usr_msg' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> User Review</button></td>
+          </tr>   
           <tr>
             <td><button id='home-page' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i> Home Page</button></td>
           </tr>

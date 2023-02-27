@@ -25,7 +25,6 @@
     <form action="#" method="POST">
         <table class="table table-dark table-striped">
             <tr>
-                <!-- <th>Product Id</th> -->
                 <th>User Name</th>
                 <th>User Email</th>
                 <th>User Phone</th>
@@ -43,9 +42,9 @@
                     <td><?= $row['usr_email'] ?></td>
                     <td><?= $row['usr_phone'] ?></td>
                     <td><?= $row['usr_msg'] ?></td>
-                    <td><a class="btn btn-success">Approve</a></td>
+                    <!-- <td><a class="btn btn-success">Approve</a></td>
 
-                    <td><a class="btn btn-danger status_btn">Reject</a></td>
+                    <td><a class="btn btn-danger status_btn">Reject</a></td> -->
 
                 </tr>
 

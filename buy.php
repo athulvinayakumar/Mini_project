@@ -14,7 +14,9 @@ session_start();
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 </head>
 
@@ -41,7 +43,7 @@ session_start();
                                 ?>
                                 <div class="card bg-primary text-white rounded-3">
                                     <div class="card-body">
-                                        
+
 
                                         <p class="small mb-2">Supported Card type</p>
                                         <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-mastercard fa-2x me-2"></i></a>
@@ -52,19 +54,19 @@ session_start();
                                         <form class="mt-4">
                                             <div class="form-outline form-white mb-4">
                                                 <label class="form-label" for="typeName">User Name</label>
-                                                <input type="text" id="typeName" class="form-control form-control-lg" siez="17" value=<?=$name?> disabled/>
+                                                <input type="text" id="typeName" class="form-control form-control-lg" siez="17" value=<?= $name ?> disabled />
                                             </div>
 
                                             <div class="form-outline form-white mb-4">
                                                 <label class="form-label" for="typeText">phone number:</label>
-                                                <input type="text" id="typeText" class="form-control form-control-lg" siez="17" value=<?=$phone?> minlength="19" maxlength="19" disabled/>
+                                                <input type="text" id="typeText" class="form-control form-control-lg" siez="17" value=<?= $phone ?> minlength="19" maxlength="19" disabled />
                                             </div>
 
                                             <div class="row mb-4">
                                                 <div class="col-md-6">
                                                     <div class="form-outline form-white">
                                                         <label class="form-label" for="typeExp">email</label>
-                                                        <input type="text" id="typeExp" class="form-control form-control-lg" value=<?=$email?> size="7" id="exp" minlength="7" maxlength="7"  disabled/>
+                                                        <input type="text" id="typeExp" class="form-control form-control-lg" value=<?= $email ?> size="7" id="exp" minlength="7" maxlength="7" disabled />
                                                     </div>
                                                 </div>
 
@@ -73,7 +75,8 @@ session_start();
                                         </form>
 
                                         <hr class="my-4">
-                                        <button type="button" class="btn btn-info btn-block btn-lg checkout_btn">
+                                        <!-- <button type="button" class="btn btn-info btn-block btn-lg checkout_btn"> -->
+                                         <button type="button" name="pay"  class="btn btn-info btn-block btn-lg checkout_btn" id ="rzp-button1" value="pay now" onclick="pay_now()">
                                             <div class="d-flex justify-content-between">
                                                 <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
                                             </div>
@@ -99,9 +102,42 @@ session_start();
     </section>
 </body>
 <script>
-    $(".checkout_btn").click(function(){
-        alert("Success");
-    })
+    function pay_now(){
+
+    var name=jQuery('#name').val();
+    var amt=jQuery('#amt').val();
+    var options = {
+    "key": "rzp_test_memh6ACSKYdCkR",
+    "amount": 50*100, 
+    "currency": "INR",
+    "name": "VK",
+    "description": "Test Transaction",
+    "image": "https://drive.google.com/file/d/1FJCNPPMhML96z3s4IrR8-yGU4A6HLm2X/view?usp=share_link",
+    "handler":function(response){
+        console.log(response);
+        jQuery.ajax({
+            type:'POST',
+            url:'payment.php',
+            data:"payment_id="+response.razorpay_payment_id+"&amt="+amt+"&name="+name,
+            success:function(result){
+                window.location.href="thankyou.php";
+            }
+
+        })
+     
+    }
+};
+
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+
+}
 </script>
+
+
+
 
 </html>

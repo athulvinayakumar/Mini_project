@@ -42,7 +42,7 @@ if (!isset($_SESSION['Username'])) {
                         <td><button id='View' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> View Users</button></td>
                     </tr>
                     <tr>
-                        <td><button id='usr_msg' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> User Message</button></td>
+                        <td><button id='usr_msg' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> User Review</button></td>
                     </tr>
 
                     <tr>
@@ -100,7 +100,7 @@ if (!isset($_SESSION['Username'])) {
             move_uploaded_file($_FILES["img"]["tmp_name"], $targetFilePath);
             if ($query) {
                 echo "<script>alert('Item added successful!!')</script>";
-                echo "<script> window.location='edit_special';</script>";
+                echo "<script> window.location='edit_special.php';</script>";
             }
         }
         ?>
