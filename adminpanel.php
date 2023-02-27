@@ -79,16 +79,12 @@ if (!isset($_SESSION['Username'])) {
           <label for="" class="form-label"></label>
           <input type="text" class="form-control" name="ak" id="c" aria-describedby="helpId" onkeyup="pro_price()" autocomplete="off">
           <div id="message3"></div>
-          <div class="mb-3">
-            <h6>Product size</h6>
-            <label for="" class="form-label"></label>
-            <input type="text" class="form-control" name="siz" id="d" aria-describedby="helpId" onkeyup="pro_size()" autocomplete="off">
-            <div id="message4"></div>
-          </div>
+          
           <div class="mb-3">
             <h6>Product Discription</h6>
             <label for="" class="form-label"></label>
-            <input type="text" class="form-control" name="p_color" id="a" aria-describedby="helpId" onkeyup="colour()" autocomplete="off">
+            <textarea class="form-control" name="discription" onkeyup="discriptions()" id="a" rows="2"></textarea>
+            <!-- <input type="text" class="form-control" name="p_discription" id="a" aria-describedby="helpId" onkeyup="colour()" autocomplete="off"> -->
             <div id="message5"></div>
           </div>
           <div class="mb-3">

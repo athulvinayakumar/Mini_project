@@ -139,7 +139,7 @@
                         <li class=""><a href="index.php">Home</a></li>
                         <li><a href="about.php">About</a></li>
                         <li><a href="product.php">Product</a></li>
-                        <li><a href="contact.php">Contact</a></li>
+                        <li><a href="feedback.php">Review</a></li>
 
                         <?php if (isset($_SESSION['Username'])) { ?>
                             <li class="nav-item dropdown">

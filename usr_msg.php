@@ -29,7 +29,7 @@
                 <th>User Email</th>
                 <th>User Phone</th>
                 <th>Message</th>
-                <th colspan="2"></th>
+                <!-- <th colspan="2"></th> -->
             </tr>
             <?php
             $con = mysqli_connect("localhost", "root", "", "shoes");

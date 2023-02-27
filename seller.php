@@ -18,7 +18,18 @@ if (!isset($_SESSION['Username'])) {
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <title>Admin panel</title>
     <link rel="stylesheet" href="css/admin.css">
+    <style>
+        .panel_btns {
+            background-color: #4e73df !important;
+        }
+        .panel_btns:hover {
+            background-color: blue !important;
+        }
 
+        .side-pane {
+            background-color: #4e73df !important;
+        }
+    </style>
 
 </head>
 
@@ -34,7 +45,7 @@ if (!isset($_SESSION['Username'])) {
                         <td><button id='Add-item' class="panel_btns"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Item</button></td>
                     </tr>
                     <tr>
-                        <td> <button id='Product' class="panel_btns"><i class="fa fa-user-circle" aria-hidden="true"></i> Products</button></td>
+                        <td> <button id='seller_product' class="panel_btns"><i class="fa fa-user-circle" aria-hidden="true"></i> Products</button></td>
                     </tr>
                     <tr>
                         <td><button id='logout' class="panel_btns"><i class="fa fa-chevron-right" aria-hidden="true"></i> Logout</button></td>
@@ -55,7 +66,7 @@ if (!isset($_SESSION['Username'])) {
                 </div>
             </div>
 
-            <form method="post" id="form" enctype="multipart/form-data" action="admin.php">
+            <form method="post" id="form" enctype="multipart/form-data">
                 <div class="mb-3">
                     <h6>Product name</h6>
                     <label for="" class="form-label"></label>
@@ -103,7 +114,6 @@ if (!isset($_SESSION['Username'])) {
         <?php
         include('db.php');
         if (isset($_POST['submit'])) {
-            echo "<script>alert('Item added successful!!')</script>";
             $pimage = $_FILES["img"]["name"];
             $pname = $_POST['vk'];
             $descrption = $_POST['p_drs'];
@@ -128,8 +138,8 @@ if (!isset($_SESSION['Username'])) {
 
 
 <script>
-    $("#Product").click(function() {
-        window.location.href = "edit_details.php";
+    $("#seller_product").click(function() {
+        window.location.href = "seller_product.php";
     })
     $("#logout").click(function() {
         window.location.href = "logout.php";

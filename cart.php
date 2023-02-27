@@ -1,6 +1,7 @@
 <?php
 session_start();
 error_reporting(E_ERROR | E_PARSE);
+$user = $_SESSION['usr_id'];
 include 'db.php';
 ?>
 <!DOCTYPE html>
@@ -36,59 +37,37 @@ include 'db.php';
                                 </thead>
                                 <tbody>
                                     <?php
-                                    // $values = $_SESSION['cart_btn_id'];
-                                    $values = $_COOKIE["cart"];
-                                    // echo"<script>alert('$values')</script>";
-                                    $carts = explode(" ", $values);
+                                    $con = mysqli_connect("localhost", "root", "", "shoes");
+                                    $sql = "SELECT * FROM `cart` WHERE `id` =$user AND `status` = 1";
+                                    $result = mysqli_query($con, $sql);
+                                    while ($row = mysqli_fetch_array($result)) { 
+                                        $prdid=$row['pid'];
+                                        $sql = "SELECT * FROM `admins` WHERE `prdid` = $prdid ";
+                                        $result1 = mysqli_query($con, $sql);
+                                        $row1=mysqli_fetch_array($result1);
 
-                                    foreach ($carts as $cart_id) {
-                                        if ($cart_id != null) {
-                                            $sql = "SELECT * FROM admins WHERE prdid = '$cart_id'";
-                                            $result = mysqli_query($connection, $sql);
-                                            $row = mysqli_fetch_array($result);
-                                            $name = $row['prdnm'];
-                                            $size = $row['prdsiz'];
-                                            $brand = $row['brand'];
-                                            $total_price = $total_price + $row['prdpr'];
-                                            $discount = $discount + 10;
-                                            $xyz = $row['prdpr'];
+                                        $total_price = $total_price+($row1['prdpr']*$row['quantity']); 
 
-                                    ?>
-                                            <tr>
-                                                <td>
-                                                    <figure class="itemside align-items-center">
-                                                        <div class="aside"><img src="product_img/<?= $row['image']; ?>" class="img-sm"></div>
-                                                        <figcaption class="info"> <a href="#" class="title text-dark" data-abc="true"><?= $name ?></a>
-                                                            <p class="text-muted small">SIZE: <?= $size ?><br> Brand: <?= $brand ?></p>
-                                                        </figcaption>
-                                                    </figure>
-                                                </td>
-                                                <td> <input id="quant<?= $row['prdid'] ?>" min="1" value="1" name="quantitys" type="number" class="quantitys form-control form-control-sm" /></td>
-                                                <td>
-                                                    <div class="price-wrap"> <var class="pro_price<?= $row['prdid'] ?> price">₹<?= $row['prdpr']; ?></var></div>
-                                                </td>
-                                                <td class="text-right d-none d-md-block"> <a href="remove_cart.php?id=<?= $row['prdid'] ?>" class="btn btn-light" data-abc="true"> Remove</a> </td>
-                                            </tr>
-                                            <script>
-                                                $(document).ready(function() {
-                                                    $("#quant<?= $row['prdid'] ?>").keyup(function() {
-                                                        var x = $("#quant<?= $row['prdid'] ?>").val();
-                                                        if (x < 1) {
-                                                            z = '<?= $row['prdpr'] ?>'
-                                                            $(".pro_price<?= $row['prdid'] ?>").text('₹' + z)
-
-                                                        } else {
-                                                            var y = '<?= $xyz ?>'
-                                                            var z = x * y
-                                                            $(".pro_price<?= $row['prdid'] ?>").text('₹' + z)
-                                                        }
-                                                    })
-                                                })
-
-                                            </script>
-                                    <?php }
-                                    }
-                                    $total = $total_price - $discount;
+                                        $discount=$discount+(10*$row['quantity']);
+                                        ?>
+                                    <tr>
+                                        <td>
+                                            <figure class="itemside align-items-center">
+                                                <div class="aside"><img src="product_img/<?= $row1['image']; ?>" class="img-sm"></div>
+                                                <figcaption class="info"> <a href="#" class="title text-dark" data-abc="true"><?=$row1['prdnm']?></a>
+                                                    <p class="text-muted small"> Brand: <?=$row1['brand']?></p>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td> <input id="quant<?= $row['prdid'] ?>" min="1" value="<?= $row['quantity'] ?>" name="quantitys" type="number" class="quantitys form-control form-control-sm" disabled></td>
+                                        <td>
+                                            <div class="price-wrap"> <var class="pro_price price">₹<?= $row1['prdpr']*$row['quantity']; ?></var></div>
+                                        </td>
+                                        <td class="text-right d-none d-md-block"> <a href="remove_cart.php?id=<?= $row1['prdid'] ?>&uid=<?= $user ?>" class="btn btn-light" data-abc="true"> Remove</a> </td>
+                                    </tr>
+                                    <?php  }
+                                    $total=$total_price -$discount;
+                                    $_SESSION['total_amount']=$total;
                                     ?>
                                 </tbody>
                             </table>
@@ -101,7 +80,7 @@ include 'db.php';
                 </aside>
                 <aside class="col-lg-3">
                     <div class="card">
-                        <div class="card-body"> 
+                        <div class="card-body">
                             <dl class="dlist-align">
                                 <dt>Total price:</dt>
                                 <dd class="tot_price text-right ml-3">₹<?= $total_price ?></dd>
@@ -113,8 +92,8 @@ include 'db.php';
                             <dl class="dlist-align">
                                 <dt>Total:</dt>
                                 <dd class="text-right text-dark b ml-3"><strong>₹<?= $total ?></strong></dd>
-                            </dl> 
-                            <hr> <a href="buy.php" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Make Purchase </a> 
+                            </dl>
+                            <hr> <a href="buy.php" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Make Purchase </a>
                             <a href="product.php" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue Shopping</a>
                         </div>
                     </div>

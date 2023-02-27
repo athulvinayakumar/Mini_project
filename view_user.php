@@ -54,7 +54,9 @@
                     ?>
                         <td><span>Normal</span></td>
                     <?php
-                    }
+                    }else{?>
+<td><span>Seller</span></td>
+                  <?php  }
                     ?>
 
                 </tr>

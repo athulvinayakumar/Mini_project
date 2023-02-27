@@ -62,7 +62,7 @@ include 'db.php';
                         <li class=""><a href="index.php">Home</a></li>
                         <li><a href="about.php">About</a></li>
                         <li><a href="product.php">Product</a></li>
-                        <li><a href="contact.php">Contact</a></li>
+                        <li><a href="feedback.php">Review</a></li>
 
                      
                         <?php if (isset($_SESSION['Username'])) { ?>
@@ -142,7 +142,7 @@ include 'db.php';
                                                 <span class="money">₹<?= $row['prdpr'] ?></span>
                                             </div>
                                         </div>
-                                        <button class="btn btn-success cart_btn" name="cart_btn">Add to Cart</button>
+                                        <a href="add_cart.php?id=<?=$row['prdid']?>" class="btn btn-success cart_btn" name="cart_btn">Add to Cart</a>
                                     </div>
                                 </div>
                             </a>

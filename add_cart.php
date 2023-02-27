@@ -1,25 +1,42 @@
 <?php
-$cart_ids=$_GET['id'];
 session_start();
+$con = mysqli_connect("localhost", "root", "", "shoes");
 error_reporting(E_ERROR | E_PARSE);
-// $values = $_SESSION['cart_btn_id'];
-// setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
-$values=$_COOKIE["cart"];
-$carts = explode(" ", $values);
-foreach ($carts as $cart_id) {
-    if ($cart_ids == $cart_id) {
-        $temp = 1;
+$user = $_SESSION['usr_id'];
+if ($user == null) { ?>
+    <script>
+        alert("Pls login")
+    </script>
+    <script>
+        location.href = "login.php"
+    </script>
+    <?php } else {
+
+    $cart_ids = $_GET['id'];
+    $sql = "SELECT * FROM `cart` WHERE `pid` =$cart_ids  AND `id` = $user";
+    $result = mysqli_query($con, $sql);
+    $row = mysqli_fetch_array($result);
+    if ($row['quantity'] > 0) {
+        $quantity = $row['quantity'] + 1;
+        $sql = "UPDATE `cart` SET `quantity`= $quantity WHERE `pid` =$cart_ids  AND `id` = $user";
+        mysqli_query($con, $sql);?>
+        <script>
+            alert("Success")
+        </script>
+        <script>
+            location.href = "product.php"
+        </script>
+        <?php 
+    } else {
+        $sql = "INSERT INTO `cart`(`id`, `pid`) VALUES ('$user','$cart_ids')";
+        mysqli_query($con, $sql); ?>
+        <script>
+            alert("Success")
+        </script>
+        <script>
+            location.href = "product.php"
+        </script>
+<?php
     }
 }
-if ($temp == 1) {
-    echo ("<script>alert('Already added')</script>");
-} else {
-    $_SESSION['cart_btn_id'] = $_SESSION['cart_btn_id'] . " " . $cart_ids;
-    $test=$_SESSION['cart_btn_id'];
-    setcookie("cart", $test);
-
-    echo ("<script>alert('successfully added')</script>");
-}
-echo ("<script>location.href='product.php'</script>");
-
 ?>

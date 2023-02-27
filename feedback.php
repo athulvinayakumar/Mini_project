@@ -149,7 +149,7 @@ include 'db.php';
                         <li class=""><a href="index.php">Home</a></li>
                         <li><a href="about.php">About</a></li>
                         <li><a href="product.php">Product</a></li>
-                        <li><a href="contact.php">Contact</a></li>
+                        <li><a href="contact.php">Review</a></li>
 
                 
                         <?php if (isset($_SESSION['Username'])) { ?>
@@ -194,7 +194,7 @@ include 'db.php';
 
     <section class="ab-info-main py-5">
         <div class="container py-3">
-            <h3 class="tittle text-center"><span class="sub-tittle">Find Us</span> Contact Us</h3>
+            <h3 class="tittle text-center"><span class="sub-tittle"></span> Review</h3>
             <div class="row contact-main-info mt-5">
                 <div class="col-md-6 contact-right-content">
                     <form action="#" method="post" class="col-lg-10 offset-lg-7">

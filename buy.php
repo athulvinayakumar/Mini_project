@@ -54,16 +54,19 @@ session_start();
                                         <form class="mt-4">
                                             <div class="form-outline form-white mb-4">
                                                 <label class="form-label" for="typeName">User Name</label>
-                                                <input type="text" id="typeName" class="form-control form-control-lg" siez="17" value=<?= $name ?> disabled />
+                                                <input type="text" id="name" class="form-control form-control-lg" siez="17" value=<?= $name ?> disabled />
                                             </div>
 
                                             <div class="form-outline form-white mb-4">
                                                 <label class="form-label" for="typeText">phone number:</label>
                                                 <input type="text" id="typeText" class="form-control form-control-lg" siez="17" value=<?= $phone ?> minlength="19" maxlength="19" disabled />
                                             </div>
+                                            <div class="form-outline form-white mb-4" style="display:none">
+                                                <input type="text" id="amt" class="form-control form-control-lg" siez="17" value=<?=$_SESSION['total_amount'] ?> minlength="19" maxlength="19" disabled />
+                                            </div>
 
                                             <div class="row mb-4">
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="form-outline form-white">
                                                         <label class="form-label" for="typeExp">email</label>
                                                         <input type="text" id="typeExp" class="form-control form-control-lg" value=<?= $email ?> size="7" id="exp" minlength="7" maxlength="7" disabled />
@@ -103,12 +106,11 @@ session_start();
 </body>
 <script>
     function pay_now(){
-
     var name=jQuery('#name').val();
     var amt=jQuery('#amt').val();
     var options = {
     "key": "rzp_test_memh6ACSKYdCkR",
-    "amount": 50*100, 
+    "amount": amt*100, 
     "currency": "INR",
     "name": "VK",
     "description": "Test Transaction",
@@ -120,7 +122,7 @@ session_start();
             url:'payment.php',
             data:"payment_id="+response.razorpay_payment_id+"&amt="+amt+"&name="+name,
             success:function(result){
-                window.location.href="thankyou.php";
+                window.location.href="thank_you.php";
             }
 
         })

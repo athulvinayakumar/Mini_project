@@ -32,34 +32,20 @@
                 <th>Product Brand</th>
                 <th>Product Image</th>
                 <th>Action</th>
-                <th>Update</th>
             </tr>
             <?php
             $con = mysqli_connect("localhost", "root", "", "shoes");
-            $mysql = "SELECT * FROM `admins` ";
+            $mysql = "SELECT * FROM `tbl_seller` ";
             $result = mysqli_query($con, $mysql);
             while ($row = mysqli_fetch_array($result)) {
             ?>
                 <tr>
-                    <!-- <td><?= $row['prdid'] ?></td> -->
-                    <td><?= $row['prdnm'] ?></td>
-                    <td><?= $row['prdpr'] ?></td>
-                    <td><?= $row['discription'] ?></td>
-                    <td><?= $row['brand'] ?></td>
-                    <td><img class="product_img" src="./product_img/<?= $row['image'] ?>"></td>
-                    <td><a href="update_details.php?id=<?= $row['prdid'] ?>" class="btn btn-success">Edit</a></td>
-                    <?php
-                    if ($row['status'] == 0) {
-                    ?>
-                        <td><a href="inactive.php?id=<?= $row['prdid'] ?>" class="btn btn-primary status_btn">Disable</a></td>
-                    <?php
-                    } elseif ($row['status'] == 1) {
-                    ?>
-                        <td><a href="active.php?id=<?= $row['prdid'] ?>" class="btn btn-primary status_btn">Enable</a></td>
-                    <?php
-                    }
-                    ?>
-
+                    <td><?= $row['s_name'] ?></td>
+                    <td><?= $row['s_price'] ?></td>
+                    <td><?= $row['s_drs'] ?></td>
+                    <td><?= $row['s_brand'] ?></td>
+                    <td><img class="product_img" src="./product_img/<?= $row['s_image'] ?>"></td>
+                    <td><a href="update_details.php?id=<?= $row['s_id'] ?>" class="btn btn-success">Edit</a></td>
                 </tr>
 
 
@@ -89,7 +75,7 @@
         </table>
     </form>
     <div class="d-flex justify-content-md-center">
-        <a href="./adminpanel.php" class="btn btn-success">Back</a>
+        <a href="./seller.php" class="btn btn-success">Back</a>
     </div>
 </body>
 
