@@ -38,7 +38,7 @@ if (!isset($_SESSION['Username'])) {
         <div class="col-md-2">
             <div class="side-pane">
                 <div class="page-header">
-                    <h1 style="color: white;">Seller</h1>
+                    <h1 style="color: white;">Seller</h1> 
                 </div>
                 <table style="width: 100%;">
                     <tr>
