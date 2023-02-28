@@ -1,5 +1,6 @@
 <?php
 session_start();
+if($_SESSION['usr_id']!=null){
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -139,7 +140,10 @@ document.getElementById('rzp-button1').onclick = function(e){
 }
 </script>
 
-
-
+<?php }else{
+echo("<script>alert('Pls Login')</script>");
+echo("<script>location.href='login.php'</script>");
+}
+?>
 
 </html>

@@ -5,6 +5,8 @@ $con = mysqli_connect("localhost", "root", "", "shoes");
 $mysql = "SELECT * FROM `admins` WHERE prdid = '$pro_id'";
 $result = mysqli_query($con, $mysql);
 $row = mysqli_fetch_array($result);
+
+$_SESSION['total_amount']=$row['prdpr'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -97,9 +99,13 @@ $row = mysqli_fetch_array($result);
                     <span>Color</span>
 
                     <div class="color-choose">
-                        <div>
-                            <label><?= $row['color'] ?></label>
-                        </div>
+                        <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
+                        <label class="btn btn-outline-success" for="success-outlined">Green</label>
+
+                        <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+                        <label class="btn btn-outline-danger" for="danger-outlined">Red</label>
+                        <input type="radio" class="btn-check" name="options-outlined" id="primary-outlined" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="primary-outlined">Blue</label>
                     </div>
 
                 </div>
@@ -109,10 +115,15 @@ $row = mysqli_fetch_array($result);
                     <span>Size</span>
 
                     <div class="cable-choose">
-                        <button>9</button>
-                        <button>8</button>
-                        <button>7</button>
-                        <button>6</button>
+                        <input type="radio" class="btn-check" name="size" id="9" autocomplete="off" checked>
+                        <label class="btn btn-outline-danger" for="9">9</label>
+
+                        <input type="radio" class="btn-check" name="size" id="8" autocomplete="off">
+                        <label class="btn btn-outline-danger" for="8">8</label>
+                        <input type="radio" class="btn-check" name="size" id="7" autocomplete="off">
+                        <label class="btn btn-outline-danger" for="7">7</label>
+                        <input type="radio" class="btn-check" name="size" id="6" autocomplete="off">
+                        <label class="btn btn-outline-danger" for="6">6</label>
                     </div>
 
                 </div>
@@ -121,8 +132,8 @@ $row = mysqli_fetch_array($result);
             <!-- Product Pricing -->
             <div class="product-price">
                 <span>₹<?= $row['prdpr'] ?></span>
-                <input type="submit" class="cart-btn buy_btn mx-2" style="background-color: #fb641b;" name="btn_s" value="Buy now">
-                <a href="add_cart.php?id=<?=$row['prdid']?>" class="cart-btn">Add to cart</a>
+                <a href="buy.php" class="cart-btn buy_btn mx-2" style="background-color: #fb641b;" name="btn_s">Buy now</a>
+                <a href="add_cart.php?id=<?= $row['prdid'] ?>" class="cart-btn">Add to cart</a>
             </div>
         </div>
     </main>
