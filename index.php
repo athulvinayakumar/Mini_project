@@ -40,6 +40,24 @@ include 'db.php';
     <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
     <!-- //Fonts -->
+    <script type="text/javascript">
+        (function(d, m) {
+            var kommunicateSettings = {
+                "appId": "287d1e30e28ca9d8ad038754a6956191",
+                "popupWidget": true,
+                "automaticChatOpenOnNavigation": true
+            };
+            var s = document.createElement("script");
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+            var h = document.getElementsByTagName("head")[0];
+            h.appendChild(s);
+            window.kommunicate = m;
+            m._globals = kommunicateSettings;
+        })(document, window.kommunicate || {});
+        /* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+    </script>
 
 </head>
 
@@ -64,7 +82,7 @@ include 'db.php';
                         <li><a href="product.php">Product</a></li>
                         <li><a href="feedback.php">Review</a></li>
 
-                     
+
                         <?php if (isset($_SESSION['Username'])) { ?>
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -74,7 +92,7 @@ include 'db.php';
                                     <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
                                     <li><a class="dropdown-item" href="changepsw.php">Change Password</a></li>
                                     <li><a class="dropdown-item" href="logout.php">logout</a></li>
-                                    
+
                                 </ul>
                             </li>
 
@@ -142,7 +160,7 @@ include 'db.php';
                                                 <span class="money">₹<?= $row['prdpr'] ?></span>
                                             </div>
                                         </div>
-                                        <a href="add_cart.php?id=<?=$row['prdid']?>" class="btn btn-success cart_btn" name="cart_btn">Add to Cart</a>
+                                        <a href="add_cart.php?id=<?= $row['prdid'] ?>" class="btn btn-success cart_btn" name="cart_btn">Add to Cart</a>
                                     </div>
                                 </div>
                             </a>
