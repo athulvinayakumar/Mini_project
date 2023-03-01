@@ -139,7 +139,9 @@ include 'db.php';
                 <div class="row">
                     <?php
                     $con = mysqli_connect("localhost", "root", "", "shoes");
-                    $mysql = "SELECT * FROM `admins` WHERE status = '0'";
+                    // $mysql = "SELECT * FROM `admins` WHERE status = '0'";
+                    $mysql = " SELECT `prdid`, `prdnm`, `prdpr`, `discription`, `brand`, `image`, `status` FROM `admins` UNION SELECT `s_id`,`s_name`,`s_price`,`s_drs`,`s_brand`,`s_image`,`status` FROM `tbl_seller` WHERE status = '0'";
+
                     $result = mysqli_query($con, $mysql);
                     while ($row = mysqli_fetch_array($result)) {
                     ?>

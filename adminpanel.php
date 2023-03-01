@@ -43,6 +43,9 @@ if (!isset($_SESSION['Username'])) {
             <td><button id='View' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> View Users</button></td>
           </tr>
           <tr>
+            <td><button id='seller_products' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> Seller Products</button></td>
+          </tr>
+          <tr>
             <td><button id='usr_msg' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> User Review</button></td>
           </tr>   
           <tr>
@@ -137,6 +140,9 @@ if (!isset($_SESSION['Username'])) {
   })
   $("#usr_msg").click(function() {
     window.location.href = "usr_msg.php";
+  })
+  $("#seller_products").click(function() {
+    window.location.href = "seller_products.php";
   })
 </script>
 

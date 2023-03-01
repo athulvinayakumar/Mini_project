@@ -121,7 +121,7 @@ if (!isset($_SESSION['Username'])) {
             $price = $_POST['ak'];
             $targetDir = "product_img/";
             $targetFilePath = $targetDir . $pimage;
-            $sql = "INSERT INTO `tbl_seller`(`s_name`, `s_price`, `s_drs`, `s_brand`, `s_image`) VALUES ('$pname','$price','$descrption','brand','pimage')";
+            $sql = "INSERT INTO `tbl_seller`(`s_name`, `s_price`, `s_drs`, `s_brand`, `s_image`) VALUES ('$pname','$price','$descrption','$brand','$pimage')";
             $query = mysqli_query($connection, $sql);
             move_uploaded_file($_FILES["img"]["tmp_name"], $targetFilePath);
             if ($query) {

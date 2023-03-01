@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <h4 style="text-align:center;">Edit Details</h4>
+    <h4 style="text-align:center;">Seller Products</h4>
     <form action="#" method="POST">
         <table class="table table-dark table-striped">
             <tr>
@@ -31,11 +31,11 @@
                 <th>Product Discription</th>
                 <th>Product Brand</th>
                 <th>Product Image</th>
-                <th>Action</th>
+                <th>Update</th>
             </tr>
             <?php
             $con = mysqli_connect("localhost", "root", "", "shoes");
-            $mysql = "SELECT * FROM `tbl_seller` ";
+            $mysql = "SELECT * FROM `tbl_seller` WHERE `status` =1";
             $result = mysqli_query($con, $mysql);
             while ($row = mysqli_fetch_array($result)) {
             ?>
@@ -45,7 +45,9 @@
                     <td><?= $row['s_drs'] ?></td>
                     <td><?= $row['s_brand'] ?></td>
                     <td><img class="product_img" src="./product_img/<?= $row['s_image'] ?>"></td>
-                    <td><a href="seller_details.php?id=<?= $row['s_id'] ?>" class="btn btn-success">Edit</a></td>
+                    <td><a href="seller_product_approve.php?id=<?= $row['s_id'] ?>" class="btn btn-primary status_btn">Approve</a></td>
+        
+
                 </tr>
 
 
@@ -75,7 +77,7 @@
         </table>
     </form>
     <div class="d-flex justify-content-md-center">
-        <a href="./seller.php" class="btn btn-success">Back</a>
+        <a href="./adminpanel.php" class="btn btn-success">Back</a>
     </div>
 </body>
 
