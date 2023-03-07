@@ -82,7 +82,7 @@ if (!isset($_SESSION['Username'])) {
                 <div class="mb-3">
                     <h6>Product Description</h6>
                     <label for="" class="form-label"></label>
-                    <input type="text" class="form-control" name="p_drs" id="a" aria-describedby="helpId" onkeyup="colour()" autocomplete="off">
+                    <textarea class="form-control" name="p_drs" id="a" rows="2" onkeyup="colour()" autocomplete="off"></textarea>
                     <div id="message5"></div>
                 </div>
                 <div class="mb-3">

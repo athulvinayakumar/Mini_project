@@ -33,9 +33,7 @@
             }
 
         })
-        // if(response){
-        //     window.location.href="/adsol/index.php";
-        // }
+       
        
 
     }

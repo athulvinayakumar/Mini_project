@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
   $query = mysqli_query($connection, $sql);
   move_uploaded_file($_FILES["img"]["tmp_name"], $targetFilePath);
   if ($query) {
-    echo "<script>alert('Item added successful!!')</script>";
+    echo "<script>alert('Item added successfully!!')</script>";
     echo "<script> window.location='adminpanel.php';</script>";
   }
 }

@@ -211,7 +211,7 @@ $result = mysqli_query($con, $mysql);
                 <div class="col-lg-4 footer-grid_section_w3layouts">
                     <h2 class="logo-2 mb-lg-4 mb-3">
                         <a href="index.html">STEPSOUT</a>
-                    </h2>
+                    </h2> 
                     <p></p>
                     <h4 class="sub-con-fo ad-info my-4">Catch on Social</h4>
                     <ul class="w3layouts_social_list list-unstyled">

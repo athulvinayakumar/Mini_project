@@ -171,7 +171,7 @@ if (isset($_POST["recover"])) {
 
       // h-hotel account
       $mail->Username = 'athulvinayakumar2023b@mca.ajce.in';
-      $mail->Password = 'athul123';
+      $mail->Password = '';
 
       // send by h-hotel email
       $mail->setFrom('athulvinayakumar2023b@mca.ajce.in', 'Password Reset');
@@ -199,7 +199,7 @@ if (isset($_POST["recover"])) {
       } else {
       ?>
         <script>
-          window.alert("  Email send out !  Kindly check your email inbox.");
+          window.alert("Email send out !  Kindly check your email inbox.");
           window.location.replace("index.php");
         </script>
 <?php

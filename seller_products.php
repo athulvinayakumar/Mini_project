@@ -31,11 +31,12 @@
                 <th>Product Discription</th>
                 <th>Product Brand</th>
                 <th>Product Image</th>
-                <th>Update</th>
+                <th>Action</th>
+                <th>Action</th>
             </tr>
             <?php
             $con = mysqli_connect("localhost", "root", "", "shoes");
-            $mysql = "SELECT * FROM `tbl_seller` WHERE `status` =1";
+            $mysql = "SELECT * FROM `tbl_seller` WHERE `status` ='pending'";
             $result = mysqli_query($con, $mysql);
             while ($row = mysqli_fetch_array($result)) {
             ?>
@@ -46,7 +47,8 @@
                     <td><?= $row['s_brand'] ?></td>
                     <td><img class="product_img" src="./product_img/<?= $row['s_image'] ?>"></td>
                     <td><a href="seller_product_approve.php?id=<?= $row['s_id'] ?>" class="btn btn-primary status_btn">Approve</a></td>
-        
+                    <td><a href="seller_product_reject.php?id=<?= $row['s_id'] ?>" class="btn btn-danger status_btn">Reject</a></td>
+    
 
                 </tr>
 
