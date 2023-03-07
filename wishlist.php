@@ -1,643 +1,268 @@
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container mb-4">
-    <div class="row">
-        <div class="col-lg-4 pb-5">
-            <!-- Account Sidebar-->
-            <div class="author-card pb-3">
-                <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"><a class="btn btn-style-1 btn-white btn-sm" href="#" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward points to spend"><i class="fa fa-award text-md"></i>&nbsp;290 points</a></div>
-                <div class="author-card-profile">
-                    <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams">
-                    </div>
-                    <div class="author-card-details">
-                        <h5 class="author-card-name text-lg">Daniel Adams</h5><span class="author-card-position">Joined February 06, 2017</span>
-                    </div>
+<?php
+session_start();
+error_reporting(E_ERROR | E_PARSE);
+$user = $_SESSION['usr_id'];
+include 'db.php';
+?>
+<?php
+$con = mysqli_connect("localhost", "root", "", "shoes");
+$sql = "SELECT * FROM `cart` WHERE `id` =$user AND `status` = 1";
+$result = mysqli_query($con, $sql);
+while ($row = mysqli_fetch_array($result)) {
+    $prdid = $row['pid'];
+    $sql = "SELECT * FROM `admins` WHERE `prdid` = $prdid ";
+    $result1 = mysqli_query($con, $sql);
+}
+?>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+<div class="cart-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main-heading mb-10">My wishlist</div>
+                <div class="table-wishlist">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th width="45%">Product Name</th>
+                                <th width="15%">Unit Price</th>
+                                <th width="15%">Stock Status</th>
+                                <th width="15%"></th>
+                                <th width="10%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td width="45%">
+                                    <div class="display-flex align-center">
+                                        <div class="img-product">hi
+                                            <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg" alt="" class="mCS_img_loaded">
+                                        </div>
+                                        <div class="name-product">
+                                            Apple iPad Mini
+                                        </div>
+                                    </div>
+                                </td>
+                                <td width="15%" class="price">$110.00</td>
+                                <td width="15%"><span class="in-stock-box">In Stock</span></td>
+                                <td width="15%"><button class="round-black-btn small-btn">Add to Cart</button></td>
+                                <td width="10%" class="text-center"><a href="#" class="trash-icon"><i class="far fa-trash-alt"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td width="45%">
+                                    <div class="display-flex align-center">
+                                        <div class="img-product">
+                                            <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg" alt="" class="mCS_img_loaded">
+                                        </div>
+                                        <div class="name-product">
+                                            Apple iPad Mini
+                                        </div>
+                                    </div>
+                                </td>
+                                <td width="15%" class="price">$110.00</td>
+                                <td width="15%"><span class="in-stock-box">In Stock</span></td>
+                                <td width="15%"><button class="round-black-btn small-btn">Add to Cart</button></td>
+                                <td width="10%" class="text-center"><a href="#" class="trash-icon"><i class="far fa-trash-alt"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td width="45%">
+                                    <div class="display-flex align-center">
+                                        <div class="img-product">
+                                            <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg" alt="" class="mCS_img_loaded">
+                                        </div>
+                                        <div class="name-product">
+                                            Apple iPad Mini
+                                        </div>
+                                    </div>
+                                </td>
+                                <td width="15%" class="price">$110.00</td>
+                                <td width="15%"><span class="in-stock-box">In Stock</span></td>
+                                <td width="15%"><button class="round-black-btn small-btn">Add to Cart</button></td>
+                                <td width="10%" class="text-center"><a href="#" class="trash-icon"><i class="far fa-trash-alt"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
-            <div class="wizard">
-                <nav class="list-group list-group-flush">
-                    <a class="list-group-item active" href="#">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div><i class="fa fa-shopping-bag mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">Orders List</div>
-                            </div><span class="badge badge-secondary">6</span>
-                        </div>
-                    </a><a class="list-group-item" href="https://www.bootdey.com/snippets/view/bs4-profile-settings-page" target="__blank">
-<i class="fa fa-user text-muted"></i>Profile Settings</a><a class="list-group-item" href="#"><i class="fa fa-map-marker text-muted"></i>Addresses</a>
-                    <a class="list-group-item" href="#">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div><i class="fa fa-heart mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">My Wishlist</div>
-                            </div><span class="badge badge-secondary">3</span>
-                        </div>
-                    </a>
-                    <a class="list-group-item" href="https://www.bootdey.com/snippets/view/bs4-account-tickets" target="__blank">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div><i class="fa fa-tag mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">My Tickets</div>
-                            </div><span class="badge badge-secondary">4</span>
-                        </div>
-                    </a>
-                </nav>
-            </div>
-        </div>
-        <!-- Wishlist-->
-        <div class="col-lg-8 pb-5">
-            <!-- Item-->
-            <div class="cart-item d-md-flex justify-content-between"><span class="remove-item"><i class="fa fa-times"></i></span>
-                <div class="px-3 my-3">
-                    <a class="cart-item-product" href="#">
-                        <div class="cart-item-product-thumb"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Product"></div>
-                        <div class="cart-item-product-info">
-                            <h4 class="cart-item-product-title">Canon EOS M50 Mirrorless Camera</h4>
-                            <div class="text-lg text-body font-weight-medium pb-1">$910.00</div><span>Availability: <span class="text-success font-weight-medium">In Stock</span></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <!-- Item-->
-            <div class="cart-item d-md-flex justify-content-between"><span class="remove-item"><i class="fa fa-times"></i></span>
-                <div class="px-3 my-3">
-                    <a class="cart-item-product" href="#">
-                        <div class="cart-item-product-thumb"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="Product"></div>
-                        <div class="cart-item-product-info">
-                            <h4 class="cart-item-product-title">Apple iPhone X 256 GB Space Gray</h4>
-                            <div class="text-lg text-body font-weight-medium pb-1">$1,450.00</div><span>Availability: <span class="text-warning font-weight-medium">2 - 3 Weeks</span></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <!-- Item-->
-            <div class="cart-item d-md-flex justify-content-between"><span class="remove-item"><i class="fa fa-times"></i></span>
-                <div class="px-3 my-3">
-                    <a class="cart-item-product" href="#">
-                        <div class="cart-item-product-thumb"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Product"></div>
-                        <div class="cart-item-product-info">
-                            <h4 class="cart-item-product-title">HP LaserJet Pro Laser Printer</h4>
-                            <div class="text-lg text-body font-weight-medium pb-1">$188.50</div><span>Availability: <span class="text-success font-weight-medium">In Stock</span></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="custom-control custom-checkbox">
-                <input class="custom-control-input" type="checkbox" checked="" id="inform-me">
-                <label class="custom-control-label" for="inform-me">Inform me when item from my wishlist is available</label>
             </div>
         </div>
     </div>
 </div>
+<style>
+    .cart-wrap {
+        padding: 40px 0;
+        font-family: 'Open Sans', sans-serif;
+    }
 
-<style type="text/css">
-    body{
-    background:#eee;
-    margin-top:40px;
-}
-.widget-author {
-  margin-bottom: 58px;
-}
-.author-card {
-  position: relative;
-  padding-bottom: 48px;
-  background-color: #fff;
-  box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .09);
-}
-.author-card .author-card-cover {
-  position: relative;
-  width: 100%;
-  height: 100px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.author-card .author-card-cover::after {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  content: '';
-  opacity: 0.5;
-}
-.author-card .author-card-cover > .btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 0 10px;
-}
-.author-card .author-card-profile {
-  display: table;
-  position: relative;
-  margin-top: -22px;
-  padding-right: 15px;
-  padding-bottom: 16px;
-  padding-left: 20px;
-  z-index: 5;
-}
-.author-card .author-card-profile .author-card-avatar, .author-card .author-card-profile .author-card-details {
-  display: table-cell;
-  vertical-align: middle;
-}
-.author-card .author-card-profile .author-card-avatar {
-  width: 85px;
-  border-radius: 50%;
-  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, .15);
-  overflow: hidden;
-}
-.author-card .author-card-profile .author-card-avatar > img {
-  display: block;
-  width: 100%;
-}
-.author-card .author-card-profile .author-card-details {
-  padding-top: 20px;
-  padding-left: 15px;
-}
-.author-card .author-card-profile .author-card-name {
-  margin-bottom: 2px;
-  font-size: 14px;
-  font-weight: bold;
-}
-.author-card .author-card-profile .author-card-position {
-  display: block;
-  color: #8c8c8c;
-  font-size: 12px;
-  font-weight: 600;
-}
-.author-card .author-card-info {
-  margin-bottom: 0;
-  padding: 0 25px;
-  font-size: 13px;
-}
-.author-card .author-card-social-bar-wrap {
-  position: absolute;
-  bottom: -18px;
-  left: 0;
-  width: 100%;
-}
-.author-card .author-card-social-bar-wrap .author-card-social-bar {
-  display: table;
-  margin: auto;
-  background-color: #fff;
-  box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .11);
-}
-.btn-style-1.btn-white {
-    background-color: #fff;
-}
-.list-group-item i {
-    display: inline-block;
-    margin-top: -1px;
-    margin-right: 8px;
-    font-size: 1.2em;
-    vertical-align: middle;
-}
-.mr-1, .mx-1 {
-    margin-right: .25rem !important;
-}
+    .main-heading {
+        font-size: 19px;
+        margin-bottom: 20px;
+    }
 
-.list-group-item.active:not(.disabled) {
-    border-color: #e7e7e7;
-    background: #fff;
-    color: #ac32e4;
-    cursor: default;
-    pointer-events: none;
-}
-.list-group-flush:last-child .list-group-item:last-child {
-    border-bottom: 0;
-}
+    .table-wishlist table {
+        width: 100%;
+    }
 
-.list-group-flush .list-group-item {
-    border-right: 0 !important;
-    border-left: 0 !important;
-}
+    .table-wishlist thead {
+        border-bottom: 1px solid #e5e5e5;
+        margin-bottom: 5px;
+    }
 
-.list-group-flush .list-group-item {
-    border-right: 0;
-    border-left: 0;
-    border-radius: 0;
-}
-.list-group-item.active {
-    z-index: 2;
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-}
-.list-group-item:last-child {
-    margin-bottom: 0;
-    border-bottom-right-radius: .25rem;
-    border-bottom-left-radius: .25rem;
-}
-a.list-group-item, .list-group-item-action {
-    color: #404040;
-    font-weight: 600;
-}
-.list-group-item {
-    padding-top: 16px;
-    padding-bottom: 16px;
-    -webkit-transition: all .3s;
-    transition: all .3s;
-    border: 1px solid #e7e7e7 !important;
-    border-radius: 0 !important;
-    color: #404040;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    text-decoration: none;
-}
-.list-group-item {
-    position: relative;
-    display: block;
-    padding: .75rem 1.25rem;
-    margin-bottom: -1px;
-    background-color: #fff;
-    border: 1px solid rgba(0,0,0,0.125);
-}
+    .table-wishlist thead tr th {
+        padding: 8px 0 18px;
+        color: #484848;
+        font-size: 15px;
+        font-weight: 400;
+    }
 
-.product-card {
-  position: relative;
-  max-width: 380px;
-  padding-top: 12px;
-  padding-bottom: 43px;
-  transition: all 0.35s;
-  border: 1px solid #e7e7e7;
-}
-.product-card .product-head {
-  padding: 0 15px 8px;
-}
-.product-card .product-head .badge {
-  margin: 0;
-}
-.product-card .product-thumb {
-  display: block;
-}
-.product-card .product-thumb > img {
-  display: block;
-  width: 100%;
-}
-.product-card .product-card-body {
-  padding: 0 20px;
-  text-align: center;
-}
-.product-card .product-meta {
-  display: block;
-  padding: 12px 0 2px;
-  transition: color 0.25s;
-  color: rgba(140, 140, 140, .75);
-  font-size: 12px;
-  font-weight: 600;
-  text-decoration: none;
-}
-.product-card .product-meta:hover {
-  color: #8c8c8c;
-}
-.product-card .product-title {
-  margin-bottom: 8px;
-  font-size: 16px;
-  font-weight: bold;
-}
-.product-card .product-title > a {
-  transition: color 0.3s;
-  color: #343b43;
-  text-decoration: none;
-}
-.product-card .product-title > a:hover {
-  color: #ac32e4;
-}
-.product-card .product-price {
-  display: block;
-  color: #404040;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: normal;
-}
-.product-card .product-price > del {
-  margin-right: 6px;
-  color: rgba(140, 140, 140, .75);
-}
-.product-card .product-buttons-wrap {
-  position: absolute;
-  bottom: -20px;
-  left: 0;
-  width: 100%;
-}
-.product-card .product-buttons {
-  display: table;
-  margin: auto;
-  background-color: #fff;
-  box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .11);
-}
-.product-card .product-button {
-  display: table-cell;
-  position: relative;
-  width: 50px;
-  height: 40px;
-  border-right: 1px solid rgba(231, 231, 231, .6);
-}
-.product-card .product-button:last-child {
-  border-right: 0;
-}
-.product-card .product-button > a {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transition: all 0.3s;
-  color: #404040;
-  font-size: 16px;
-  line-height: 40px;
-  text-align: center;
-  text-decoration: none;
-}
-.product-card .product-button > a:hover {
-  background-color: #ac32e4;
-  color: #fff;
-}
-.product-card:hover {
-  border-color: transparent;
-  box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .09);
-}
-.product-category-card {
-  display: block;
-  max-width: 400px;
-  text-align: center;
-  text-decoration: none !important;
-}
-.product-category-card .product-category-card-thumb {
-  display: table;
-  width: 100%;
-  box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .09);
-}
-.product-category-card .product-category-card-body {
-  padding: 20px;
-  padding-bottom: 28px;
-}
-.product-category-card .main-img, .product-category-card .thumblist {
-  display: table-cell;
-  padding: 15px;
-  vertical-align: middle;
-}
-.product-category-card .main-img > img, .product-category-card .thumblist > img {
-  display: block;
-  width: 100%;
-}
-.product-category-card .main-img {
-  width: 65%;
-  padding-right: 10px;
-}
-.product-category-card .thumblist {
-  width: 35%;
-  padding-left: 10px;
-}
-.product-category-card .thumblist > img:first-child {
-  margin-bottom: 6px;
-}
-.product-category-card .product-category-card-meta {
-  display: block;
-  padding-bottom: 9px;
-  color: rgba(140, 140, 140, .75);
-  font-size: 11px;
-  font-weight: 600;
-}
-.product-category-card .product-category-card-title {
-  margin-bottom: 0;
-  transition: color 0.3s;
-  color: #343b43;
-  font-size: 18px;
-}
-.product-category-card:hover .product-category-card-title {
-  color: #ac32e4;
-}
-.product-gallery {
-  position: relative;
-  padding: 45px 15px 0;
-  box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .09);
-}
-.product-gallery .gallery-item::before {
-  display: none !important;
-}
-.product-gallery .gallery-item::after {
-  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, .26);
-}
-.product-gallery .video-player-button, .product-gallery .badge {
-  position: absolute;
-  z-index: 5;
-}
-.product-gallery .badge {
-  top: 15px;
-  left: 15px;
-  margin-left: 0;
-}
-.product-gallery .video-player-button {
-  top: 0;
-  right: 15px;
-  width: 60px;
-  height: 60px;
-  line-height: 60px;
-}
-.product-gallery .product-thumbnails {
-  display: block;
-  margin: 0 -15px;
-  padding: 12px;
-  border-top: 1px solid #e7e7e7;
-  list-style: none;
-  text-align: center;
-}
-.product-gallery .product-thumbnails > li {
-  display: inline-block;
-  margin: 10px 3px;
-}
-.product-gallery .product-thumbnails > li > a {
-  display: block;
-  width: 94px;
-  transition: all 0.25s;
-  border: 1px solid transparent;
-  background-color: #fff;
-  opacity: 0.75;
-}
-.product-gallery .product-thumbnails > li:hover > a {
-  opacity: 1;
-}
-.product-gallery .product-thumbnails > li.active > a {
-  border-color: #ac32e4;
-  cursor: default;
-  opacity: 1;
-}
-.product-meta {
-  padding-bottom: 10px;
-}
-.product-meta > a, .product-meta > i {
-  display: inline-block;
-  margin-right: 5px;
-  color: rgba(140, 140, 140, .75);
-  vertical-align: middle;
-}
-.product-meta > i {
-  margin-top: 2px;
-}
-.product-meta > a {
-  transition: color 0.25s;
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
-}
-.product-meta > a:hover {
-  color: #8c8c8c;
-}
-.cart-item {
-  position: relative;
-  margin-bottom: 30px;
-  padding: 0 50px 0 10px;
-  background-color: #fff;
-  box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .09);
-}
-.cart-item .cart-item-label {
-  display: block;
-  margin-bottom: 15px;
-  color: #8c8c8c;
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-.cart-item .cart-item-product {
-  display: table;
-  width: 420px;
-  text-decoration: none;
-}
-.cart-item .cart-item-product-thumb, .cart-item .cart-item-product-info {
-  display: table-cell;
-  vertical-align: top;
-}
-.cart-item .cart-item-product-thumb {
-  width: 110px;
-}
-.cart-item .cart-item-product-thumb > img {
-  display: block;
-  width: 100%;
-}
-.cart-item .cart-item-product-info {
-  padding-top: 5px;
-  padding-left: 15px;
-}
-.cart-item .cart-item-product-info > span {
-  display: block;
-  margin-bottom: 2px;
-  color: #404040;
-  font-size: 12px;
-}
-.cart-item .cart-item-product-title {
-  margin-bottom: 8px;
-  transition: color, 0.3s;
-  color: #343b43;
-  font-size: 16px;
-  font-weight: bold;
-}
-.cart-item .cart-item-product:hover .cart-item-product-title {
-  color: #ac32e4;
-}
-.cart-item .count-input {
-  display: inline-block;
-  width: 85px;
-}
-.cart-item .remove-item {
-  right: -10px !important;
-}
-@media (max-width: 991px) {
-  .cart-item {
-    padding-right: 30px;
-  }
-  .cart-item .cart-item-product {
-    width: auto;
-  }
-}
-@media (max-width: 768px) {
-  .cart-item {
-    padding-right: 10px;
-    padding-bottom: 15px;
-  }
-  .cart-item .cart-item-product {
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
-  .cart-item .cart-item-product-thumb, .cart-item .cart-item-product-info {
-    display: block;
-  }
-  .cart-item .cart-item-product-thumb {
-    margin: 0 auto 10px;
-  }
-  .cart-item .cart-item-product-info {
-    padding-left: 0;
-  }
-  .cart-item .cart-item-label {
-    margin-bottom: 8px;
-  }
-}
-.comparison-table {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-}
-.comparison-table table {
-  min-width: 750px;
-  table-layout: fixed;
-}
-.comparison-table .comparison-item {
-  position: relative;
-  margin-bottom: 10px;
-  padding: 13px 12px 18px;
-  background-color: #fff;
-  text-align: center;
-  box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .09);
-}
-.comparison-table .comparison-item .comparison-item-thumb {
-  display: block;
-  width: 80px;
-  margin-right: auto;
-  margin-bottom: 12px;
-  margin-left: auto;
-}
-.comparison-table .comparison-item .comparison-item-thumb > img {
-  display: block;
-  width: 100%;
-}
-.comparison-table .comparison-item .comparison-item-title {
-  display: block;
-  margin-bottom: 14px;
-  transition: color 0.25s;
-  color: #404040;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-}
-.comparison-table .comparison-item .comparison-item-title:hover {
-  color: #ac32e4;
-}
-.remove-item {
-  display: block;
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  width: 22px;
-  height: 22px;
-  padding-left: 1px;
-  border-radius: 50%;
-  background-color: #ff5252;
-  color: #fff;
-  line-height: 23px;
-  text-align: center;
-  box-shadow: 0 3px 12px 0 rgba(255, 82, 82, .5);
-  cursor: pointer;
-}
-.card-wrapper {
-  margin: 30px -15px;
-}
-@media (max-width: 576px) {
-  .card-wrapper .jp-card-container {
-    width: 260px !important;
-  }
-  .card-wrapper .jp-card {
-    min-width: 250px !important;
-  }
-}
+    .table-wishlist tr td {
+        padding: 25px 0;
+        vertical-align: middle;
+    }
+
+    .table-wishlist tr td .img-product {
+        width: 72px;
+        float: left;
+        margin-left: 8px;
+        margin-right: 31px;
+        line-height: 63px;
+    }
+
+    .table-wishlist tr td .img-product img {
+        width: 100%;
+    }
+
+    .table-wishlist tr td .name-product {
+        font-size: 15px;
+        color: #484848;
+        padding-top: 8px;
+        line-height: 24px;
+        width: 50%;
+    }
+
+    .table-wishlist tr td.price {
+        font-weight: 600;
+    }
+
+    .table-wishlist tr td .quanlity {
+        position: relative;
+    }
+
+    .total {
+        font-size: 24px;
+        font-weight: 600;
+        color: #8660e9;
+    }
+
+    .display-flex {
+        display: flex;
+    }
+
+    .align-center {
+        align-items: center;
+    }
+
+    .round-black-btn {
+        border-radius: 25px;
+        background: #212529;
+        color: #fff;
+        padding: 5px 20px;
+        display: inline-block;
+        border: solid 2px #212529;
+        transition: all 0.5s ease-in-out 0s;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .round-black-btn:hover,
+    .round-black-btn:focus {
+        background: transparent;
+        color: #212529;
+        text-decoration: none;
+    }
+
+    .mb-10 {
+        margin-bottom: 10px !important;
+    }
+
+    .mt-30 {
+        margin-top: 30px !important;
+    }
+
+    .d-block {
+        display: block;
+    }
+
+    .custom-form label {
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+    .pretty.p-default {
+        margin-bottom: 15px;
+    }
+
+    .pretty input:checked~.state.p-primary-o label:before,
+    .pretty.p-toggle .state.p-primary-o label:before {
+        border-color: #8660e9;
+    }
+
+    .pretty.p-default:not(.p-fill) input:checked~.state.p-primary-o label:after {
+        background-color: #8660e9 !important;
+    }
+
+    .main-heading.border-b {
+        border-bottom: solid 1px #ededed;
+        padding-bottom: 15px;
+        margin-bottom: 20px !important;
+    }
+
+    .custom-form .pretty .state label {
+        padding-left: 6px;
+    }
+
+    .custom-form .pretty .state label:before {
+        top: 1px;
+    }
+
+    .custom-form .pretty .state label:after {
+        top: 1px;
+    }
+
+    .custom-form .form-control {
+        font-size: 14px;
+        height: 38px;
+    }
+
+    .custom-form .form-control:focus {
+        box-shadow: none;
+    }
+
+    .custom-form textarea.form-control {
+        height: auto;
+    }
+
+    .mt-40 {
+        margin-top: 40px !important;
+    }
+
+    .in-stock-box {
+        background: #ff0000;
+        font-size: 12px;
+        text-align: center;
+        border-radius: 25px;
+        padding: 4px 15px;
+        display: inline-block;
+        color: #fff;
+    }
+
+    .trash-icon {
+        font-size: 20px;
+        color: #212529;
+    }
 </style>
