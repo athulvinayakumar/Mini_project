@@ -4,21 +4,10 @@ error_reporting(E_ERROR | E_PARSE);
 $user = $_SESSION['usr_id'];
 include 'db.php';
 ?>
-<?php
-$con = mysqli_connect("localhost", "root", "", "shoes");
-$sql = "SELECT * FROM `cart` WHERE `id` =$user AND `status` = 1";
-$result = mysqli_query($con, $sql);
-while ($row = mysqli_fetch_array($result)) {
-    $prdid = $row['pid'];
-    $sql = "SELECT * FROM `admins` WHERE `prdid` = $prdid ";
-    $result1 = mysqli_query($con, $sql);
-}
-?>
-
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+
 
 
 <div class="cart-wrap">
@@ -32,61 +21,36 @@ while ($row = mysqli_fetch_array($result)) {
                             <tr>
                                 <th width="45%">Product Name</th>
                                 <th width="15%">Unit Price</th>
+                                <th width="15%">Brand</th>
                                 <th width="15%">Stock Status</th>
                                 <th width="15%"></th>
-                                <th width="10%"></th>
+                                <th width="15%"></th>
+
+                               
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td width="45%">
-                                    <div class="display-flex align-center">
-                                        <div class="img-product">hi
-                                            <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg" alt="" class="mCS_img_loaded">
-                                        </div>
-                                        <div class="name-product">
-                                            Apple iPad Mini
-                                        </div>
-                                    </div>
-                                </td>
-                                <td width="15%" class="price">$110.00</td>
-                                <td width="15%"><span class="in-stock-box">In Stock</span></td>
-                                <td width="15%"><button class="round-black-btn small-btn">Add to Cart</button></td>
-                                <td width="10%" class="text-center"><a href="#" class="trash-icon"><i class="far fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td width="45%">
-                                    <div class="display-flex align-center">
-                                        <div class="img-product">
-                                            <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg" alt="" class="mCS_img_loaded">
-                                        </div>
-                                        <div class="name-product">
-                                            Apple iPad Mini
-                                        </div>
-                                    </div>
-                                </td>
-                                <td width="15%" class="price">$110.00</td>
-                                <td width="15%"><span class="in-stock-box">In Stock</span></td>
-                                <td width="15%"><button class="round-black-btn small-btn">Add to Cart</button></td>
-                                <td width="10%" class="text-center"><a href="#" class="trash-icon"><i class="far fa-trash-alt"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td width="45%">
-                                    <div class="display-flex align-center">
-                                        <div class="img-product">
-                                            <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg" alt="" class="mCS_img_loaded">
-                                        </div>
-                                        <div class="name-product">
-                                            Apple iPad Mini
-                                        </div>
-                                    </div>
-                                </td>
-                                <td width="15%" class="price">$110.00</td>
-                                <td width="15%"><span class="in-stock-box">In Stock</span></td>
-                                <td width="15%"><button class="round-black-btn small-btn">Add to Cart</button></td>
-                                <td width="10%" class="text-center"><a href="#" class="trash-icon"><i class="far fa-trash-alt"></i></a></td>
-                            </tr>
+                            <?php
+                            $con = mysqli_connect("localhost", "root", "", "shoes");
+                            $sql = "SELECT * FROM `tbl_wishlist` WHERE `id` =$user AND status='1'";
+                            $result = mysqli_query($con, $sql);
+                            while ($row = mysqli_fetch_array($result)) {
+                                $prdid = $row['pid'];
+                                $sql = "SELECT * FROM `admins` WHERE `prdid` = '$prdid' ";
+                                $result1 = mysqli_query($con, $sql);
+                                while ($row1 = mysqli_fetch_array($result1)) {?>
+                                    <td><?php echo $row1['prdnm']; ?></td>
+                                    <td><?php echo $row1['prdpr']; ?></td>
+                                    <td><?php echo $row1['brand']; ?></td>
+                                    <td class="text-right d-none d-md-block"> <a href="remove_wishlist.php?id=<?= $row1['prdid'] ?>&uid=<?= $user ?>" class="btn btn-light" data-abc="true"> Remove</a> </td>
+
+
                         </tbody>
+                        <?php
+                                }
+
+                            }
+                            ?>
                     </table>
                 </div>
             </div>

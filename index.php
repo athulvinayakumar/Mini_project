@@ -109,6 +109,13 @@ include 'db.php';
                             <li><a href="login.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
                         <?php } ?>
 
+                        <?php if (isset($_SESSION['Username'])) { ?>
+                            <!-- <li>|</li>  -->
+                            <li><a href="wishlist.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
+                        <?php } else { ?>
+                            <li><a href="login.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
+                        <?php } ?>
+
 
 
                     </ul>
@@ -163,6 +170,8 @@ include 'db.php';
                                             </div>
                                         </div>
                                         <a href="add_cart.php?id=<?= $row['prdid'] ?>" class="btn btn-success cart_btn" name="cart_btn">Add to Cart</a>
+                                        <a href="add_wishlist.php?id=<?=$row['prdid']?>" class="btn btn-primary cart_btn">Add to Wishlist</a>
+
                                     </div>
                                 </div>
                             </a>
