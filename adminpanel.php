@@ -18,7 +18,7 @@ if (!isset($_SESSION['Username'])) {
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <title>Admin panel</title>
   <link rel="stylesheet" href="css/admin.css">
-  
+
 
 </head>
 
@@ -47,7 +47,7 @@ if (!isset($_SESSION['Username'])) {
           </tr>
           <tr>
             <td><button id='usr_msg' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> User Review</button></td>
-          </tr>   
+          </tr>
           <tr>
             <td><button id='home-page' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i> Home Page</button></td>
           </tr>
@@ -68,7 +68,6 @@ if (!isset($_SESSION['Username'])) {
           <h1 class="display-3">Add new Items</h1>
           </p>
         </div>
-      </div>
 
       <form method="post" id="form" enctype="multipart/form-data" action="admin.php">
         <div class="mb-3">
@@ -78,44 +77,52 @@ if (!isset($_SESSION['Username'])) {
           <div id="message2"></div>
         </div>
         <div class="mb-3">
+          <h6>Product quantity</h6>
+          <label for="" class="form-label"></label>
+          <input type="text" class="form-control" name="a" id="d" aria-describedby="helpId" onkeyup="pro_qnt()" autocomplete="off">
+          <div id="message4"></div>
+        </div>
+
+        <div class="mb-3">
           <h6>Product Price</h6>
           <label for="" class="form-label"></label>
           <input type="text" class="form-control" name="ak" id="c" aria-describedby="helpId" onkeyup="pro_price()" autocomplete="off">
           <div id="message3"></div>
-          
-          <div class="mb-3">
-            <h6>Product Discription</h6>
-            <label for="" class="form-label"></label>
-            <textarea class="form-control" name="discription" onkeyup="discriptions()" id="a" rows="2"></textarea>
-            <!-- <input type="text" class="form-control" name="p_discription" id="a" aria-describedby="helpId" onkeyup="colour()" autocomplete="off"> -->
-            <div id="message5"></div>
-          </div>
-          <div class="mb-3">
-            <h6>Product Brand</h6>
-            <label for="" class="form-label"></label>
-            <select name="p_brand" class="form-control">
-            <?php
-              $sql="SELECT * FROM `bands`";
-              $result=mysqli_query($connection,$sql);
-              while($row=mysqli_fetch_array($result)){
-            ?>
-              <option value="<?=$row['b_name']?>"><?=$row['b_name']?></option>
-              <?php
-              }
-              ?>
-            </select>
-          </div>
-          <div class="mb-3">
-            <h6>Product image</h6>
-            <label for="" class="form-label"></label>
-            <input type="file" class="form-control" name="img" id="e" aria-describedby="helpId" onkeyup="unames()" autocomplete="off">
-            <div id="message5"></div>
-          </div>
-          <button type="submit" name="submit" class="btn btn-primary" id="add-btn">Add</button>
-          <button type="reset" class="btn btn-secondary">Reset</button>
         </div>
-      </form>
+
+        <div class="mb-3">
+          <h6>Product Discription</h6>
+          <label for="" class="form-label"></label>
+          <textarea class="form-control" name="discription" onkeyup="discriptions()" id="a" rows="2"></textarea>
+          <!-- <input type="text" class="form-control" name="p_discription" id="a" aria-describedby="helpId" onkeyup="colour()" autocomplete="off"> -->
+          <div id="message5"></div>
+        </div>
+        <div class="mb-3">
+          <h6>Product Brand</h6>
+          <label for="" class="form-label"></label>
+          <select name="p_brand" class="form-control">
+            <?php
+            $sql = "SELECT * FROM `bands`";
+            $result = mysqli_query($connection, $sql);
+            while ($row = mysqli_fetch_array($result)) {
+            ?>
+              <option value="<?= $row['b_name'] ?>"><?= $row['b_name'] ?></option>
+            <?php
+            }
+            ?>
+          </select>
+        </div>
+        <div class="mb-3">
+          <h6>Product image</h6>
+          <label for="" class="form-label"></label>
+          <input type="file" class="form-control" name="img" id="e" aria-describedby="helpId" onkeyup="unames()" autocomplete="off">
+          <div id="message5"></div>
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary" id="add-btn">Add</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
     </div>
+    </form>
+  </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="admin.js"></script>

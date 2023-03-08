@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("form").submit(function (e) {
-        if (flag1 != 1 || flag2 != 1  || flag4 != 1) {
+        if (flag1 != 1 || flag2 != 1  || flag3 != 0 || flag4 != 1) {
             e.preventDefault();
         }
 
@@ -23,6 +23,20 @@ function product() {
     } else {
         document.getElementById("message2").innerHTML = "";
         flag1 = 1;
+    }
+
+}
+
+function pro_qnt() {
+    var user = document.getElementById("b").value;
+    var letters = /^[0-9]{3,5}$/;
+
+    if (!letters.test(user)) {
+        document.getElementById("message4").innerHTML = "Numbers only";
+        flag3 = 0;
+    } else {
+        document.getElementById("message4").innerHTML = "";
+        flag3 = 1;
     }
 
 }

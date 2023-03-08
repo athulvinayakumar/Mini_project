@@ -97,7 +97,7 @@ $_SESSION['total_amount']=$row['prdpr'];
             <div class="product-description">
                 <span>Shoes</span>
                 <h1><?= $row['prdnm'] ?>(<?= $row['brand'] ?>)</h1>
-                <p>The preferred choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation. Sturdy headband and on-ear cushions suitable for live performance</p>
+                <p>The 8 choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation. Sturdy headband and on-ear cushions suitable for live performance</p>
             </div>
 
             <!-- Product Configuration -->

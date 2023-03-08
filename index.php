@@ -74,51 +74,58 @@ include 'db.php';
                         <h1> <a href="#">STEPSOUT</a></h1>
                     </div>
 
-                    <label for="drop" class="toggle">Menu</label>
-                    <input type="checkbox" id="drop" />
-                    <ul class="menu mt-2">
-                        <li class=""><a href="index.php">Home</a></li>
-                        <li><a href="about.php">About</a></li>
-                        <li><a href="product.php">Product</a></li>
-                        <li><a href="feedback.php">Review</a></li>
+                    <div id="search_container">
+                        <input type="text" name="search_bar_input" onkeyup="searchFunc();" id="search_bar_input" placeholder="Search..">
+                        <!-- <span id="search_bar_searchbtn"><i class="fa fa-search"></i></span> -->
+                        <div class="search_display_box search_hide" id="db_result_box">
+
+                        </div>
+
+                        <label for="drop" class="toggle">Menu</label>
+                        <input type="checkbox" id="drop" />
+                        <ul class="menu mt-2">
+                            <li class=""><a href="index.php">Home</a></li>
+                            <li><a href="about.php">About</a></li>
+                            <li><a href="product.php">Product</a></li>
+                            <li><a href="feedback.php">Review</a></li>
 
 
-                        <?php if (isset($_SESSION['Username'])) { ?>
-                            <li class="nav-item dropdown">
-                                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?php echo strtoupper($_SESSION['Username']); ?>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
-                                    <li><a class="dropdown-item" href="changepsw.php">Change Password</a></li>
-                                    <li><a class="dropdown-item" href="logout.php">logout</a></li>
+                            <?php if (isset($_SESSION['Username'])) { ?>
+                                <li class="nav-item dropdown">
+                                    <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <?php echo strtoupper($_SESSION['Username']); ?>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
+                                        <li><a class="dropdown-item" href="changepsw.php">Change Password</a></li>
+                                        <li><a class="dropdown-item" href="logout.php">logout</a></li>
 
-                                </ul>
-                            </li>
+                                    </ul>
+                                </li>
 
-                        <?php } else { ?>
-                            <li><a href="./login.php">Signin</a></li>
-                        <?php
-                        }
-                        ?>
+                            <?php } else { ?>
+                                <li><a href="./login.php">Signin</a></li>
+                            <?php
+                            }
+                            ?>
 
-                        <?php if (isset($_SESSION['Username'])) { ?>
-                            <li>|</li>
-                            <li><a href="cart.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
-                        <?php } else { ?>
-                            <li><a href="login.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
-                        <?php } ?>
+                            <?php if (isset($_SESSION['Username'])) { ?>
+                                <li>|</li>
+                                <li><a href="cart.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
+                            <?php } else { ?>
+                                <li><a href="login.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
+                            <?php } ?>
 
-                        <?php if (isset($_SESSION['Username'])) { ?>
-                            <!-- <li>|</li>  -->
-                            <li><a href="wishlist.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
-                        <?php } else { ?>
-                            <li><a href="login.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
-                        <?php } ?>
+                            <?php if (isset($_SESSION['Username'])) { ?>
+                                <!-- <li>|</li>  -->
+                                <li><a href="wishlist.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
+                            <?php } else { ?>
+                                <li><a href="login.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
+                            <?php } ?>
 
 
 
-                    </ul>
+                        </ul>
                 </nav>
                 <!-- //nav -->
             </div>
@@ -170,7 +177,7 @@ include 'db.php';
                                             </div>
                                         </div>
                                         <a href="add_cart.php?id=<?= $row['prdid'] ?>" class="btn btn-success cart_btn" name="cart_btn">Add to Cart</a>
-                                        <a href="add_wishlist.php?id=<?=$row['prdid']?>" class="btn btn-primary cart_btn">Add to Wishlist</a>
+                                        <a href="add_wishlist.php?id=<?= $row['prdid'] ?>" class="btn btn-primary cart_btn" cart>Add to Wishlist</a>
 
                                     </div>
                                 </div>
@@ -363,6 +370,123 @@ include 'db.php';
     $(".cart_btn").click(function() {
         alert("Success")
     })
+
+    function searchFunc(){
+        var search = document.getElementById("search_bar_input").value;
+        var element = document.getElementById("db_result_box");
+        if(search!=""){
+            element.classList.remove("search_hide");
+            element.classList.add("search_show");
+            $.ajax({
+                url:"searchbar.php",
+                method:"POST",
+                data:{text:search},
+                success:function(data){
+                    $('.search_display_box').html(data);
+                }
+            });
+        }
+        else{
+            element.classList.remove("search_show");
+            element.classList.add("search_hide");
+        }
+    }
+
 </script>
 
 </html>
+
+<style>
+    #search_bar_input {
+    border-radius: 5px;
+    border: 1px solid grey;
+    padding: 10px 5px;
+    margin-left: 40px;
+    margin-top: 5px;
+}
+
+#search_bar_input:focus {
+    padding-left: 10px;
+    transition: 0.3s all ease-in-out;
+}
+
+#search_bar_searchbtn {
+    padding: 10px 15px;
+    margin-left: 10px;
+    margin-top: 5px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    color: grey;
+    cursor: pointer;
+}
+
+#search_bar_searchbtn:hover {
+    border: 1px solid grey;
+    background-color: white;
+    border-radius: 5px;
+    color: #94d924;
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+}
+
+.search_display_box {
+    position: absolute;
+    max-height: 350px;
+    overflow-y: scroll;
+    background: white;
+    overflow-x: hidden;
+    width: 12.5%;
+    margin-left: 265px;
+    margin-top: 20px;
+    font-size: 13px;
+    border-radius: 0px 0px 5px 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5), 0 1px 20px rgba(0, 0, 0, 0.0) inset;
+    top: 55px;
+}
+
+.search_display_box::-webkit-scrollbar {
+    width: 10px;
+}
+
+.search_display_box::-webkit-scrollbar-thumb {
+    background: #0000ff;
+    border-radius: 5px;
+    height: 100px;
+    scroll-behavior: smooth;
+}
+
+.search_display_box::-webkit-scrollbar-thumb:hover {
+    background: #0000ff;
+}
+
+.search_hide {
+    display: none;
+}
+
+.search_show {
+    display: block;
+}
+
+.search_row {
+    margin: 10px 0px;
+}
+
+.search_row a {
+    display: flex;
+}
+
+.db_img {
+    margin-left: 20px;
+}
+
+.db_pname {
+    margin-left: 20px;
+    font-size: small;
+}
+
+.db_img img {
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 0px;
+}
+</style>

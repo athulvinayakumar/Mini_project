@@ -16,16 +16,14 @@ if ($user == null) { ?>
     $sql = "SELECT * FROM `cart` WHERE `pid` =$cart_ids  AND `id` = $user";
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_array($result);
+    $quantity=$row['quantity'];
     if ($row['quantity'] > 0) {
-        $quantity = $row['quantity'] + 1;
+        $quantity++;
         $sql = "UPDATE `cart` SET `quantity`= $quantity WHERE `pid` =$cart_ids  AND `id` = $user";
-        mysqli_query($con, $sql);?>
-        <script>
-            alert("Success")
-        </script>
-        <script>
-            location.href = "product.php"
-        </script>
+        if(mysqli_query($con, $sql)){
+            echo"<script>alert('Success');location.href = 'cart.php'</script>";
+        }
+        ?>
         <?php 
     } else {
         $sql = "INSERT INTO `cart`(`id`, `pid`) VALUES ('$user','$cart_ids')";

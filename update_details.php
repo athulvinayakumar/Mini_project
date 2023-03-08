@@ -33,18 +33,19 @@ $row = mysqli_fetch_array($result);
                 <td><div id="message1"></div></td>
             </tr>
             <tr>
+                <th>Product quantity</th>
+                <td><input class="form-control" id="third" name="product_quantity" onkeyup="cl()" type="text" value="<?php echo $row['prqnt']; ?>"></td>
+                <td><div id="message3"></div></td>
+            </tr>
+            <tr>
                 <th>Product Price</th>
                 <td><input class="form-control" id="second" name="product_price" onkeyup="pp()" type="text" value="<?php echo $row['prdpr']; ?>"></td>
                 <td><div id="message2"></div></td>
             </tr>
+           
             <tr>
-                <th>Product Color</th>
-                <td><input class="form-control" id="third" name="product_color" onkeyup="cl()" type="text" value="<?php echo $row['color']; ?>"></td>
-                <td><div id="message3"></div></td>
-            </tr>
-            <tr>
-                <th>Product size</th>
-                <td><input class="form-control" id="four" name="product_size" type="text" onkeyup="ps()" value="<?php echo $row['prdsiz']; ?>"></td>
+                <th>Product discription</th>
+                <td><input class="form-control" id="four" name="product_discription" type="text" onkeyup="ps()" value="<?php echo $row['discription']; ?>"></td>
                 <td><div id="message4"></div></td> 
             </tr>
             <tr>
@@ -63,9 +64,9 @@ if (isset($_POST['sub'])) {
 
     // $product_id = $_POST['product_id'];
     $product_name = $_POST['product'];
+    $product_quantity = $_POST["product_quantity"];
     $product_price = $_POST['product_price'];
-    $product_color = $_POST["product_color"];
-    $product_size = $_POST['product_size'];
+    $product_discription = $_POST['discription'];
     $product_img = $_FILES['product_img']['name'];
     if($product_img == null){
         $product_img=$row['image'];
@@ -74,7 +75,7 @@ if (isset($_POST['sub'])) {
         echo ("<script>alert('Enter Valid details')</script>");
     } else {
         $con = mysqli_connect("localhost", "root", "", "shoes");
-        $mysql = "UPDATE `admins` SET `prdnm`='$product_name',`prdpr`='$product_price',`color` = '$product_color',`prdsiz`='$product_size',`image`='$product_img' WHERE prdid='$val'";
+        $mysql = "UPDATE `admins` SET `prdnm`='$product_name',`prqnt`='$product_quantity',`prdpr`='$product_price',`discription`='$product_discrption',`image`='$product_img' WHERE prdid='$val'";
         mysqli_query($con, $mysql);
         $targetDir = "product_img/";
         $targetFilePath = $targetDir . $product_img;
@@ -114,7 +115,7 @@ if (isset($_POST['sub'])) {
                 var c_mobile = /^[0-9]{3,4}$/;
                 var r_mobile = c_mobile.test(mobile)
                 if (r_mobile == false) {
-                    $("#message2").text("*Enter a valid number");
+                    $("#message2").text("*Enter a number");
                    check2=1;
                 } else {
                     check2=0;
