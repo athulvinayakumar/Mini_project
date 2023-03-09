@@ -150,7 +150,7 @@
                                     <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
                                     <li><a class="dropdown-item" href="changepsw.php">Change Password</a></li>
                                     <li><a class="dropdown-item" href="logout.php">logout</a></li>
-                                    
+
                                 </ul>
                             </li>
 
@@ -159,13 +159,20 @@
                         <?php
                         }
                         ?>
-                        
+
                         <?php if (isset($_SESSION['Username'])) { ?>
                             <li>|</li>
                             <li><a href="cart.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
                         <?php } else { ?>
                             <li><a href="login.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
-                            <?php } ?>
+                        <?php } ?>
+                        <?php if (isset($_SESSION['Username'])) { ?>
+                            <!-- <li>|</li>  -->
+                            <li><a href="wishlist.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
+                        <?php } else { ?>
+                            <li><a href="login.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
+                        <?php } ?>
+
 
 
                     </ul>
@@ -177,7 +184,9 @@
     <div class="about-section">
         <h1>About Us</h1>
         <h4>Launched In January 2023</h4><br>
-        <p><b><ul>Created By VK</ul> </b></p>
+        <p><b>
+                <ul>Created By VK</ul>
+            </b></p>
         <p>One of our popular shoe collections is our athletic shoe line, designed for men. Whether you're into running, hiking, or working out, our selection of sports shoes caters to every need. We offer shoes with advanced features such as breathable mesh material, cushioned soles, and sturdy grip for better traction. We understand that finding the right athletic shoe is essential for athletes and fitness enthusiasts alike, and we take great care in ensuring that our customers are satisfied with their purchase.</p>
         <p>At our shoe store, we believe that shoes are not just an accessory but a necessity. We take great pride in providing our customers with high-quality shoes that offer both comfort and style. With our extensive collection of footwear and knowledgeable staff, we are confident that we can help you find the perfect pair of shoes for any occasion. So come on in and experience the best shoe shopping experience in town!</p>
 

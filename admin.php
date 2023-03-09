@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
   $price = $_POST['ak'];
   $targetDir = "product_img/";
   $targetFilePath = $targetDir . $pimage;
-  $sql = "INSERT INTO `admins`(`prdnm`, `prqnt`,prdpr`, `discription`, `brand`, `image`, `status`) VALUES('$pname','$quantity',$price',' $discription','$brand','$pimage','0')";
+  $sql = "INSERT INTO `admins`(`prdnm`, `prqnt`,`prdpr`, `discription`, `brand`, `image`, `status`) VALUES('$pname','$quantity','$price','$discription','$brand','$pimage','0')";
   $query = mysqli_query($connection, $sql);
   move_uploaded_file($_FILES["img"]["tmp_name"], $targetFilePath);
   if ($query) {

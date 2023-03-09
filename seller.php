@@ -48,6 +48,9 @@ if (!isset($_SESSION['Username'])) {
                         <td> <button id='seller_product' class="panel_btns"><i class="fa fa-user-circle" aria-hidden="true"></i> Products</button></td>
                     </tr>
                     <tr>
+                        <td> <button id='alert' class="panel_btns"><i class="fa fa-user-circle" aria-hidden="true"></i> Alerts</button></td>
+                    </tr>
+                    <tr>
                         <td><button id='logout' class="panel_btns"><i class="fa fa-chevron-right" aria-hidden="true"></i> Logout</button></td>
                     </tr>
 
@@ -74,9 +77,21 @@ if (!isset($_SESSION['Username'])) {
                     <div id="message2"></div>
                 </div>
                 <div class="mb-3">
+                    <h6>Seller name</h6>
+                    <label for="" class="form-label"></label>
+                    <input type="text" class="form-control" name="sk" id="d" aria-describedby="helpId" onkeyup="seller()" autocomplete="off">
+                    <div id="message 1"></div>
+                </div>
+                <div class="mb-3">
                     <h6>Product Price</h6>
                     <label for="" class="form-label"></label>
                     <input type="text" class="form-control" name="ak" id="c" aria-describedby="helpId" onkeyup="pro_price()" autocomplete="off">
+                    <div id="message3"></div>
+                </div>
+                <div class="mb-3">
+                    <h6>Product Quantity</h6>
+                    <label for="" class="form-label"></label>
+                    <input type="text" class="form-control" name="fk" id="e" aria-describedby="helpId" onkeyup="quantity()" autocomplete="off">
                     <div id="message3"></div>
                 </div>
                 <div class="mb-3">
@@ -116,12 +131,14 @@ if (!isset($_SESSION['Username'])) {
         if (isset($_POST['submit'])) {
             $pimage = $_FILES["img"]["name"];
             $pname = $_POST['vk'];
+            $sname = $_POST['sk'];
+            $quantity = $_POST['fk'];
             $descrption = $_POST['p_drs'];
             $brand = $_POST['p_brand'];
             $price = $_POST['ak'];
             $targetDir = "product_img/";
             $targetFilePath = $targetDir . $pimage;
-            $sql = "INSERT INTO `tbl_seller`(`s_name`, `s_price`, `s_drs`, `s_brand`, `s_image`) VALUES ('$pname','$price','$descrption','$brand','$pimage')";
+            $sql = "INSERT INTO `tbl_seller`(`s_name`,`name`,`s_qnt`,`s_price`, `s_drs`, `s_brand`, `s_image`) VALUES ('$pname','$sname', '$quantity','$price','$descrption','$brand','$pimage')";
             $query = mysqli_query($connection, $sql);
             move_uploaded_file($_FILES["img"]["tmp_name"], $targetFilePath);
             if ($query) {
@@ -146,6 +163,9 @@ if (!isset($_SESSION['Username'])) {
     })
     $("#View").click(function() {
         window.location.href = "view_user.php";
+    })
+    $("#alert").click(function() {
+        window.location.href = "notify.php";
     })
 </script>
 

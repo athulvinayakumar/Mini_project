@@ -87,7 +87,7 @@ $result = mysqli_query($con, $mysql);
                                     <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
                                     <li><a class="dropdown-item" href="changepsw.php">Change Password</a></li>
                                     <li><a class="dropdown-item" href="logout.php">logout</a></li>
-                                    
+
                                 </ul>
                             </li>
 
@@ -102,6 +102,13 @@ $result = mysqli_query($con, $mysql);
                         <?php } else { ?>
                             <li><a href="login.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
                         <?php } ?>
+                        <?php if (isset($_SESSION['Username'])) { ?>
+                            <!-- <li>|</li>  -->
+                            <li><a href="wishlist.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
+                        <?php } else { ?>
+                            <li><a href="login.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
+                        <?php } ?>
+
 
 
                     </ul>
@@ -193,15 +200,15 @@ $result = mysqli_query($con, $mysql);
                             </div>
                         </div>
                     </a>
-        <?php
+                <?php
                 }
-        ?>
-        </div>
-        <div class="pagination d-flex justify-content-center">
-            <div class="prev">Prev</div>
-            <div class="page">Page <span class="page-num"></span></div>
-            <div class="next">Next</div>
-        </div>
+                ?>
+            </div>
+            <div class="pagination d-flex justify-content-center">
+                <div class="prev">Prev</div>
+                <div class="page">Page <span class="page-num"></span></div>
+                <div class="next">Next</div>
+            </div>
         </div>
     </section>
     <!-- footer -->
@@ -211,7 +218,7 @@ $result = mysqli_query($con, $mysql);
                 <div class="col-lg-4 footer-grid_section_w3layouts">
                     <h2 class="logo-2 mb-lg-4 mb-3">
                         <a href="index.html">STEPSOUT</a>
-                    </h2> 
+                    </h2>
                     <p></p>
                     <h4 class="sub-con-fo ad-info my-4">Catch on Social</h4>
                     <ul class="w3layouts_social_list list-unstyled">

@@ -27,6 +27,8 @@
             <tr>
                 <!-- <th>Product Id</th> -->
                 <th>Product Name</th>
+                <th>Seller Name</th>
+                <th>Product Quantity</th>
                 <th>Product Price</th>
                 <th>Product Discription</th>
                 <th>Product Brand</th>
@@ -41,6 +43,8 @@
             ?>
                 <tr>
                     <td><?= $row['s_name'] ?></td>
+                    <td><?= $row['name'] ?></td>
+                    <td><?= $row['s_qnt'] ?></td>
                     <td><?= $row['s_price'] ?></td>
                     <td><?= $row['s_drs'] ?></td>
                     <td><?= $row['s_brand'] ?></td>

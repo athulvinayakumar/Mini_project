@@ -1,8 +1,8 @@
 <!-- <?php
-session_start();
-include 'db.php';
+        session_start();
+        include 'db.php';
 
-?> -->
+        ?> -->
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -35,8 +35,8 @@ include 'db.php';
     <link href="font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- //font-awesome-icons -->
@@ -47,88 +47,87 @@ include 'db.php';
 
 </head>
 <script>
-        $(document).ready(function() {
-            var check = 0;
-            var check1 = 0;
-            var check2 = 0;
-            $("#Name").keyup(function() {
-                var name = document.getElementById("Name").value
-                var c_name = /^[a-z ]{3,20}$/i;
-                var r_name = c_name.test(name)
-                if (r_name == false) {
-                    $("#name2").text("*Enter a valid Name");
-                    check=1;
-                } else {
-                    check=0;
-                    $("#name2").text("");
+    $(document).ready(function() {
+        var check = 0;
+        var check1 = 0;
+        var check2 = 0;
+        $("#Name").keyup(function() {
+            var name = document.getElementById("Name").value
+            var c_name = /^[a-z ]{3,20}$/i;
+            var r_name = c_name.test(name)
+            if (r_name == false) {
+                $("#name2").text("*Enter a valid Name");
+                check = 1;
+            } else {
+                check = 0;
+                $("#name2").text("");
 
-                }
-            })
-
-            $("#inputemail").keyup(function() {
-                var email = document.getElementById("inputemail").value
-                var c_email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-                var r_email = c_email.test(email)
-                if (r_email == false) {
-                    check1=1;
-                    $("#inputemail2").text("*Enter a valid Email");
-                } else {
-                   
-                                check1=0;
-                                $("#inputemail2").text("");
-                            }
-            })
-            $("#inputmob").keyup(function() {
-                var mobile = document.getElementById("inputmob").value
-                var c_mobile = /^[6-9][0-9]{9}$/;
-                var r_mobile = c_mobile.test(mobile)
-                if (r_mobile == false) {
-                    $("#inputmob2").text("*Enter a valid mobile number");
-                   check2=1;
-                } else {
-                    check2=0;
-                    $("#inputmob2").text("");
-
-
-                }
-            })
-            $("#msg").keyup(function() {
-                var mobile = document.getElementById("msg").value
-                var c_mobile = /^[a-zA-Z. ']{3,30}$/;
-                var r_mobile = c_mobile.test(mobile)
-                if (r_mobile == false) {
-                    $("#msg2").text("*Enter a valid message");
-                   check2=1;
-                } else {
-                    check2=0;
-                    $("#msg2").text("");
-
-
-                }
-            })
-            $("#btn").click(function() {
-                var mobile = document.getElementById("inputmob").value
-                var name = document.getElementById("Name").value
-                var email = document.getElementById("inputemail").value
-                if (mobile.length == 0) {
-                    alert("Please fill all the fields");
-                } else if (name.length == 0) {
-                    alert("Please fill all the fields");
-
-
-                } else if (email.length == 0) {
-                    alert("Please fill all the fields");
-
-                } else {
-                }
-                if (check == 1 || check1 == 1 || check2 == 1) {
-                    alert("please fill all field correctly");
-                } else {
-                    
-                }
-            })
+            }
         })
-    </script>
+
+        $("#inputemail").keyup(function() {
+            var email = document.getElementById("inputemail").value
+            var c_email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+            var r_email = c_email.test(email)
+            if (r_email == false) {
+                check1 = 1;
+                $("#inputemail2").text("*Enter a valid Email");
+            } else {
+
+                check1 = 0;
+                $("#inputemail2").text("");
+            }
+        })
+        $("#inputmob").keyup(function() {
+            var mobile = document.getElementById("inputmob").value
+            var c_mobile = /^[6-9][0-9]{9}$/;
+            var r_mobile = c_mobile.test(mobile)
+            if (r_mobile == false) {
+                $("#inputmob2").text("*Enter a valid mobile number");
+                check2 = 1;
+            } else {
+                check2 = 0;
+                $("#inputmob2").text("");
+
+
+            }
+        })
+        $("#msg").keyup(function() {
+            var mobile = document.getElementById("msg").value
+            var c_mobile = /^[a-zA-Z. ']{3,30}$/;
+            var r_mobile = c_mobile.test(mobile)
+            if (r_mobile == false) {
+                $("#msg2").text("*Enter a valid message");
+                check2 = 1;
+            } else {
+                check2 = 0;
+                $("#msg2").text("");
+
+
+            }
+        })
+        $("#btn").click(function() {
+            var mobile = document.getElementById("inputmob").value
+            var name = document.getElementById("Name").value
+            var email = document.getElementById("inputemail").value
+            if (mobile.length == 0) {
+                alert("Please fill all the fields");
+            } else if (name.length == 0) {
+                alert("Please fill all the fields");
+
+
+            } else if (email.length == 0) {
+                alert("Please fill all the fields");
+
+            } else {}
+            if (check == 1 || check1 == 1 || check2 == 1) {
+                alert("please fill all field correctly");
+            } else {
+
+            }
+        })
+    })
+</script>
 
 <body>
 
@@ -151,7 +150,7 @@ include 'db.php';
                         <li><a href="product.php">Product</a></li>
                         <li><a href="feedback.php">Review</a></li>
 
-                
+
                         <?php if (isset($_SESSION['Username'])) { ?>
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -161,7 +160,7 @@ include 'db.php';
                                     <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
                                     <li><a class="dropdown-item" href="changepsw.php">Change Password</a></li>
                                     <li><a class="dropdown-item" href="logout.php">logout</a></li>
-                                    
+
                                 </ul>
                             </li>
 
@@ -170,13 +169,20 @@ include 'db.php';
                         <?php
                         }
                         ?>
-                        
+
                         <?php if (isset($_SESSION['Username'])) { ?>
                             <li>|</li>
                             <li><a href="cart.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
                         <?php } else { ?>
                             <li><a href="login.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
                         <?php } ?>
+                        <?php if (isset($_SESSION['Username'])) { ?>
+                            <!-- <li>|</li>  -->
+                            <li><a href="wishlist.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
+                        <?php } else { ?>
+                            <li><a href="login.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
+                        <?php } ?>
+
 
 
                     </ul>
@@ -202,26 +208,26 @@ include 'db.php';
                         <div id="name2" style=color:red></div>
                         <input type="email" class="email" name="Email" id="inputemail" placeholder="Email" autocomplete="off" required="">
                         <div id="inputemail2"></div>
-                        <input type="text" name="Phone_no" id="inputmob" placeholder="Phone" autocomplete="off"  required="">
+                        <input type="text" name="Phone_no" id="inputmob" placeholder="Phone" autocomplete="off" required="">
                         <div id="inputmob2"></div>
-                        <textarea name="Message" placeholder="Message"  id="msg" autocomplete="off"  required=""></textarea>
+                        <textarea name="Message" placeholder="Message" id="msg" autocomplete="off" required=""></textarea>
                         <div id="msg2"></div>
                         <div class="read mt-3">
                             <input type="submit" name="sub" class="offset-lg-4 btn-primary" id="btn" value="Submit">
                         </div>
                     </form>
                     <?php
-                    if(isset($_POST['sub'])){
-                        $name=$_POST['Name'];
-                        $email=$_POST['Email'];
-                        $phone=$_POST['Phone_no'];
-                        $msg=$_POST['Message'];
-                        $usr_id=$_SESSION['usr_id'];
-                        if($name!=null&&$email!=null&&$phone!=null&&$msg!=null){
-                            $con=mysqli_connect("localhost","root","","shoes");
-                            $sql="INSERT INTO `contact`(`usr_id`, `usr_name`, `usr_email`, `usr_phone`, `usr_msg`) VALUES ('$usr_id','$name','$email','$phone','$msg')";
-                            mysqli_query($con,$sql);
-                            echo"<script>alert('Messages sent successfully')</script>";
+                    if (isset($_POST['sub'])) {
+                        $name = $_POST['Name'];
+                        $email = $_POST['Email'];
+                        $phone = $_POST['Phone_no'];
+                        $msg = $_POST['Message'];
+                        $usr_id = $_SESSION['usr_id'];
+                        if ($name != null && $email != null && $phone != null && $msg != null) {
+                            $con = mysqli_connect("localhost", "root", "", "shoes");
+                            $sql = "INSERT INTO `contact`(`usr_id`, `usr_name`, `usr_email`, `usr_phone`, `usr_msg`) VALUES ('$usr_id','$name','$email','$phone','$msg')";
+                            mysqli_query($con, $sql);
+                            echo "<script>alert('Messages sent successfully')</script>";
                         }
                     }
                     ?>
@@ -230,7 +236,7 @@ include 'db.php';
         </div>
     </section>
     <!-- //ab -->
-    
+
     <!-- footer -->
     <footer>
         <div class="container">
@@ -276,7 +282,7 @@ include 'db.php';
                         </form>
                     </div>
                     <div class="row mt-lg-4 bottom-w3layouts-sec-nav mx-0">
-          <div class="col-md-4 footer-grid_section_w3layouts">
+                        <div class="col-md-4 footer-grid_section_w3layouts">
                             <h3 class="footer-title text-uppercase text-wh mb-lg-4 mb-3">Information</h3>
                             <ul class="list-unstyled w3layouts-icons">
                                 <li>

@@ -25,6 +25,7 @@ include 'db.php';
 
     <!-- Custom-Files -->
     <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="searchbar.css">
     <!-- Bootstrap-Core-CSS -->
     <link rel="stylesheet" href="style.css" type="text/css" media="all" />
     <link rel="stylesheet" href="./css/style2.css">
@@ -120,7 +121,7 @@ include 'db.php';
                                 <!-- <li>|</li>  -->
                                 <li><a href="wishlist.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
                             <?php } else { ?>
-                                <li><a href="login.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
+                                <li><a href="login.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
                             <?php } ?>
 
 
@@ -396,98 +397,3 @@ include 'db.php';
 </script>
 
 </html>
-
-<style>
-    #search_bar_input {
-    border-radius: 5px;
-    border: 1px solid grey;
-    padding: 10px 5px;
-    margin-left: 40px;
-    margin-top: 5px;
-}
-
-#search_bar_input:focus {
-    padding-left: 10px;
-    transition: 0.3s all ease-in-out;
-}
-
-#search_bar_searchbtn {
-    padding: 10px 15px;
-    margin-left: 10px;
-    margin-top: 5px;
-    border: 1px solid grey;
-    border-radius: 5px;
-    color: grey;
-    cursor: pointer;
-}
-
-#search_bar_searchbtn:hover {
-    border: 1px solid grey;
-    background-color: white;
-    border-radius: 5px;
-    color: #94d924;
-    cursor: pointer;
-    transition: 0.3s all ease-in-out;
-}
-
-.search_display_box {
-    position: absolute;
-    max-height: 350px;
-    overflow-y: scroll;
-    background: white;
-    overflow-x: hidden;
-    width: 12.5%;
-    margin-left: 265px;
-    margin-top: 20px;
-    font-size: 13px;
-    border-radius: 0px 0px 5px 5px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5), 0 1px 20px rgba(0, 0, 0, 0.0) inset;
-    top: 55px;
-}
-
-.search_display_box::-webkit-scrollbar {
-    width: 10px;
-}
-
-.search_display_box::-webkit-scrollbar-thumb {
-    background: #0000ff;
-    border-radius: 5px;
-    height: 100px;
-    scroll-behavior: smooth;
-}
-
-.search_display_box::-webkit-scrollbar-thumb:hover {
-    background: #0000ff;
-}
-
-.search_hide {
-    display: none;
-}
-
-.search_show {
-    display: block;
-}
-
-.search_row {
-    margin: 10px 0px;
-}
-
-.search_row a {
-    display: flex;
-}
-
-.db_img {
-    margin-left: 20px;
-}
-
-.db_pname {
-    margin-left: 20px;
-    font-size: small;
-}
-
-.db_img img {
-    max-width: 40px;
-    max-height: 40px;
-    border-radius: 0px;
-}
-</style>

@@ -115,7 +115,7 @@ if (!isset($_SESSION['Username'])) {
         <div class="mb-3">
           <h6>Product image</h6>
           <label for="" class="form-label"></label>
-          <input type="file" class="form-control" name="img" id="e" aria-describedby="helpId" onkeyup="unames()" autocomplete="off">
+          <input type="file" class="form-control" name="img" id="e" aria-describedby="helpId" onchange="unames()" autocomplete="off">
           <div id="message5"></div>
         </div>
         <button type="submit" name="submit" class="btn btn-primary" id="add-btn">Add</button>
@@ -152,5 +152,6 @@ if (!isset($_SESSION['Username'])) {
     window.location.href = "seller_products.php";
   })
 </script>
+
 
 </html>

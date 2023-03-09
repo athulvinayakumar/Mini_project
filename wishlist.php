@@ -13,7 +13,7 @@ include 'db.php';
 <div class="cart-wrap">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" style="    border-style: solid;border-radius: 8px;padding: 53px;">
                 <div class="main-heading mb-10">My wishlist</div>
                 <div class="table-wishlist">
                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
