@@ -177,6 +177,7 @@ include 'db.php';
                                             </div>
                                         </div>
                                         <a href="add_cart.php?id=<?= $row['prdid'] ?>" class="btn btn-success cart_btn" name="cart_btn">Add to Cart</a>
+
                                         <a href="add_wishlist.php?id=<?= $row['prdid'] ?>" class="btn btn-primary cart_btn" cart>Add to Wishlist</a>
 
                                     </div>
@@ -367,9 +368,9 @@ include 'db.php';
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
-    $(".cart_btn").click(function() {
-        alert("Success")
-    })
+    // $(".cart_btn").click(function() {
+    //     alert("Success")
+    // })
 
     function searchFunc(){
         var search = document.getElementById("search_bar_input").value;

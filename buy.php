@@ -22,7 +22,7 @@ if($_SESSION['usr_id']!=null){
 </head>
 
 <body>
-    <section class="h-100 h-custom" style="background-color: #eee;">
+    <section class="h-100 h-custom" style="background-color: #eee;"> 
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col">
@@ -109,7 +109,7 @@ if($_SESSION['usr_id']!=null){
     function pay_now(){
     var name=jQuery('#name').val();
     var amt=jQuery('#amt').val();
-    var options = {
+    var options = { 
     "key": "rzp_test_memh6ACSKYdCkR",
     "amount": amt*100, 
     "currency": "INR",
