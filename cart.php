@@ -14,11 +14,12 @@ include 'db.php';
     <title>Cart</title>
     <link rel="stylesheet" href="cart.css">
     <!-- CSS only -->
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
-<body>
+<body onload="change();">
 
     <section>
         <div class="container-fluid">
@@ -40,34 +41,38 @@ include 'db.php';
                                     $con = mysqli_connect("localhost", "root", "", "shoes");
                                     $sql = "SELECT * FROM `cart` WHERE `id` =$user AND `status` = 1";
                                     $result = mysqli_query($con, $sql);
-                                    while ($row = mysqli_fetch_array($result)) { 
-                                        $prdid=$row['pid'];
+                                    while ($row = mysqli_fetch_array($result)) {
+                                        $prdid = $row['pid'];
                                         $sql = "SELECT * FROM `admins` WHERE `prdid` = $prdid ";
                                         $result1 = mysqli_query($con, $sql);
-                                        $row1=mysqli_fetch_array($result1);
+                                        $row1 = mysqli_fetch_array($result1);
 
-                                        $total_price = $total_price+($row1['prdpr']*$row['quantity']); 
+                                        $total_price = ($row1['prdpr'] * $row['quantity']);
 
-                                        $discount=$discount+(10*$row['quantity']);
-                                        ?>
-                                    <tr>
-                                        <td>
-                                            <figure class="itemside align-items-center">
-                                                <div class="aside"><img src="product_img/<?= $row1['image']; ?>" class="img-sm"></div>
-                                                <figcaption class="info"> <a href="#" class="title text-dark" data-abc="true"><?=$row1['prdnm']?></a>
-                                                    <p class="text-muted small"> Brand: <?=$row1['brand']?></p>
-                                                </figcaption>
-                                            </figure>
-                                        </td>
-                                        <td> <input id="quant<?= $row['prdid'] ?>" min="1" value="<?= $row['quantity'] ?>" name="quantitys" type="number" class="quantitys form-control form-control-sm" ></td>
-                                        <td>
-                                            <div class="price-wrap"> <var class="pro_price price">₹<?= $row1['prdpr']*$row['quantity']; ?></var></div>
-                                        </td>
-                                        <td class="text-right d-none d-md-block"> <a href="remove_cart.php?id=<?= $row1['prdid'] ?>&uid=<?= $user ?>" class="btn btn-light" data-abc="true"> Remove</a> </td>
-                                    </tr>
-                                    <?php  }
-                                    $total=$total_price -$discount;
-                                    $_SESSION['total_amount']=$total;
+                                        $discount = $discount + (10 * $row['quantity']);
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <figure class="itemside align-items-center">
+                                                    <div class="aside"><img src="product_img/<?= $row1['image']; ?>" class="img-sm"></div>
+                                                    <figcaption class="info"> <a href="#" class="title text-dark" data-abc="true"><?= $row1['prdnm'] ?></a>
+                                                        <p class="text-muted small"> Brand: <?= $row1['brand'] ?></p>
+                                                    </figcaption>
+                                                </figure>
+                                            </td>
+
+                                            <td> <input id="quant" class="quant" value="<?php echo $row['quantity'] ?>" name="quantitys" type="number" class="quantitys form-control form-control-sm" onchange="return change();"></td>
+                                            <td>
+                                                <!-- <div class="price-wrap"> <var class="pro_price price">₹<?php echo $row1['prdpr']; ?></var></div> -->
+                                                <input type="hidden" class="iprice" id="sprice" name="sprice" value="<?php echo $row1['prdpr']; ?>">
+                                                <span id="ttprice" class="ttprice"></span>
+                                            </td>
+                                            <td class="text-right d-none d-md-block"> <a href="remove_cart.php?id=<?= $row1['prdid'] ?>&uid=<?= $user ?>" class="btn btn-light" data-abc="true"> Remove</a> </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    $total = $total_price - $discount;
+                                    $_SESSION['total_amount'] = $total;
                                     ?>
                                 </tbody>
                             </table>
@@ -105,5 +110,35 @@ include 'db.php';
 
     </section>
 </body>
+<script>
+    function change()
+    {
+        // alert("hi");
+        var t=0;
+        var quantity=document.getElementsByClassName('quant');
+        var price=document.getElementsByClassName('iprice');
+        // var val=document.getElementsByClassName('quant').value;
+        var tprice=document.getElementsByClassName('ttprice');
+        var gtotal=document
+        for(i=0;i<quantity.length;i++)
+        {
+            // alert(quantity[i].value);
+            // alert(price[i].value);
+            if(quantity[i].value<= 0)
+            {
+                quantity[i].value=1;
+            }
+            // else if(val[i].value)
+            t=(quantity[i].value)*(price[i].value);
+            // alert(t);
+            // .value=t;;
+
+            tprice[i].innerText=t;
+        }
+        // alert(quantity);
+        // alert(price);
+    }
+
+</script>
 
 </html>

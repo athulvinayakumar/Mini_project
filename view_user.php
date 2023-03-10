@@ -89,6 +89,8 @@
     </form>
     <div class="d-flex justify-content-md-center">
         <a href="./adminpanel.php" class="btn btn-success">Back</a>
+        <input type="button" name="btn_pdf" id="btn_pdf" onclick="window.location.href = 'user_pdf.php'"  value="Print The Report"/>
+
     </div>
 </body>
 

@@ -45,7 +45,7 @@ $row = mysqli_fetch_array($result);
            
             <tr>
                 <th>Product discription</th>
-                <td><input class="form-control" id="four" name="product_discription" type="text" onkeyup="ps()" value="<?php echo $row['discription']; ?>"></td>
+                <td><textarea class="form-control" id="four" name="product_discription" type="text" onkeyup="ps()" value="<?php echo $row['discription']; ?>"></textarea></td>
                 <td><div id="message4"></div></td> 
             </tr>
             <tr>
@@ -66,16 +66,16 @@ if (isset($_POST['sub'])) {
     $product_name = $_POST['product'];
     $product_quantity = $_POST["product_quantity"];
     $product_price = $_POST['product_price'];
-    $product_discription = $_POST['discription'];
+    $product_discription = $_POST['product_discription'];
     $product_img = $_FILES['product_img']['name'];
     if($product_img == null){
         $product_img=$row['image'];
     }
-    if ( $product_name == null || $product_price == null ||  $product_color == null || $product_size == null || $product_img == null) {
+    if ( $product_name == null || $product_price == null ||  $product_discription == null || $product_quantity == null || $product_img == null) {
         echo ("<script>alert('Enter Valid details')</script>");
     } else {
         $con = mysqli_connect("localhost", "root", "", "shoes");
-        $mysql = "UPDATE `admins` SET `prdnm`='$product_name',`prqnt`='$product_quantity',`prdpr`='$product_price',`discription`='$product_discrption',`image`='$product_img' WHERE prdid='$val'";
+        $mysql = "UPDATE `admins` SET `prdnm`='$product_name',`prqnt`='$product_quantity',`prdpr`='$product_price',`discription`='$product_discription',`image`='$product_img' WHERE prdid='$val'";
         mysqli_query($con, $mysql);
         $targetDir = "product_img/";
         $targetFilePath = $targetDir . $product_img;
@@ -95,7 +95,7 @@ if (isset($_POST['sub'])) {
             var check1 = 0;
             var check2 = 0;
             var check3 =0;
-            var check4 =0;
+            // var check4 =0;
             $("#first").keyup(function() {
                 var name = document.getElementById("first").value
                 var c_name = /^[a-z ]{3,20}$/i;
@@ -139,23 +139,23 @@ if (isset($_POST['sub'])) {
 
                 }
             })
-            $("#four").keyup(function() {
-                var name = document.getElementById("four").value
-                if(name<=11){
-                var c_name =/^[1-9]{1,2}$/;
-                var r_name = c_name.test(name)
-                if (r_name == false) {
-                    $("#message4").text("*Enter a valid size");
-                    check4=1;
-                } else {
-                    check4=0;
-                    $("#btn").prop('disabled',false);
-                    $("#message4").text("");
+            // $("#four").keyup(function() {
+            //     var name = document.getElementById("four").value
+            //     if(name<=11){
+            //     var c_name =/^[1-9]{1,2}$/;
+            //     var r_name = c_name.test(name)
+            //     if (r_name == false) {
+            //         $("#message4").text("*Enter details");
+            //         check4=1;
+            //     } else {
+            //         check4=0;
+            //         $("#btn").prop('disabled',false);
+            //         $("#message4").text("");
 
-                }
-            }else{
-                $("#message4").text("*Enter a valid size");
-            }
+            //     }
+            // }else{
+            //     $("#message4").text("*Enter a valid size");
+            // }
 
             })
             $("#btn").click(function() {
@@ -178,7 +178,7 @@ if (isset($_POST['sub'])) {
                     $("#btn").prop('disabled',true);
                 } else {
                 }
-                if (check == 1 || check2 == 1|| check3 == 1 || check4 == 1) {
+                if (check == 1 || check2 == 1|| check3 == 1 ) {
                     alert("please fill all field correctly");
                     $("#btn").prop('disabled',true);
                 } else {
