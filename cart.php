@@ -59,7 +59,7 @@ include 'db.php';
                                                 </figcaption>
                                             </figure>
                                         </td>
-                                        <td> <input id="quant<?= $row['prdid'] ?>" min="1" value="<?= $row['quantity'] ?>" name="quantitys" type="number" class="quantitys form-control form-control-sm" disabled></td>
+                                        <td> <input id="quant<?= $row['prdid'] ?>" min="1" value="<?= $row['quantity'] ?>" name="quantitys" type="number" class="quantitys form-control form-control-sm" ></td>
                                         <td>
                                             <div class="price-wrap"> <var class="pro_price price">₹<?= $row1['prdpr']*$row['quantity']; ?></var></div>
                                         </td>

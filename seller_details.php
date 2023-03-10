@@ -38,8 +38,13 @@ $row = mysqli_fetch_array($result);
                 <td><div id="message2"></div></td>
             </tr>
             <tr>
-                <th>Product Color</th>
-                <td><input class="form-control" id="third" name="product_color" onkeyup="cl()" type="text" value="<?php echo $row['s_drs']; ?>"></td>
+                <th>Product Quantity</th>
+                <td><input class="form-control" id="third" name="product_qnt" onkeyup="cl()" type="text" value="<?php echo $row['s_qnt']; ?>"></td>
+                <td><div id="message3"></div></td>
+            </tr>
+            <tr>
+                <th>Product Description</th>
+                <td><input class="form-control" id="four" name="product"  type="text" value="<?php echo $row['s_drs']; ?>"></td>
                 <td><div id="message3"></div></td>
             </tr>
             <tr>
@@ -59,17 +64,17 @@ if (isset($_POST['sub'])) {
     // $product_id = $_POST['product_id'];
     $product_name = $_POST['product'];
     $product_price = $_POST['product_price'];
-    $product_color = $_POST["product_color"];
+    $product_qnt = $_POST["product_qnt"];
   
     $product_img = $_FILES['product_img']['name'];
     if($product_img == null){
-        $product_img=$row['image'];
+        $product_img=$row['s_image'];
     }
-    if ( $product_name == null || $product_price == null ||  $product_color == null || $product_size == null || $product_img == null) {
+    if ( $product_name == null || $product_price == null ||  $product_qnt == null || $product_img == null) {
         echo ("<script>alert('Enter Valid details')</script>");
     } else {
         $con = mysqli_connect("localhost", "root", "", "shoes");
-        $mysql = "UPDATE `admins` SET `prdnm`='$product_name',`prdpr`='$product_price',`color` = '$product_color',`prdsiz`='$product_size',`image`='$product_img' WHERE prdid='$val'";
+        $mysql = "UPDATE `tbl_seller` SET `s_name`='$product_name',`s_price`='$product_price',`s_qnt` = '$product_qnt',`s_image`='$product_img' WHERE p_id='$val'";
         mysqli_query($con, $mysql);
         $targetDir = "product_img/";
         $targetFilePath = $targetDir . $product_img;
@@ -77,7 +82,7 @@ if (isset($_POST['sub'])) {
 
 
         echo ("<script>alert('Success')</script>");
-        echo ("<script>location.href='edit_details.php'</script>");
+        echo ("<script>location.href='seller_details.php'</script>");
     }
 }
 ?>
@@ -121,10 +126,10 @@ if (isset($_POST['sub'])) {
             })
             $("#third").keyup(function() {
                 var name = document.getElementById("third").value
-                var c_name = /^[a-z ]{3,20}$/i;
+                var c_name = /^[0-9]{1,2}$/i;
                 var r_name = c_name.test(name)
                 if (r_name == false) {
-                    $("#message3").text("*Enter a valid color");
+                    $("#message3").text("*Enter number");
                     check3=1;
                 } else {
                     check3=0;
