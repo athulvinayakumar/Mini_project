@@ -40,7 +40,7 @@ if($_SESSION['usr_id']!=null){
                                 $name = $row["username"];
                                 $email = $row["email"];
                                 $address = $row["address"];
-                                $phone = $row["mobile number"];
+                                $phone = $row["mobile_number"];
                                 ?>
                                 <div class="card bg-primary text-white rounded-3">
                                     <div class="card-body">

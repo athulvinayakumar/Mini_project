@@ -27,55 +27,60 @@ include 'db.php';
                 <aside class="col-lg-9">
                     <div class="card">
                         <div class="table-responsive">
-                            <table class="table table-borderless table-shopping-cart">
-                                <thead class="text-muted">
-                                    <tr class="small text-uppercase">
-                                        <th scope="col">Product</th>
-                                        <th scope="col" width="120">Quantity</th>
-                                        <th scope="col" width="120">Price</th>
-                                        <th scope="col" class="text-right d-none d-md-block" width="200"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $con = mysqli_connect("localhost", "root", "", "shoes");
-                                    $sql = "SELECT * FROM `cart` WHERE `id` =$user AND `status` = 1";
-                                    $result = mysqli_query($con, $sql);
-                                    while ($row = mysqli_fetch_array($result)) {
-                                        $prdid = $row['pid'];
-                                        $sql = "SELECT * FROM `admins` WHERE `prdid` = $prdid ";
-                                        $result1 = mysqli_query($con, $sql);
-                                        $row1 = mysqli_fetch_array($result1);
-
-                                        $total_price = ($row1['prdpr'] * $row['quantity']);
-
-                                        $discount = $discount + (10 * $row['quantity']);
-                                    ?>
-                                        <tr>
-                                            <td>
-                                                <figure class="itemside align-items-center">
-                                                    <div class="aside"><img src="product_img/<?= $row1['image']; ?>" class="img-sm"></div>
-                                                    <figcaption class="info"> <a href="#" class="title text-dark" data-abc="true"><?= $row1['prdnm'] ?></a>
-                                                        <p class="text-muted small"> Brand: <?= $row1['brand'] ?></p>
-                                                    </figcaption>
-                                                </figure>
-                                            </td>
-
-                                            <td> <input id="quant" class="quant" value="<?php echo $row['quantity'] ?>" name="quantitys" type="number" class="quantitys form-control form-control-sm" onchange="return change();"></td>
-                                            <td>
-                                                <!-- <div class="price-wrap"> <var class="pro_price price">₹<?php echo $row1['prdpr']; ?></var></div> -->
-                                                <input type="hidden" class="iprice" id="sprice" name="sprice" value="<?php echo $row1['prdpr']; ?>">
-                                                <span id="ttprice" class="ttprice"></span>
-                                            </td>
-                                            <td class="text-right d-none d-md-block"> <a href="remove_cart.php?id=<?= $row1['prdid'] ?>&uid=<?= $user ?>" class="btn btn-light" data-abc="true"> Remove</a> </td>
+                            <form action="#" method="post">
+                                <table class="table table-borderless table-shopping-cart">
+                                    <thead class="text-muted">
+                                        <tr class="small text-uppercase">
+                                            <th scope="col">Product</th>
+                                            <th scope="col" width="120">Quantity</th>
+                                            <th scope="col" width="120">Price</th>
+                                            <th scope="col" class="text-right d-none d-md-block" width="200"></th>
                                         </tr>
-                                    <?php
-                                    }
-                                    $total = $total_price - $discount;
-                                    $_SESSION['total_amount'] = $total;
-                                    ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $con = mysqli_connect("localhost", "root", "", "shoes");
+                                        $sql = "SELECT * FROM `cart` WHERE `id` =$user AND `status` = 1";
+                                        $result = mysqli_query($con, $sql);
+                                        while ($row = mysqli_fetch_array($result)) {
+                                            $prdid = $row['pid'];
+                                            $sql = "SELECT * FROM `admins` WHERE `prdid` = $prdid ";
+                                            $result1 = mysqli_query($con, $sql);
+                                            $row1 = mysqli_fetch_array($result1);
+
+                                            $total_price =$total_price + ($row1['prdpr'] * $row['quantity']);
+
+                                            $_SESSION['totalPrice'] = $total_price;
+                                            
+
+                                            $discount = $discount + (10 * $row['quantity']);
+                                        ?>
+                                            <tr>
+                                                <td>
+                                                    <figure class="itemside align-items-center">
+                                                        <div class="aside"><img src="product_img/<?= $row1['image']; ?>" class="img-sm"></div>
+                                                        <figcaption class="info"> <a href="#" class="title text-dark" data-abc="true"><?= $row1['prdnm'] ?></a>
+                                                            <p class="text-muted small"> Brand: <?= $row1['brand'] ?></p>
+                                                        </figcaption>
+                                                    </figure>
+                                                </td>
+
+                                                <td> <input id="quant" max="10" min="1" value="<?php echo $row['quantity'] ?>" name="quantitys" type="number" class="quant quantitys form-control form-control-sm" onchange="return change(this.value,<?=$row['pid']?>,<?=$user?>);"></td>
+                                                <td>
+                                                    <!-- <div class="price-wrap"> <var class="pro_price price">₹<?php echo $row1['prdpr']; ?></var></div> -->
+                                                    <input type="hidden" class="iprice" id="sprice" name="sprice" value="<?php echo $row1['prdpr']; ?>">
+                                                    <span id="ttprice" class="ttprice"></span>
+                                                </td>
+                                                <td class="text-right d-none d-md-block"> <a href="remove_cart.php?id=<?= $row1['prdid'] ?>&uid=<?= $user ?>" class="btn btn-light" data-abc="true"> Remove</a> </td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        $total = $total_price - $discount;
+                                        $_SESSION['total_amount'] = $total;
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </form>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center my-2">
@@ -88,7 +93,7 @@ include 'db.php';
                         <div class="card-body">
                             <dl class="dlist-align">
                                 <dt>Total price:</dt>
-                                <dd class="tot_price text-right ml-3">₹<?= $total_price ?></dd>
+                                <dd class="tot_price text-right ml-3">₹<?= $_ttot ?></dd>
                             </dl>
                             <dl class="dlist-align">
                                 <dt>Discount:</dt>
@@ -110,35 +115,43 @@ include 'db.php';
 
     </section>
 </body>
+
 <script>
-    function change()
-    {
-        // alert("hi");
-        var t=0;
-        var quantity=document.getElementsByClassName('quant');
-        var price=document.getElementsByClassName('iprice');
+    function change(id,prid,usr_id) {
+        $.ajax({
+            method: "post",
+            url: "cart_ajax.php",
+            data: {
+                id:id,
+            prid:prid,
+            usr_id:usr_id},
+            success: function(result) {
+                $(".tot_price").html(result);
+            }
+        });
+
+        var t = 0;
+        var quantity = document.getElementsByClassName('quant');
+        var price = document.getElementsByClassName('iprice');
         // var val=document.getElementsByClassName('quant').value;
-        var tprice=document.getElementsByClassName('ttprice');
-        var gtotal=document
-        for(i=0;i<quantity.length;i++)
-        {
+        var tprice = document.getElementsByClassName('ttprice');
+        var gtotal = document
+        for (i = 0; i < quantity.length; i++) {
             // alert(quantity[i].value);
             // alert(price[i].value);
-            if(quantity[i].value<= 0)
-            {
-                quantity[i].value=1;
+            if (quantity[i].value <= 0) {
+                quantity[i].value = 1;
             }
             // else if(val[i].value)
-            t=(quantity[i].value)*(price[i].value);
+            t = (quantity[i].value) * (price[i].value);
             // alert(t);
             // .value=t;;
 
-            tprice[i].innerText=t;
+            tprice[i].innerText = t;
         }
         // alert(quantity);
         // alert(price);
     }
-
 </script>
 
 </html>

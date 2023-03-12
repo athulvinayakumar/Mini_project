@@ -52,7 +52,7 @@ $row = mysqli_fetch_array($result);
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Phone</label> <label class="form-label error" autocomplete="off" id="h_error"></label>
-                                        <input type="text" name="phone" class="form-control" id="phone" value="<?= $row['mobile number'] ?>" required>
+                                        <input type="text" name="phone" class="form-control" id="phone" value="<?= $row['mobile_number'] ?>" required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Address</label> <label class="form-label error"  autocomplete="off" id="h_error"></label>
@@ -85,7 +85,7 @@ $row = mysqli_fetch_array($result);
         $email = $_POST['email'];
         $address = $_POST['address'];
         if ($fname != null && $uname != null && $phone != null && $phone != null && $email != null && $address != null) {
-            $sql = "UPDATE `auth` SET `name`='$fname',`username`='$uname',`mobile number`='$phone',`email`='$email',`address`='$address' WHERE `id` = $user";
+            $sql = "UPDATE `auth` SET `name`='$fname',`username`='$uname',`mobile_number`='$phone',`email`='$email',`address`='$address' WHERE `id` = $user";
             mysqli_query($con, $sql);
             echo("<script>location.href='profile.php'</script>");
         }

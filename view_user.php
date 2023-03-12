@@ -42,7 +42,7 @@
                 <tr>
                     <td><?= $row['name'] ?></td>
                     <td><?= $row['username'] ?></td>
-                    <td><?= $row['mobile number'] ?></td>
+                    <td><?= $row['mobile_number'] ?></td>
                     <td><?= $row['email'] ?></td>
                     <td><?= $row['address'] ?></td>
                     <?php
@@ -54,9 +54,9 @@
                     ?>
                         <td><span>Normal</span></td>
                     <?php
-                    }else{?>
-<td><span>Seller</span></td>
-                  <?php  }
+                    } else { ?>
+                        <td><span>Seller</span></td>
+                    <?php  }
                     ?>
 
                 </tr>
@@ -89,7 +89,8 @@
     </form>
     <div class="d-flex justify-content-md-center">
         <a href="./adminpanel.php" class="btn btn-success">Back</a>
-        <input type="button" name="btn_pdf" id="btn_pdf" onclick="window.location.href = 'user_pdf.php'"  value="Print The Report"/>
+        <a href="user_pdf.php" name="btn_pdf" id="btn_pdf" class="btn btn-danger ">Print The Report</a>
+        <!-- <input type="button" name="btn_pdf"  onclick="window.location.href = 'user_pdf.php'" value="Print The Report" /> -->
 
     </div>
 </body>

@@ -46,7 +46,10 @@ if (!isset($_SESSION['Username'])) {
             <td><button id='seller_products' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> Seller Products</button></td>
           </tr>
           <tr>
-            <td><button id='usr_msg' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> User Review</button></td>
+            <td><button id='usr_msg' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> User Message</button></td>
+          </tr>
+          <tr>
+            <td><button id='usr_review' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i>User Review</button></td>
           </tr>
           <tr>
             <td><button id='home-page' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i> Home Page</button></td>
@@ -146,6 +149,9 @@ if (!isset($_SESSION['Username'])) {
     window.location.href = "view_user.php";
   })
   $("#usr_msg").click(function() {
+    window.location.href = "usr_msg.php";
+  })
+  $("#usr_review").click(function() {
     window.location.href = "usr_msg.php";
   })
   $("#seller_products").click(function() {

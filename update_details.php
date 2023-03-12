@@ -185,7 +185,7 @@ if (isset($_POST['sub'])) {
                     $("#btn").prop('disabled',false);
                 }
             })
-        })
+        
     </script>
     <script>
          function fileValidation() {

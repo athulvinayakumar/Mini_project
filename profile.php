@@ -58,7 +58,7 @@ $row=mysqli_fetch_array($result);
                                     <div class="col-md-4">
                                         <label class="form-label">Phone</label>
                                         <input type="text" class="form-control" placeholder="" aria-label="Phone number"
-                                            value="<?= $row['mobile number'] ?>" disabled>
+                                            value="<?= $row['mobile_number'] ?>" disabled>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Address</label>
