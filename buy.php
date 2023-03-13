@@ -16,7 +16,7 @@ if($_SESSION['usr_id']!=null){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script> 
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 </head>
@@ -54,7 +54,7 @@ if($_SESSION['usr_id']!=null){
 
                                         <form class="mt-4">
                                             <div class="form-outline form-white mb-4">
-                                                <label class="form-label" for="typeName">User Name</label>
+                                                <label class="form-label" for="typeName">User Name:</label>
                                                 <input type="text" id="name" class="form-control form-control-lg" siez="17" value=<?= $name ?> disabled />
                                             </div>
 
@@ -106,7 +106,7 @@ if($_SESSION['usr_id']!=null){
     </section>
 </body>
 <script>
-    function pay_now(){
+    function pay_now(){ 
     var name=jQuery('#name').val();
     var amt=jQuery('#amt').val();
     var options = { 

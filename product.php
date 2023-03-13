@@ -62,8 +62,8 @@ error_reporting(E_ERROR | E_PARSE);
                     <ul class="menu mt-2">
                         <li class=""><a href="index.php">Home</a></li>
                         <li><a href="about.php">About</a></li>
-                        <li><a href="product.php">Product</a></li>
-                        <li><a href="feedback.php">Review</a></li>
+                        <li><a href="product.php">Products</a></li>
+                        <li><a href="contact.php">Contact</a></li>
 
                         <!-- <li>
                             <label for="drop-2" class="toggle">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span> </label>

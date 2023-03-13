@@ -225,7 +225,7 @@ if (isset($_POST['review'])) {
                             $sql = "SELECT * FROM `tbl_rating` where `prdid`=$pro_id";
                             $result = mysqli_query($con, $sql);
                             while ($row2 = mysqli_fetch_array($result)) {
-                                $id = $row2['id'];
+                                 $id = $row2['id'];
                                 $sql = "SELECT * FROM `auth` WHERE `id` = $id ";
                                 $result1 = mysqli_query($con, $sql);
                                 $row1 = mysqli_fetch_array($result1);

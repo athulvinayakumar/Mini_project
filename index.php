@@ -86,9 +86,9 @@ include 'db.php';
                         <input type="checkbox" id="drop" />
                         <ul class="menu mt-2">
                             <li class=""><a href="index.php">Home</a></li>
-                            <li><a href="about.php">About</a></li>
-                            <li><a href="product.php">Product</a></li>
-                            <li><a href="feedback.php">Review</a></li>
+                            <li><a href="about.php ">About</a></li>
+                            <li><a href="product.php">Products</a></li>
+                            <li><a href="contact.php">Contact</a></li>
 
 
                             <?php if (isset($_SESSION['Username'])) { ?>
@@ -212,7 +212,7 @@ include 'db.php';
                 <div class="col-md-6 latest-left">
                     <div class="product-shoe-info shoe text-center">
                         <img src="images/img1.jpg" class="img-fluid" alt="">
-                        <div class="shop-now"><a href="shop.html" class="btn">Shop Now</a></div>
+                        <!-- <div class="shop-now"><a href="shop.html" class="btn">Shop Now</a></div> -->
                     </div>
                 </div>
                 <div class="col-md-6 latest-right">
@@ -221,7 +221,7 @@ include 'db.php';
                             <div class="product-shoe-info shoe text-center">
                                 <div class="men-thumb-item">
                                     <img src="images/img2.jpg" class="img-fluid" alt="">
-                                    <div class="shop-now"><a href="shop.html" class="btn">Shop Now</a></div>
+                                    <!-- <div class="shop-now"><a href="shop.html" class="btn">Shop Now</a></div> -->
                                 </div>
                             </div>
                         </div>
@@ -229,7 +229,7 @@ include 'db.php';
                             <div class="product-shoe-info shoe text-center">
                                 <div class="men-thumb-item">
                                     <img src="images/img3.jpg" class="img-fluid" alt="">
-                                    <div class="shop-now"><a href="shop.html" class="btn">Shop Now</a></div>
+                                    <!-- <div class="shop-now"><a href="shop.html" class="btn">Shop Now</a></div> -->
 
                                 </div>
                             </div>
