@@ -22,10 +22,20 @@ $user_id = $_SESSION['usr_id'];
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- <link rel="stylesheet" href="style.css" type="text/css" media="all" /> -->
     <link rel="stylesheet" href="./css/flip.css">
+    <link rel="stylesheet" href="css/etalage.css">
     <!-- <link rel="stylesheet" href="./css/style2.css"> -->
     <link href="product_details.css" rel="stylesheet">
     <!--Latest compiled and minified JavaScript-->
+    <script src="jquery.etalage.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.etalage').etalage({
+                thumb_image_width: 400,
+                thumb_image_height: 500
+            });
+        });
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <title>Navbar in Bootstrap</title> -->
     <style>
@@ -132,14 +142,18 @@ if (isset($_POST['review'])) {
     </div>
     <!-- </header> -->
 
-
     <section>
         <div class="container-fluid">
             <div class="row">
                 <!-- Product picture -->
                 <div class="col-sm-5">
                     <div class="thumbnail">
-                        <img id="prd_img" src="./images/<?= $row['image'] ?>" class="img-responsive" alt="">
+                        <ul class="etalage" style="margin-left: 100px; margin-bottom:50px;">
+                            <li>
+                                <img class="etalage_thumb_image" src="./images/<?= $row['image'] ?>">
+                                <img class="etalage_source_image" src="./images/<?= $row['image'] ?>">
+                            </li>
+                        </ul>
 
                         <div class="caption">
                             <div class="row buttons">
@@ -208,117 +222,122 @@ if (isset($_POST['review'])) {
                     </div>
                     <h4><strong>Customer Review</strong></h4>
                     <div class="col-md-10" style="border-style: solid;border-radius: 8px;padding: 10px;">
-                    <div class="main-heading mb-10"><h4>Review</h4></div> 
-                    <span class="label label-success"><span class="glyphicon glyphicon-star"></span></span>
-                    <table class="table table-active">
-                        <thead>
-                            <tr>
-                                <!-- <th scope="col">Sno</th> -->
-                                <th scope="col">Name</th>
-                                <th scope="col">Star Rating</th>
-                                <th scope="col">Comments</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $con = mysqli_connect("localhost", "root", "", "shoes");
-                            $sql = "SELECT * FROM `tbl_rating` where `prdid`=$pro_id";
-                            $result = mysqli_query($con, $sql);
-                            while ($row2 = mysqli_fetch_array($result)) {
-                                 $id = $row2['id'];
-                                $sql = "SELECT * FROM `auth` WHERE `id` = $id ";
-                                $result1 = mysqli_query($con, $sql);
-                                $row1 = mysqli_fetch_array($result1);
-
-                            ?>
-                                <tr>
-                                    <!-- <th scope="row"><?= $row2['r_id'] ?></th> -->
-                                    <th><?= $row1['name'] ?></th>
-                                    <td><?= $row2['r_number'] ?> <span class="label label-success"><span class="glyphicon glyphicon-star"></span></span></td>
-                                    <td><?= $row2['comments'] ?></td>
-                                </tr>
-                            <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                    <br><br>
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class="container col-md-12" style="margin-top:50px;">
-                    <div class="panel panel-default" style="margin-right: 20px;">
-                        <div class="panel-body">
-                            <div class="col-md-12">
-                                <h3>PRODUCT DESCRIPTION</h3>
-                                <p>
-                                <h4><?= $row['discription']?></h4>
-                                </p>
-                            </div>
+                        <div class="main-heading mb-10">
+                            <h4>Review <span class="label label-success"><span class="glyphicon glyphicon-star"></span><span id="avg_star"></span></span></h4>
                         </div>
-                        <hr>
+
+                        <table class="table table-active">
+                            <thead>
+                                <tr>
+                                    <!-- <th scope="col">Sno</th> -->
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Star Rating</th>
+                                    <th scope="col">Comments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $con = mysqli_connect("localhost", "root", "", "shoes");
+                                $sql = "SELECT * FROM `tbl_rating` where `prdid`=$pro_id";
+                                $result = mysqli_query($con, $sql);
+                                $count = mysqli_num_rows($result);
+                                $total_star = 0;
+                                while ($row2 = mysqli_fetch_array($result)) {
+                                    $id = $row2['id'];
+                                    $sql = "SELECT * FROM `auth` WHERE `id` = $id ";
+                                    $result1 = mysqli_query($con, $sql);
+                                    $row1 = mysqli_fetch_array($result1);
+                                    $total_star = ($total_star + $row2['r_number']);
+
+                                ?>
+                                    <tr>
+                                        <th><?= $row1['name'] ?></th>
+                                        <td><?= $row2['r_number'] ?> <span class="label label-success"><span class="glyphicon glyphicon-star"></span></span></td>
+                                        <td><?= $row2['comments'] ?></td>
+                                    </tr>
+                                <?php
+                                }
+                                // $avg_star = ($total_star / $count);
+                                ?>
+                            </tbody>
+                        </table>
+                        <br><br>
                     </div>
 
                 </div>
 
-                <div class="panel-footer">
+                <div class="row">
 
-
-                </div>
-
-            </div>
-
-
-            <!-- Specifications -->
-
-            <div class="panel panel-default ml-5 " id="specifications">
-                <div class="panel-heading" style="background-color:#fff;">
-                    <h3>Review and Ratings</h3>
-                </div>
-
-
-
-                <div class="container">
-                    <div class="row" style="width: 100%;">
-                        <div class="col-md-12">
-                            <div class="well well-sm">
-                                <div class="text-center">
-                                    <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Leave a Review</a>
+                    <div class="container col-md-12" style="margin-top:50px;">
+                        <div class="panel panel-default" style="margin-right: 20px;">
+                            <div class="panel-body">
+                                <div class="col-md-12">
+                                    <h3>PRODUCT DESCRIPTION</h3>
+                                    <p>
+                                    <h4><?= $row['discription'] ?></h4>
+                                    </p>
                                 </div>
+                            </div>
+                            <hr>
+                        </div>
 
-                                <div class="row" id="post-review-box" style="display:none;">
-                                    <div class="col-md-12">
-                                        <form accept-charset="UTF-8" action="" method="POST">
-                                            <input id="ratings-hidden" name="rating" type="hidden">
-                                            <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea><br><br>
+                    </div>
 
-                                            <div class="text-center">
-                                                <!-- <input type="hidden" name="stars" id="stars" /> -->
-                                                <span class="stars starrr" data-rating="0" name="star" id="star"></span><br><br>
-                                                <a class="btn btn-danger" href="#" id="close-review-box">Cancel</a>
-                                                <button class="btn btn-primary" type="submit" name="review" onsubmit="review();">Save</button>
-                                            </div>
-                                        </form>
+                    <div class="panel-footer">
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- Specifications -->
+
+                <div class="panel panel-default ml-5 " id="specifications">
+                    <div class="panel-heading" style="background-color:#fff;">
+                        <h3>Review and Ratings</h3>
+                    </div>
+
+
+
+                    <div class="container">
+                        <div class="row" style="width: 100%;">
+                            <div class="col-md-12">
+                                <div class="well well-sm">
+                                    <div class="text-center">
+                                        <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Leave a Review</a>
+                                    </div>
+
+                                    <div class="row" id="post-review-box" style="display:none;">
+                                        <div class="col-md-12">
+                                            <form accept-charset="UTF-8" action="" method="POST">
+                                                <input id="ratings-hidden" name="rating" type="hidden">
+                                                <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea><br><br>
+
+                                                <div class="text-center">
+                                                    <!-- <input type="hidden" name="stars" id="stars" /> -->
+                                                    <span class="stars starrr" data-rating="0" name="star" id="star"></span><br><br>
+                                                    <a class="btn btn-danger" href="#" id="close-review-box">Cancel</a>
+                                                    <button class="btn btn-primary" type="submit" name="review" onsubmit="review();">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
         </div>
         <!-- Button trigger modal -->
-        <button type="button" id="modal_img" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="display: none;">
+        <!-- <button type="button" id="modal_img" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="display: none;"> -->
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -327,17 +346,21 @@ if (isset($_POST['review'])) {
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img id="prd_img" style="margin-left: 13%;zoom: 149%;" src="./images/<?= $row['image'] ?>" class="img-responsive" alt="">
+                        <img id="prd_img" id="etalage" style="margin-left: 13%;zoom: 149%;" src="./images/<?= $row['image'] ?>" class="img-responsive" alt="">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </section>
 
 </body>
+<script>
+    var x = <?= $avg_star ?>;
+    document.getElementById('avg_star').innerHTML=x;
+</script>
 <script>
     $(document).ready(function() {
         $("#prd_img").click(function() {

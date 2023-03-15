@@ -154,7 +154,7 @@ error_reporting(E_ERROR | E_PARSE);
                                             <span class="money">₹<?= $row['prdpr'] ?></span>
                                         </div>
                                     </div>
-                                    <a href="add_cart.php?id=<?= $row['prdid'] ?>" class="btn btn-success cart_btn">Add to Cart</a>
+                                    <!-- <a href="add_cart.php?id=<?= $row['prdid'] ?>" class="btn btn-success cart_btn">Add to Cart</a> -->
                                     <a href="add_wishlist.php?id=<?= $row['prdid'] ?>" class="btn btn-primary cart_btn">Add to Wishlist</a>
                                 </div>
                             </div>

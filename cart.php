@@ -46,7 +46,7 @@ include 'db.php';
                                             $prdid = $row['pid'];
                                             $sql = "SELECT * FROM `admins` WHERE `prdid` = $prdid ";
                                             $result1 = mysqli_query($con, $sql);
-                                            $row1 = mysqli_fetch_array($result1);
+                                            $row1 = mysqli_fetch_array($result1); 
 
                                             $total_price =$total_price + ($row1['prdpr'] * $row['quantity']);
 
