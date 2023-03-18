@@ -107,7 +107,7 @@ include 'db.php';
                                 <dt>Total:</dt>
                                 <dd class="text-right text-dark b ml-3"><strong>₹<?= $total ?></strong></dd>
                             </dl>
-                            <hr> <a href="buy.php" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Make Purchase </a>
+                            <hr> <a href="checkout.php" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Make Purchase </a>
                             <a href="product.php" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue Shopping</a>
                         </div>
                     </div>
