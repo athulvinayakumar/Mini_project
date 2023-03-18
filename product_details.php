@@ -94,9 +94,16 @@ $user_id = $_SESSION['usr_id'];
 if (isset($_POST['review'])) {
     $msg = $_POST['comment'];
     $star = $_POST['rating'];
-
-    $sql = "INSERT INTO `tbl_rating`(`prdid`, `id`, `r_number`, `comments`) VALUES ('$pro_id','$user_id','$star','$msg')";
-    mysqli_query($con, $sql);
+    $sql = "SELECT * FROM `tbl_rating` WHERE `id` = $user_id";
+    $result = mysqli_query($con, $sql);
+    $num=mysqli_num_rows($result);
+    if($num>0){
+        $sql = "UPDATE `tbl_rating` SET `r_number`='$star',`comments`='$msg' WHERE `id` =$user_id";
+        mysqli_query($con, $sql);
+    }else{
+        $sql = "INSERT INTO `tbl_rating`(`prdid`, `id`, `r_number`, `comments`) VALUES ('$pro_id','$user_id','$star','$msg')";
+        mysqli_query($con, $sql);
+    }
     echo ("<script>location.href='product_details.php?id=$pro_id'</script>");
 }
 ?>
@@ -111,7 +118,7 @@ if (isset($_POST['review'])) {
             </div>
             <ul class="menu mt-2">
                 <li class=""><a href="index.php">Home</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="about.php">About</a></li>
                 <li><a href="product.php">Product</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <?php if (isset($_SESSION['Username'])) { ?>
@@ -257,7 +264,9 @@ if (isset($_POST['review'])) {
                                     </tr>
                                 <?php
                                 }
-                                // $avg_star = ($total_star / $count);
+                                if ($total_star > 0) {
+                                    $avg_star = ($total_star / $count);
+                                }
                                 ?>
                             </tbody>
                         </table>
@@ -359,7 +368,7 @@ if (isset($_POST['review'])) {
 </body>
 <script>
     var x = <?= $avg_star ?>;
-    document.getElementById('avg_star').innerHTML=x;
+    document.getElementById('avg_star').innerHTML = x;
 </script>
 <script>
     $(document).ready(function() {

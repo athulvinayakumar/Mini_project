@@ -28,7 +28,7 @@ include 'db.php';
                     <div class="card">
                         <div class="table-responsive">
                             <form action="#" method="post">
-                                <table class="table table-borderless table-shopping-cart">
+                                <table id="cart-table" class="table table-borderless table-shopping-cart">
                                     <thead class="text-muted">
                                         <tr class="small text-uppercase">
                                             <th scope="col">Product</th>
@@ -46,12 +46,12 @@ include 'db.php';
                                             $prdid = $row['pid'];
                                             $sql = "SELECT * FROM `admins` WHERE `prdid` = $prdid ";
                                             $result1 = mysqli_query($con, $sql);
-                                            $row1 = mysqli_fetch_array($result1); 
+                                            $row1 = mysqli_fetch_array($result1);
 
-                                            $total_price =$total_price + ($row1['prdpr'] * $row['quantity']);
+                                            $total_price = $total_price + ($row1['prdpr'] * $row['quantity']);
 
                                             $_SESSION['totalPrice'] = $total_price;
-                                            
+
 
                                             $discount = $discount + (10 * $row['quantity']);
                                         ?>
@@ -65,7 +65,11 @@ include 'db.php';
                                                     </figure>
                                                 </td>
 
-                                                <td> <input id="quant" max="10" min="1" value="<?php echo $row['quantity'] ?>" name="quantitys" type="number" class="quant quantitys form-control form-control-sm" onchange="return change(this.value,<?=$row['pid']?>,<?=$user?>);"></td>
+
+                                                <td>
+                                                    <!-- <button type="button" class="dec-btn" value="<?php echo $row['cart_id']; ?>" style="float:right">-</button> -->
+                                                    <input id="quant" value="<?php echo $row['quantity'] ?>" name="quantitys" type="number" max="<?=$row1['prqnt']?>" min="1" class="quant quantitys form-control" onkeypress="return isNumberKey(event)" onchange="return change(this.value,<?= $row['pid'] ?>,<?= $user ?>);" style="width: 88px;">
+                                                    <!-- <button class="inc-btn" type="button" value="<?php echo $row['cart_id']; ?>" style="float:right">+</button> -->
                                                 <td>
                                                     <!-- <div class="price-wrap"> <var class="pro_price price">₹<?php echo $row1['prdpr']; ?></var></div> -->
                                                     <input type="hidden" class="iprice" id="sprice" name="sprice" value="<?php echo $row1['prdpr']; ?>">
@@ -117,15 +121,65 @@ include 'db.php';
 </body>
 
 <script>
-    function change(id,prid,usr_id) {
+
+
+function isNumberKey(evt) {
+  var charCode = (evt.which) ? evt.which : evt.keyCode
+  if (charCode > 31 && (charCode < 48 || charCode > 57))
+    return false;
+  return true;
+}
+    // $(document).on('click', '.dec-btn', function(e) {
+    //     e.preventDefault();
+
+    //     var cart_id = $(this).val();
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "cart_save.php",
+    //         data: {
+    //             'decrem-btn': true,
+    //             'cart_id': cart_id
+    //         },
+    //         success: function(response) {
+    //             console.log(response)
+    //             // $('#delShow').show();
+    //             location.href='cart.php'
+    //             $('#cart-table').load(location.href + " #cart-table");
+    //         }
+    //     });
+    // });
+    // $(document).on('click', '.inc-btn', function(e) {
+    //     e.preventDefault();
+
+    //     var cart_id = $(this).val();
+
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "cart_save.php",
+    //         data: {
+    //             'increm-btn': true,
+    //             'cart_id': cart_id
+    //         },
+    //         success: function(response) {
+    //             console.log(response)
+    //             // $('#delShow').show();
+    //             location.href='cart.php'
+    //             $('#cart-table').load(location.href + " #cart-table");
+    //         }
+    //     });
+    // });
+
+    function change(id, prid, usr_id) {
         $.ajax({
             method: "post",
             url: "cart_ajax.php",
             data: {
-                id:id,
-            prid:prid,
-            usr_id:usr_id},
+                id: id,
+                prid: prid,
+                usr_id: usr_id
+            },
             success: function(result) {
+                console.log(result)
                 $(".tot_price").html(result);
             }
         });
