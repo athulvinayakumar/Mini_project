@@ -28,6 +28,7 @@ $user_id = $_SESSION['usr_id'];
     <!--Latest compiled and minified JavaScript-->
     <script src="jquery.etalage.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
     <script>
         $(document).ready(function() {
             $('.etalage').etalage({
@@ -43,6 +44,10 @@ $user_id = $_SESSION['usr_id'];
             margin: 0;
             padding: 0;
             margin-bottom: 20px;
+        }
+        .badge{
+            background-color: #4caf50;
+            font-size: larger;
         }
 
 
@@ -96,11 +101,11 @@ if (isset($_POST['review'])) {
     $star = $_POST['rating'];
     $sql = "SELECT * FROM `tbl_rating` WHERE `id` = $user_id";
     $result = mysqli_query($con, $sql);
-    $num=mysqli_num_rows($result);
-    if($num>0){
+    $num = mysqli_num_rows($result);
+    if ($num > 0) {
         $sql = "UPDATE `tbl_rating` SET `r_number`='$star',`comments`='$msg' WHERE `id` =$user_id";
         mysqli_query($con, $sql);
-    }else{
+    } else {
         $sql = "INSERT INTO `tbl_rating`(`prdid`, `id`, `r_number`, `comments`) VALUES ('$pro_id','$user_id','$star','$msg')";
         mysqli_query($con, $sql);
     }
@@ -176,6 +181,7 @@ if (isset($_POST['review'])) {
 
                 </div>
 
+
                 <!-- Product Description -->
                 <div class="col-sm-7 desc">
 
@@ -223,6 +229,18 @@ if (isset($_POST['review'])) {
                         </div>
 
                         <br><br>
+
+
+                        <!-- Product Count -->
+
+                        <div class='mt-3'>
+                            <?php
+                            if ($row['prqnt'] > 0)
+                                echo "<h4><span class='badge text-bg-success'>Stock Available</span></h4>";
+                            else
+                                echo "<h4><span class='badge text-bg-danger sizebadge'>Out of stock!</span></h4>";
+                            ?>
+                        </div>
                         <br><br>
 
 

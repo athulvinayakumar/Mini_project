@@ -1,182 +1,138 @@
+<?php
+session_start();
+$usr_name = $_SESSION['Username'];
+$con = mysqli_connect("localhost", "root", "", "shoes");
+$sql = "SELECT * FROM `auth` where username ='$usr_name'";
+$result = mysqli_query($con, $sql);
+$row = mysqli_fetch_array($result);
+$name = $row["username"];
+?>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <style>
- body{
-    background:#eee;
-}
-.card {
-    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
-}
-.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
-    border-radius: 1rem;
-}
-.text-reset {
-    --bs-text-opacity: 1;
-    color: inherit!important;
-}
-a {
-    color: #5465ff;
-    text-decoration: none;
-}
-</style>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>STEPSOUT-ORDER COMPLETED</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <!-- Bootstrap CSS-->
+  <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome CSS-->
+  <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/font-awesome/css/font-awesome.min.css">
+  <!-- Bootstrap Select-->
+  <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/bootstrap-select/css/bootstrap-select.min.css">
+  <!-- Price Slider Stylesheets -->
+  <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/nouislider/nouislider.css">
+  <!-- Custom font icons-->
+  <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/css/custom-fonticons.css">
+  <!-- Google fonts - Poppins-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700">
+  <!-- owl carousel-->
+  <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/owl.carousel/assets/owl.carousel.css">
+  <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/owl.carousel/assets/owl.theme.default.css">
+  <!-- theme stylesheet-->
+  <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/css/style.default.css" id="theme-stylesheet">
+  <!-- Custom stylesheet - for your changes-->
+  <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/css/custom.css">
+  <!-- Favicon-->
+  <link rel="shortcut icon" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/favicon.ico">
+  <!-- Modernizr-->
+  <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/js/modernizr.custom.79639.js"></script>
 </head>
 
 <body>
-
-
-<div class="container-fluid">
-
-<div class="container">
-  <!-- Title -->
-  <div class="d-flex justify-content-between align-items-center py-3">
-    <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Order #16123222</h2>
-  </div>
-
-  <!-- Main content -->
-  <div class="row">
-    <div class="col-lg-8">
-      <!-- Details -->
-      <div class="card mb-4">
-        <div class="card-body">
-          <div class="mb-3 d-flex justify-content-between">
-            <div>
-              <span class="me-3">22-11-2021</span>
-              <span class="me-3">#16123222</span>
-              <span class="me-3">Visa -1234</span>
-              <span class="badge rounded-pill bg-info">SHIPPING</span>
-            </div>
-            <div class="d-flex">
-              <button class="btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text"><i class="bi bi-download"></i> <span class="text">Invoice</span></button>
-              <div class="dropdown">
-                <button class="btn btn-link p-0 text-muted" type="button" data-bs-toggle="dropdown">
-                  <i class="bi bi-three-dots-vertical"></i>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Edit</a></li>
-                  <li><a class="dropdown-item" href="#"><i class="bi bi-printer"></i> Print</a></li>
-                </ul>
+  <nav class="navbar navbar-expand-lg">
+    <div class="search-area">
+      <div class="search-area-inner d-flex align-items-center justify-content-center">
+        <div class="close-btn"><i class="icon-close"></i></div>
+        <form action="checkout5.html#">
+          <div class="form-group">
+            <input type="search" name="search" id="search" placeholder="What are you looking for?">
+            <button type="submit" class="submit"><i class="icon-search"></i></button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <!-- Navbar Header  -->
+      <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+  </nav>
+  </header>
+  <!-- Hero Section-->
+  <section class="hero hero-page gray-bg padding-small">
+    <div class="container">
+      <div class="row d-flex">
+        <div class="col-lg-9 order-2 order-lg-1">
+          <h1>Order Confirmed</h1>
+        </div>
+        <div class="col-lg-3 text-right order-1 order-lg-2">
+          <ul class="breadcrumb justify-content-lg-end">
+            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item active">Order Confirmed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Checout Forms-->
+  <section class="checkout">
+    <div class="container">
+      <div class="confirmation-icon" style="color: #4CAF50; border: solid 1px #4CAF50;"><i class="fa fa-check" style="padding-top: 23px;"></i></div>
+      <h2>Thank you,<?=$name?>. Your order is confirmed.</h2>
+      <p class="mb-5">Your order hasn't shipped yet but we will send you ane email when it does.</p>
+      <p> <a href="" class="btn btn-template wide" style="background-color: #4CAF50; border-color: #4CAF50;">View or
+          Manage your order</a></p>
+    </div>
+  </section>
+  <!-- Footer-->
+  <footer class="main-footer">
+    <!-- Service Block-->
+    <div class="services-block">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 d-flex justify-content-center justify-content-lg-start">
+            <div class="item d-flex align-items-center">
+              <div class="icon"><i class="icon-truck"></i></div>
+              <div class="text">
+                <h6 class="no-margin text-uppercase">Free shipping &amp; return</h6><span>Free Shipping over $300</span>
               </div>
             </div>
           </div>
-          <table class="table table-borderless">
-            <tbody>
-              <tr>
-                <td>
-                  <div class="d-flex mb-2">
-                    <div class="flex-shrink-0">
-                      <img src="https://www.bootdey.com/image/280x280/87CEFA/000000" alt="" width="35" class="img-fluid">
-                    </div>
-                    <div class="flex-lg-grow-1 ms-3">
-                      <h6 class="small mb-0"><a href="#" class="text-reset">Wireless Headphones with Noise Cancellation Tru Bass Bluetooth HiFi</a></h6>
-                      <span class="small">Color: Black</span>
-                    </div>
-                  </div>
-                </td>
-                <td>1</td>
-                <td class="text-end">$79.99</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex mb-2">
-                    <div class="flex-shrink-0">
-                      <img src="https://www.bootdey.com/image/280x280/FF69B4/000000" alt="" width="35" class="img-fluid">
-                    </div>
-                    <div class="flex-lg-grow-1 ms-3">
-                      <h6 class="small mb-0"><a href="#" class="text-reset">Smartwatch IP68 Waterproof GPS and Bluetooth Support</a></h6>
-                      <span class="small">Color: White</span>
-                    </div>
-                  </div>
-                </td>
-                <td>1</td>
-                <td class="text-end">$79.99</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="2">Subtotal</td>
-                <td class="text-end">$159,98</td>
-              </tr>
-              <tr>
-                <td colspan="2">Shipping</td>
-                <td class="text-end">$20.00</td>
-              </tr>
-              <tr>
-                <td colspan="2">Discount (Code: NEWYEAR)</td>
-                <td class="text-danger text-end">-$10.00</td>
-              </tr>
-              <tr class="fw-bold">
-                <td colspan="2">TOTAL</td>
-                <td class="text-end">$169,98</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-      </div>
-      <!-- Payment -->
-      <div class="card mb-4">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-6">
-              <h3 class="h6">Payment Method</h3>
-              <p>Visa -1234 <br>
-              Total: $169,98 <span class="badge bg-success rounded-pill">PAID</span></p>
+          <div class="col-lg-4 d-flex justify-content-center">
+            <div class="item d-flex align-items-center">
+              <div class="icon"><i class="icon-coin"></i></div>
+              <div class="text">
+                <h6 class="no-margin text-uppercase">Money back guarantee</h6><span>30 Days Money Back Guarantee</span>
+              </div>
             </div>
-            <div class="col-lg-6">
-              <h3 class="h6">Billing address</h3>
-              <address>
-                <strong>John Doe</strong><br>
-                1355 Market St, Suite 900<br>
-                San Francisco, CA 94103<br>
-                <abbr title="Phone">P:</abbr> (123) 456-7890
-              </address>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-center">
+            <div class="item d-flex align-items-center">
+              <div class="icon"><i class="icon-headphones"></i></div>
+              <div class="text">
+                <h6 class="no-margin text-uppercase">020-800-456-747</h6><span>24/7 Available Support</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-lg-4">
-      <!-- Customer Notes -->
-      <div class="card mb-4">
-        <div class="card-body">
-          <h3 class="h6">Customer Notes</h3>
-          <p>Sed enim, faucibus litora velit vestibulum habitasse. Cras lobortis cum sem aliquet mauris rutrum. Sollicitudin. Morbi, sem tellus vestibulum porttitor.</p>
-        </div>
-      </div>
-      <div class="card mb-4">
-        <!-- Shipping information -->
-        <div class="card-body">
-          <h3 class="h6">Shipping Information</h3>
-          <strong>FedEx</strong>
-          <span><a href="#" class="text-decoration-underline" target="_blank">FF1234567890</a> <i class="bi bi-box-arrow-up-right"></i> </span>
-          <hr>
-          <h3 class="h6">Address</h3>
-          <address>
-            <strong>John Doe</strong><br>
-            1355 Market St, Suite 900<br>
-            San Francisco, CA 94103<br>
-            <abbr title="Phone">P:</abbr> (123) 456-7890
-          </address>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-  </div>
+    <!-- Main Block -->
+
+
+    <!-- JavaScript files-->
+    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/jquery/jquery.min.js"></script>
+    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js"></script>
+    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/nouislider/nouislider.min.js"></script>
+    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/jquery-countdown/jquery.countdown.min.js"></script>
+    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/masonry-layout/masonry.pkgd.min.js"></script>
+    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <!-- Main Template File-->
+    <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/js/front.js"></script>
 </body>
+
 </html>
