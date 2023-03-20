@@ -75,11 +75,11 @@ $result1 = mysqli_query($con, $sql);
         <div class="row">
           <!-- Customer Sidebar-->
           <div class="customer-sidebar col-xl-3 col-lg-4 mb-md-5">
-            <div class="customer-profile"><a href="customer-order.html#" class="d-inline-block"><img src="" class="img-fluid rounded-circle customer-image"></a>
+            <div class="customer-profile"><a href="customer-order.html#" class="d-inline-block"></a>
               <h5>Amal</h5>
               <!-- <p class="text-muted text-small">Ostrava, Czech republic</p> -->
             </div>
-            <nav class="list-group customer-nav"><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-orders.html" class="active list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-bag"></span>Orders</span><small class="badge badge-pill badge-light">5</small></a><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-account.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-profile"></span>Profile</span></a><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-addresses.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-map"></span>Addresses</span></a><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-login.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="fa fa-sign-out"></span>Log out</span></a>
+            <nav class="list-group customer-nav"><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-orders.html" class="active list-group-item d-flex justify-content-between align-items-center" style=" background: #4CAF50; border-color: #4CAF50;"><span><span class="icon icon-bag"></span >Orders</span><small class="badge badge-pill badge-light">5</small></a><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-account.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-profile"></span>Profile</span></a><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-addresses.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-map"></span>Addresses</span></a><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-login.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="fa fa-sign-out"></span>Log out</span></a>
             </nav>
           </div>
           <div class="col-lg-8 col-xl-9 pl-lg-3">
@@ -87,17 +87,16 @@ $result1 = mysqli_query($con, $sql);
               <div class="basket-holder">
                 <div class="basket-header">
                   <div class="row">
-                    <div class="col-4">Product</div>
+                    <div class="col-6">Product</div>
                     <div class="col-2">Price</div>
-                    <div class="col-2">Quantity</div>
-                    <div class="col-2 text-right">Date</div>
-                    <div class="col-2 text-right">BILL</div>
+                    <div class="col-4">Quantity</div>
+                    <!-- <div class="col-2 text-right">Date</div> -->
+                    <!-- <div class="col-2 text-right">BILL</div> -->
                     <!-- <div class="col-2 text-right">Date</div>    -->
                   </div>
                 </div>
                 <div class="basket-body">
                 <?php
-
                 while ($row1 = mysqli_fetch_array($result1)) {
                 $prdid = $row1['pid'];
                 $sql = "SELECT * FROM `admins` WHERE `prdid` = $prdid ";

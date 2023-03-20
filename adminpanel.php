@@ -34,6 +34,9 @@ if (!isset($_SESSION['Username'])) {
             <td><button id='Add-item' class="panel_btns"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Item</button></td>
           </tr>
           <tr>
+            <td><button id='Add-colour' class="panel_btns"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Color</button></td>
+          </tr>
+          <tr>
             <td><button id='Add-special' class="panel_btns"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Special Offers</button></td>
           </tr>
           <tr>
@@ -50,6 +53,9 @@ if (!isset($_SESSION['Username'])) {
           </tr>
           <tr>
             <td><button id='usr_review' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i>User Review</button></td>
+          </tr>
+          <tr>
+            <td><button id='view_order' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i> View Order List</button></td>
           </tr>
           <tr>
             <td><button id='home-page' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i> Home Page</button></td>
@@ -138,6 +144,9 @@ if (!isset($_SESSION['Username'])) {
   $("#Add-special").click(function() {
     window.location.href = "edit_special.php";
   })
+  $("#Add-colour").click(function() {
+    window.location.href = "color.php";
+  })
   $("#home-page").click(function() {
     window.location.href = "index.php";
   })
@@ -152,6 +161,9 @@ if (!isset($_SESSION['Username'])) {
   })
   $("#usr_review").click(function() {
     window.location.href = "usr_msg.php";
+  })
+  $("#view_order").click(function() {
+    window.location.href = "admin_order.php";
   })
   $("#seller_products").click(function() {
     window.location.href = "seller_products.php";

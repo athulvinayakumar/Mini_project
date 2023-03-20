@@ -1,5 +1,3 @@
-          
-
 <?php
 session_start();
 include 'db.php';
@@ -16,7 +14,7 @@ class PDF extends FPDF {
         // Add a top margin of 10 units
         $this->SetY(10);
         // Display the text in the center of the page
-        $this->Cell(0,10,'STEPSOUT',0,0,'C');
+        $this->Cell(0,10,'STEPSOUT',0,0,'C'); 
          // Add a line break
          $this->Ln(10);
         $this->Cell(0,10,' Users List',0,0,'C');

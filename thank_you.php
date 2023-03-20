@@ -35,7 +35,7 @@ $name = $row["username"];
   <!-- Custom stylesheet - for your changes-->
   <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/css/custom.css">
   <!-- Favicon-->
-  <link rel="shortcut icon" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/favicon.ico">
+  <!-- <link rel="shortcut icon" href="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/favicon.ico"> -->
   <!-- Modernizr-->
   <script src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/js/modernizr.custom.79639.js"></script>
 </head>
@@ -80,7 +80,7 @@ $name = $row["username"];
       <div class="confirmation-icon" style="color: #4CAF50; border: solid 1px #4CAF50;"><i class="fa fa-check" style="padding-top: 23px;"></i></div>
       <h2>Thank you,<?=$name?>. Your order is confirmed.</h2>
       <p class="mb-5">Your order hasn't shipped yet but we will send you ane email when it does.</p>
-      <p> <a href="" class="btn btn-template wide" style="background-color: #4CAF50; border-color: #4CAF50;">View or
+      <p> <a href="order.php" class="btn btn-template wide" style="background-color: #4CAF50; border-color: #4CAF50;">View or
           Manage your order</a></p>
     </div>
   </section>

@@ -9,8 +9,8 @@ $row = mysqli_fetch_array($result);
 $_SESSION['total_amount'] = $row['prdpr'];
 $user_id = $_SESSION['usr_id'];
 ?>
-
 <head>
+    <title>STEPSOUT-PRODUCT DETAILS</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
@@ -217,7 +217,8 @@ if (isset($_POST['review'])) {
                         <br>
 
                         <br>
-
+                     
+                    
                         <div class="row">
                             <div class="col-sm-6">
                                 <strong>Color</strong>
@@ -225,9 +226,12 @@ if (isset($_POST['review'])) {
                                 <br>
                                 <button class="btn btn-default" style="color:#337ab7;border:1px dashed #337ab7;">Red</button>
                                 <button class="btn btn-default">Blue</button>
+                                <button class="btn btn-default">Black</button>
+                                <button class="btn btn-default">White</button>
+                                <button class="btn btn-default">Yellow</button>
                             </div>
                         </div>
-
+                      
                         <br><br>
 
 
@@ -242,6 +246,7 @@ if (isset($_POST['review'])) {
                             ?>
                         </div>
                         <br><br>
+                    
 
 
                     </div>
