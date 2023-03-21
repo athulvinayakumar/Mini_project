@@ -1,167 +1,229 @@
+
+
 <?php
-session_start();
-$pro_id = $_GET['id'];
-$con = mysqli_connect("localhost", "root", "", "shoes");
-$mysql = "SELECT * FROM `admins` WHERE prdid = '$pro_id'";
-$result = mysqli_query($con, $mysql);
-$row = mysqli_fetch_array($result);
+// $lid=9999;
+// if(isset($_SESSION['l_id']))
+    // $lid=$_SESSION['l_id'];
+// connect to database
+include("db.php");
 
-$_SESSION['total_amount']=$row['prdpr'];
+// number of records per page
+$recordsPerPage = 10;
+
+// get current page number from URL parameter
+if (isset($_GET["page"])) {
+    $currentPage = $_GET["page"];
+} else {
+    $currentPage = 1;
+}
+
+// calculate starting record for current page
+$startingRecord = ($currentPage - 1) * $recordsPerPage;
+
+// fetch data from database
+$sql = "SELECT 
+   *
+    FROM 
+   `admins`";
+
+
+//City Filter
+if (isset($_REQUEST['city'])) {
+    // store filter value in session
+    $_SESSION['city_filter'] = $_REQUEST['city'];
+    echo '<script>location.href="services.php";</script>';
+}
+if (isset($_SESSION['city_filter'])) {
+    // retrieve filter value from session
+    $city_filter = implode('","', $_SESSION['city_filter']);
+    $sql .= ' AND (u.City IN ("' . $city_filter . '"))';
+}
+
+//Price Filter
+if (isset($_REQUEST['pricefilter'])) {
+    // store filter value in session
+    $_SESSION['price_filter'] = $_REQUEST['pricefilter'];
+    echo '<script>location.href="services.php";</script>';
+}
+if (isset($_SESSION['price_filter'])) {
+    // retrieve filter value from session
+    $price_filter = $_SESSION['price_filter'];
+    $sql .= ' AND sp.Price > ' . $price_filter ;
+}
+
+//Service Filter
+if (isset($_REQUEST['service_filter'])) {
+    // store filter value in session
+    $_SESSION['service_filter'] = $_REQUEST['service_filter'];
+    echo '<script>location.href="services.php";</script>';
+}
+if (isset($_SESSION['service_filter'])) {
+    // retrieve filter value from session
+    $service_filter = implode('","', $_SESSION['service_filter']);
+    $sql .= ' AND (s.Service_Name IN ("' . $service_filter . '"))';
+}
+
+//unset filter
+if (isset($_REQUEST['sub_unset'])) {
+    unset($_SESSION['city_filter']);
+    unset($_SESSION['service_filter']);
+    unset($_SESSION['price_filter']);
+    unset($_REQUEST['city']);
+    unset($_REQUEST['service_filter']);
+    unset($_REQUEST['price_filter']);  
+
+    echo '<script>location.href="services.php";</script>';
+}
+
+// count total number of records
+$totalRecords = mysqli_num_rows(mysqli_query($connection, $sql));
+// calculate total number of pages
+$totalPages = ceil($totalRecords / $recordsPerPage);
+
+$sql .= " ORDER BY prdid
+LIMIT $startingRecord, $recordsPerPage";
+
+$result = mysqli_query($connection, $sql);
+
+// generate HTML output
+$output = '<div>';
+
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $output .= '<div class="row p-2 mt-3 bg-white border rounded">';
+        $output .= '<div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" style="width: 100%; height: 200px;object-fit: cover;" src="uploaded files/Profile Pictures/' . $row['Profile_Picture'] . '"></div>';
+        $output .= '<div class="col-md-6 mt-1">';
+        $output .= '<h5>' . $row['First_Name'] . ' ' . $row['Last_Name'] . '</h5>';
+        $output .= '<div class="d-flex flex-row"><div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span></div>';
+        $output .= '<div class="mt-1 mb-1 spec-1"><span>' . $row['Service_Name'] . '</span><span class="dot"></span><span></span><span class="dot"></span><span> ✓<br></span></div>';
+        $output .= '<div class="mt-1 mb-1 spec-1"><span class="text-info"><h5>City: ' . $row['City'] . '</h5></span></div>';
+        $output .= '<p class="text-justify text-truncate para mb-0">' . $row['Service_Desc'] . '<br><br></p>';
+        $output .= '</div>';
+        $output .= '<div class="align-items-center align-content-center col-md-3 border-left mt-1">';
+        $output .= '<div class="d-flex flex-row align-items-center"><h4 class="mr-1">' . $row['Price'] . '</h4><span class="">/ hr</span></div><h6 class="text-success">Blank</h6>';
+        $output .= '<div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#providerModal' . $row['User_ID'] . '">Details</button>
+                        <button class="btn btn-outline-primary btn-sm mt-2" type="button" onclick="location.href=`book_now.php?id='.$row['Provider_ID'].'`">Book Now</button></div>';
+        $output .= '</div></div>';
+        $output .= '<div class="modal fade" id="providerModal' . $row['User_ID'] . '" tabindex="-1" role="dialog" aria-labelledby="providerModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:800px;margin: 0.75rem auto;">
+        <div class="modal-content bg-light text-dark">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-light" id="providerModalLabel">' . $row['First_Name'] . ' ' . $row['Last_Name'] . '</h5>
+                <button type="button" class="close text-dark" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4">
+                        <!-- Profile picture -->
+                        <img src="uploaded files/Profile Pictures/' . $row['Profile_Picture'] . '" class="img-fluid rounded mb-2" style="width: 100%; height: 200px;object-fit: cover;"
+                            alt=" ">
+                        <!-- Book Now button -->
+                        <button type="button" class="btn btn-primary btn-block mt-3" onclick="location.href=`book_now.php?id='.$row['Provider_ID'].'`">Book Now</button>
+                    </div>
+                    <div class="col-8">
+                        <!-- Name and description -->
+                        <h4 class="mb-0">' . $row['First_Name'] . ' ' . $row['Last_Name'] . '</h4>
+                        <p class="text-muted mb-0">' . $row['Service_Name'] . '</p>
+                        <p class="mt-2">' . $row['Service_Desc'] . '</p>
+                        <p class="mt-2"><strong>City:</strong>' . $row['City'] . '</p>
+                    </div>
+                </div>
+                <hr class="bg-light">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Reviews -->
+                        <h5><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="far fa-star"></i> 4.0</h5>
+                        <div class="reviews-wrapper" style="height: 200px; overflow-y: scroll;">
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                                        sodales
+                                        libero a arcu faucibus, vel consectetur sapien blandit.</p>
+                                    <small class="text-muted">Reviewer Name</small>
+                                </div>
+                            </div>
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <p class="mb-0">Sed ut euismod mi. Donec ut pharetra quam. Fusce eu felis est.
+                                        Nullam
+                                        non malesuada ipsum.</p>
+                                    <small class="text-muted">Reviewer Name</small>
+                                </div>
+                            </div>
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <p class="mb-0">Sed ut euismod mi. Donec ut pharetra quam. Fusce eu felis est.
+                                        Nullam
+                                        non malesuada ipsum.</p>
+                                    <small class="text-muted">Reviewer Name</small>
+                                </div>
+                            </div>
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <p class="mb-0">Sed ut euismod mi. Donec ut pharetra quam. Fusce eu felis est.
+                                        Nullam
+                                        non malesuada ipsum.</p>
+                                    <small class="text-muted">Reviewer Name</small>
+                                </div>
+                            </div>
+                            <!-- add more reviews here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>';
+
+        // Add a container div to wrap the above code
+    }
+} else {
+    $output .= '<div class="col-md-12 my-5  d-flex justify-content-center">';
+    $output .= '<h3>No data found.</h3>';
+    $output .= '</div>';
+}
+$output .= '</div><div class="row pt-3 my-3 border rounded d-flex bg-light justify-content-center">';
+
+// generate pagination links
+
+// calculate range of pages to show
+$range = 4;
+$start = max(1, $currentPage - floor($range / 2));
+$end = min($totalPages, $start + $range - 1);
+
+// generate pagination links
+if ($totalPages > 1) {
+    $output .= '<ul class="pagination">';
+    if ($start > 1) {
+        // add "first" link
+        $output .= '<li class="page-item"><a class="page-link" href="?page=1">First</a></li>';
+    }
+    for ($i = $start; $i <= $end; $i++) {
+        if ($i == $currentPage) {
+            $output .= '<li class="page-item active"><a class="page-link" href="#">' . $i . '</a></li>';
+        } else {
+            $output .= '<li class="page-item"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+        }
+    }
+    if ($end < $totalPages) {
+        // add "last" link
+        $output .= '<li class="page-item"><a class="page-link" href="?page=' . $totalPages . '">Last</a></li>';
+    }
+    $output .= '</ul>';
+}
+
+$output .= '</div>';
+
+
+$output .= '</div>';
+
+// output HTML
+echo $output;
+
+mysqli_close($connection);
 ?>
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= $row['prdnm'] ?>(<?= $row['brand'] ?>)</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-
-    <link rel="stylesheet" href="style.css" type="text/css" media="all" />
-    <link rel="stylesheet" href="./css/style2.css">
-    <!-- CSS -->
-    <link href="product_details.css" rel="stylesheet">
-    <meta name="robots" content="noindex,follow" />
-
-</head>
-
-<body>
-    <header class="header bg-transparent">
-        <div class="container-fluid px-lg-5">
-            <!-- nav -->
-            <nav class="py-4">
-                <div id="logo">
-                    <h1> <a href="#">STEPSOUT</a></h1>
-                </div>
-
-                <label for="drop" class="toggle">Menu</label>
-                <input type="checkbox" id="drop" />
-                <ul class="menu mt-2">
-                    <li class=""><a href="index.php">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="product.php">Product</a></li>
-                    <li><a href="contact.php">Contact</a></li>
-
-                    <!-- <li>
-                            <label for="drop-2" class="toggle">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span> </label>
-                            <a href="#">Drop Down <span class="fa fa-angle-down" aria-hidden="true"></span></a>
-                            <input type="checkbox" id="drop-2" />
-                            <ul>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="shop.html">Shop Now</a></li>
-                                <li><a href="shop-single.html">Single Page</a></li>
-                            </ul>
-                        </li> -->
-                        <?php if (isset($_SESSION['Username'])) { ?>
-                            <li class="nav-item dropdown">
-                                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?php echo strtoupper($_SESSION['Username']); ?>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
-                                    <li><a class="dropdown-item" href="changepsw.php">Change Password</a></li>
-                                    <li><a class="dropdown-item" href="logout.php">logout</a></li>
-
-                                </ul>
-                            </li>
-
-                        <?php } else { ?>
-                            <li><a href="./login.php">Signin</a></li>
-                        <?php
-                        }
-                        ?>
-                    <li>|</li>
-
-                    <li><a href="cart.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
-
-                </ul>
-            </nav>
-            <!-- //nav -->
-        </div>
-    </header>
-    <main class="container">
-
-        <!-- Left Column / Headphones Image -->
-        <div class="left-column">
-            <img class="active" src="./images/<?= $row['image'] ?>" alt="">
-        </div>
-
-
-        <!-- Right Column -->
-        <div class="right-column">
-
-            <!-- Product Description -->
-            <div class="product-description">
-                <span>Shoes</span>
-                <h1><?= $row['prdnm'] ?>(<?= $row['brand'] ?>)</h1>
-                <p>The 8 choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation. Sturdy headband and on-ear cushions suitable for live performance</p>
-            </div>
-
-            <!-- Product Configuration -->
-            <div class="product-configuration">
-
-                <!-- Product Color -->
-                <div class="product-color">
-                    <span>Color</span>
-
-                    <div class="color-choose">
-                        <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
-                        <label class="btn btn-outline-success" for="success-outlined">Green</label>
-
-                        <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
-                        <label class="btn btn-outline-danger" for="danger-outlined">Red</label>
-                        <input type="radio" class="btn-check" name="options-outlined" id="primary-outlined" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="primary-outlined">Blue</label>
-                    </div>
-
-                </div>
-
-                <!-- Cable Configuration -->
-                <div class="cable-config">
-                    <span>Size</span>
-
-                    <div class="cable-choose">
-                        <input type="radio" class="btn-check" name="size" id="9" autocomplete="off" checked>
-                        <label class="btn btn-outline-danger" for="9">9</label>
-
-                        <input type="radio" class="btn-check" name="size" id="8" autocomplete="off">
-                        <label class="btn btn-outline-danger" for="8">8</label>
-                        <input type="radio" class="btn-check" name="size" id="7" autocomplete="off">
-                        <label class="btn btn-outline-danger" for="7">7</label>
-                        <input type="radio" class="btn-check" name="size" id="6" autocomplete="off">
-                        <label class="btn btn-outline-danger" for="6">6</label>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Product Pricing -->
-            <div class="product-price">
-                <span>₹<?= $row['prdpr'] ?></span>
-                <a href="buy.php" class="cart-btn buy_btn mx-2" style="background-color: #fb641b;" name="btn_s">Buy now</a>
-                <a href="add_cart.php?id=<?= $row['prdid'] ?>" class="cart-btn">Add to cart</a>
-            </div>
-        </div>
-    </main>
-
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
-    <!-- <script>
-        $(document).ready(function() {
-
-            $('.color-choose input').on('click', function() {
-                var headphonesColor = $(this).attr('data-image');
-
-                $('.active').removeClass('active');
-                $('.left-column img[data-image = ' + headphonesColor + ']').addClass('active');
-                $(this).addClass('active');
-            });
-
-        });
-    </script> -->
-</body>
-
-</html>

@@ -56,7 +56,7 @@ while ($row = mysqli_fetch_array($result)) {
       </nav>
     </header>
     <!-- Hero Section-->
-    <section class="hero hero-page gray-bg padding-small">
+    <section class="hero hero-page gray-bg padding-small"  style="padding: 42px">
       <div class="container">
         <div class="row d-flex">
           <div class="col-lg-9 order-2 order-lg-1">
@@ -64,8 +64,8 @@ while ($row = mysqli_fetch_array($result)) {
           </div>
           <div class="col-lg-3 text-right order-1 order-lg-2">
             <ul class="breadcrumb justify-content-lg-end">
-              <li class="breadcrumb-item"><a href="https://demo.bootstrapious.com/hub/1-4-2/index.html">Home</a></li>
-              <li class="breadcrumb-item active">Orders</li>
+              <!-- <li class="breadcrumb-item"><a href="https://demo.bootstrapious.com/hub/1-4-2/index.html">Home</a></li> -->
+              <!-- <li class="breadcrumb-item active">Orders</li> -->
             </ul>
           </div>
         </div>
@@ -81,11 +81,11 @@ while ($row = mysqli_fetch_array($result)) {
  
           <!-- Customer Sidebar-->
           <div class="customer-sidebar col-xl-3 col-lg-4 mb-md-5">
-            <div class="customer-profile"><a href="customer-orders.html#" class="d-inline-block"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-4-2/img/person-3.jpg" class="img-fluid rounded-circle customer-image"></a>
+            <div class="customer-profile"><a href="customer-orders.html#" class="d-inline-block"></a>
               <h5>Amal</h5> 
               <p class="text-muted text-big">Kannur</p>
             </div>
-            <nav class="list-group customer-nav"><a href="customer-orders.html" class="active list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-bag"></span>Orders</span><small class="badge badge-pill badge-light"></small></a><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-account.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-profile"></span>Profile</span></a><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-addresses.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-map"></span>Addresses</span></a><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-login.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="fa fa-sign-out"></span>Log out</span></a>
+            <nav class="list-group customer-nav"><a href="customer-orders.html" class="active list-group-item d-flex justify-content-between align-items-center"  style="background: #4CAF50;border-color: #4CAF50;"><span><span class="icon icon-bag"></span>Orders</span><small class="badge badge-pill badge-light"></small></a><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-account.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-profile"></span>Profile</span></a><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-addresses.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-map"></span>Addresses</span></a><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-login.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="fa fa-sign-out"></span>Log out</span></a>
             </nav>
           </div>
           <div class="col-lg-8 col-xl-9 pl-lg-3">
@@ -106,7 +106,7 @@ while ($row = mysqli_fetch_array($result)) {
                   <td><?=$row1['Date']?></td>
                   <td><?=$row1['price']?></td>
                   <td><span class="badge badge-info">Being prepared</span></td>
-                  <td><a href="" class="btn btn-primary btn-sm">View</a></td>
+                  <td><a href="order.php" class="btn btn-primary btn-sm"  style="background: #4CAF50;border-color: #4CAF50;">View</a></td>
                 </tr>
                 <?php
                 }

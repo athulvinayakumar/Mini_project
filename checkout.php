@@ -58,7 +58,7 @@ $result1 = mysqli_query($con, $sql);
                                 <div class="row">
                                     <div class="mb-3">
                                         <label for="firstName">Name</label>
-                                        <input type="text" class="form-control" id="firstName"  value="<?= $row['name'] ?>" required="">
+                                        <input type="text" class="form-control" name="name" id="firstName"  value="<?= $row['name'] ?>" required="">
                                     </div>
                                     <div class="mb-3">
                                         <label for="email">Email </label>
@@ -224,6 +224,7 @@ $result1 = mysqli_query($con, $sql);
                     url: 'payment.php',
                     data: "payment_id=" + response.razorpay_payment_id + "&amt=" + amt + "&name=" + name,
                     success: function(result) {
+                        // console.log(result)
                         window.location.href = "thank_you.php";
                     }
 
