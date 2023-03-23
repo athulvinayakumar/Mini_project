@@ -10,9 +10,9 @@ if(isset($_POST['amt']) && isset($_POST['name'])){
     $_SESSION['OID']=mysqli_insert_id($connection);
 }
 
-
 if(isset($_POST['payment_id']) && isset($_SESSION['OID'])){
+    echo "<script>alert('Added successfully')</script>";
     $payment_id=$_POST['payment_id'];
-    mysqli_query($connection,"update payment set payment_status='complete',payment_id='$payment_id' where id='".$_SESSION['OID']."'");
+    mysqli_query($connection,"update payment set payment_status='complete',payment_id='$payment_id' where pay_id='".$_SESSION['OID']."'");
 }
 ?>

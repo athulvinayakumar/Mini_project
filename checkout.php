@@ -58,7 +58,7 @@ $result1 = mysqli_query($con, $sql);
                                 <div class="row">
                                     <div class="mb-3">
                                         <label for="firstName">Name</label>
-                                        <input type="text" class="form-control" name="name" id="firstName"  value="<?= $row['name'] ?>" required="">
+                                        <input type="text" class="form-control" name="name" id="name"  value="<?= $row['name'] ?>" required="">
                                     </div>
                                     <div class="mb-3">
                                         <label for="email">Email </label>
@@ -153,13 +153,13 @@ $result1 = mysqli_query($con, $sql);
                                         </div>
                                         <div class="item__details">
                                             <div class="item__title">
-                                                <b> <?= $row['prdnm'] ?></b>
+                                                <b><?= $row['prdnm'] ?></b>
                                             </div>
                                             <div class="item__price">
-                                                <b> $<?= $row['prdpr'] ?></b>
+                                                <b>$<?= $row['prdpr'] ?></b>
                                             </div>
-                                            <div class="item__quantity">
-                                                Quantity: <b><?= $row['prqnt'] ?></b>
+                                            <div class="item__quantity"><br> 
+                                                Quantity:<b><?= $row['prqnt'] ?></b>
                                             </div>
                                             <div class="item__description">
                                                 <?= $row['discription'] ?>
@@ -224,8 +224,8 @@ $result1 = mysqli_query($con, $sql);
                     url: 'payment.php',
                     data: "payment_id=" + response.razorpay_payment_id + "&amt=" + amt + "&name=" + name,
                     success: function(result) {
-                        // console.log(result)
-                        window.location.href = "thank_you.php";
+                        console.log(result)
+                        // window.location.href = "thank_you.php";
                     }
 
                 })

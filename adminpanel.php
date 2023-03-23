@@ -37,6 +37,9 @@ if (!isset($_SESSION['Username'])) {
             <td><button id='Add-colour' class="panel_btns"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Color</button></td>
           </tr>
           <tr>
+            <td><button id='Add-cat' class="panel_btns"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Category</button></td>
+          </tr>
+          <tr>
             <td><button id='Add-special' class="panel_btns"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Special Offers</button></td>
           </tr>
           <tr>
@@ -79,6 +82,21 @@ if (!isset($_SESSION['Username'])) {
         </div>
 
       <form method="post" id="form" enctype="multipart/form-data" action="admin.php">
+        <div class="mb-3">
+        <h6>Select Category</h6>
+          <label for="" class="form-label"></label>
+          <select name="category" class="form-control">
+            <?php
+            $sql = "SELECT * FROM `tbl_category`";
+            $result = mysqli_query($connection, $sql);
+            while ($row = mysqli_fetch_array($result)) {
+            ?>
+              <option value="<?= $row['cat_name'] ?>"><?= $row['cat_name'] ?></option>
+            <?php
+            }
+            ?>
+            </select>
+        </div>
         <div class="mb-3">
           <h6>Product name</h6>
           <label for="" class="form-label"></label>
@@ -143,6 +161,9 @@ if (!isset($_SESSION['Username'])) {
   })
   $("#Add-special").click(function() {
     window.location.href = "edit_special.php";
+  })
+  $("#Add-cat").click(function() {
+    window.location.href = "cat.php";
   })
   $("#Add-colour").click(function() {
     window.location.href = "color.php";

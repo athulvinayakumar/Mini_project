@@ -65,11 +65,15 @@ include 'db.php';
                                                     </figure>
                                                 </td>
 
-
                                                 <td>
-                                                    <!-- <button type="button" class="dec-btn" value="<?php echo $row['cart_id']; ?>" style="float:right">-</button> -->
-                                                    <input id="quant" value="<?php echo $row['quantity'] ?>" name="quantitys" type="number" max="<?=$row1['prqnt']?>" min="1" class="quant quantitys form-control" onkeypress="return isNumberKey(event)" onchange="return change(this.value,<?= $row['pid'] ?>,<?= $user ?>);" style="width: 88px;">
-                                                    <!-- <button class="inc-btn" type="button" value="<?php echo $row['cart_id']; ?>" style="float:right">+</button> -->
+                                                    <table>
+                                                        <tr>
+                                                            <td><button type="button" class="dec-btn" value="<?php echo $row['cart_id']; ?>">-</button></td>
+                                                            <td><input disabled id="quant" value="<?php echo $row['quantity'] ?>" name="quantitys" type="number" max="<?=$row1['prqnt']?>" min="1" class="quant quantitys form-control" onkeypress="return isNumberKey(event)" onchange="return change(this.value,<?= $row['pid'] ?>,<?= $user ?>);" style="width: 50px;"></td>
+                                                            <td><button class="inc-btn" type="button" value="<?php echo $row['cart_id']; ?>">+</button></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
                                                 <td>
                                                     <!-- <div class="price-wrap"> <var class="pro_price price">₹<?php echo $row1['prdpr']; ?></var></div> -->
                                                     <input type="hidden" class="iprice" id="sprice" name="sprice" value="<?php echo $row1['prdpr']; ?>">
@@ -129,60 +133,61 @@ function isNumberKey(evt) {
     return false;
   return true;
 }
-    // $(document).on('click', '.dec-btn', function(e) {
-    //     e.preventDefault();
+    $(document).on('click', '.dec-btn', function(e) {
+        e.preventDefault();
 
-    //     var cart_id = $(this).val();
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "cart_save.php",
-    //         data: {
-    //             'decrem-btn': true,
-    //             'cart_id': cart_id
-    //         },
-    //         success: function(response) {
-    //             console.log(response)
-    //             // $('#delShow').show();
-    //             location.href='cart.php'
-    //             $('#cart-table').load(location.href + " #cart-table");
-    //         }
-    //     });
-    // });
-    // $(document).on('click', '.inc-btn', function(e) {
-    //     e.preventDefault();
-
-    //     var cart_id = $(this).val();
-
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "cart_save.php",
-    //         data: {
-    //             'increm-btn': true,
-    //             'cart_id': cart_id
-    //         },
-    //         success: function(response) {
-    //             console.log(response)
-    //             // $('#delShow').show();
-    //             location.href='cart.php'
-    //             $('#cart-table').load(location.href + " #cart-table");
-    //         }
-    //     });
-    // });
-
-    function change(id, prid, usr_id) {
+        var cart_id = $(this).val();
         $.ajax({
-            method: "post",
-            url: "cart_ajax.php",
+            type: "POST",
+            url: "cart_save.php",
             data: {
-                id: id,
-                prid: prid,
-                usr_id: usr_id
+                'decrem-btn': true,
+                'cart_id': cart_id
             },
-            success: function(result) {
-                console.log(result)
-                $(".tot_price").html(result);
+            success: function(response) {
+                console.log(response)
+                // $('#delShow').show();
+                // location.href='cart.php'
+                $('#cart-table').load(location.href + " #cart-table");
+                $('#ttprice').load(location.href + " #ttprice");
             }
         });
+    });
+    $(document).on('click', '.inc-btn', function(e) {
+        e.preventDefault();
+
+        var cart_id = $(this).val();
+
+        $.ajax({
+            type: "POST",
+            url: "cart_save.php",
+            data: {
+                'increm-btn': true,
+                'cart_id': cart_id
+            },
+            success: function(response) {
+                console.log(response)
+                // $('#delShow').show();
+                // location.href='cart.php'
+                $('#cart-table').load(location.href + " #cart-table");
+            }
+        });
+    });
+
+    // function change(id, prid, usr_id) {
+    //     $.ajax({
+    //         method: "post",
+    //         url: "cart_ajax.php",
+    //         data: {
+    //             id: id,
+    //             prid: prid,
+    //             usr_id: usr_id
+    //         },
+    //         success: function(result) {
+    //             console.log(result)
+    //             $(".tot_price").html(result);
+    //         }
+    //     });
 
         var t = 0;
         var quantity = document.getElementsByClassName('quant');
@@ -205,7 +210,7 @@ function isNumberKey(evt) {
         }
         // alert(quantity);
         // alert(price);
-    }
+    
 </script>
 
 </html>

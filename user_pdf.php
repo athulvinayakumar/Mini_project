@@ -49,11 +49,11 @@ $result = $connection->query($select);
 $pdf = new PDF();
 
 // Add a new page with the header
-$pdf->AddPage('P', 'A3');
+$pdf->AddPage('P', 'A4');
 $pdf->Header();
 
 // Define column widths
-$width_cell=array(35,40,50,35,65);
+$width_cell=array(25,25,42,35,65);
 
 // Set font family and size
 $pdf->SetFont('Arial','',12);
@@ -69,7 +69,7 @@ $pdf->Cell($width_cell[0],10,'Name',1,0,'C',true);
 $pdf->Cell($width_cell[1],10,'Username',1,0,'C',true);
 $pdf->Cell($width_cell[2],10,'Address',1,0,'C',true); 
 $pdf->Cell($width_cell[3],10,'Phone',1,0,'C',true); 
-$pdf->Cell($width_cell[4],10,'Email id',1,0,'C',true); 
+$pdf->Cell($width_cell[4],10,'Email id',1,1,'C',true); 
 // $pdf->Cell($width_cell[5],10,'District',1,1,'C',true); 
 // $pdf->Cell($width_cell[5],10,'image',1,1,'C',true); 
 // Print data from MySQL

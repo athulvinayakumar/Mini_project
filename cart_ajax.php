@@ -7,7 +7,7 @@ if (isset($_POST['id'])) {
     $prdid = $_POST['prid'];
     $usr_id = $_POST['usr_id'];
 
-    $sql = "SELECT * FROM `cart` WHERE `pid` =$prdid";
+    $sql = "SELECT * FROM `admins` WHERE `pid` =$prdid";
     $result = mysqli_query($con, $sql);
     $row1=mysqli_fetch_array($result);
     if($row1['quantity']<$value){
