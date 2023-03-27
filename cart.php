@@ -43,16 +43,14 @@ include 'db.php';
                                         $sql = "SELECT * FROM `cart` WHERE `id` =$user AND `status` = 1";
                                         $result = mysqli_query($con, $sql);
                                         while ($row = mysqli_fetch_array($result)) {
+                                            
+                                        $total_price=0;
                                             $prdid = $row['pid'];
                                             $sql = "SELECT * FROM `admins` WHERE `prdid` = $prdid ";
                                             $result1 = mysqli_query($con, $sql);
                                             $row1 = mysqli_fetch_array($result1);
-
                                             $total_price = $total_price + ($row1['prdpr'] * $row['quantity']);
-
                                             $_SESSION['totalPrice'] = $total_price;
-
-
                                             $discount = $discount + (10 * $row['quantity']);
                                         ?>
                                             <tr>
@@ -69,21 +67,27 @@ include 'db.php';
                                                     <table>
                                                         <tr>
                                                             <td><button type="button" class="dec-btn" value="<?php echo $row['cart_id']; ?>">-</button></td>
-                                                            <td><input disabled id="quant" value="<?php echo $row['quantity'] ?>" name="quantitys" type="number" max="<?=$row1['prqnt']?>" min="1" class="quant quantitys form-control" onkeypress="return isNumberKey(event)" onchange="return change(this.value,<?= $row['pid'] ?>,<?= $user ?>);" style="width: 50px;"></td>
+                                                            <td><input disabled id="quant" value="<?php echo $row['quantity'] ?>" name="quantitys" type="number" max="<?= $row1['prqnt'] ?>" min="1" class="quant quantitys form-control" onkeypress="return isNumberKey(event)" onchange="return change(this.value,<?= $row['pid'] ?>,<?= $user ?>);" style="width: 50px;"></td>
                                                             <td><button class="inc-btn" type="button" value="<?php echo $row['cart_id']; ?>">+</button></td>
                                                         </tr>
                                                     </table>
                                                 </td>
                                                 <td>
                                                     <!-- <div class="price-wrap"> <var class="pro_price price">₹<?php echo $row1['prdpr']; ?></var></div> -->
-                                                    <input type="hidden" class="iprice" id="sprice" name="sprice" value="<?php echo $row1['prdpr']; ?>">
-                                                    <span id="ttprice" class="ttprice"></span>
+                                                    <!-- <input type="hidden" class="iprice" id="sprice" name="sprice" value="<?php echo $row1['prdpr']; ?>"> -->
+                                                    
+                                                <span class="ttprice" data-cartid="<?php echo $row['cart_id']; ?>"><?php echo $total_price; ?></span>
+                                                    <?php
+                                                    // echo $total_price; 
+                                                    ?>
+
                                                 </td>
                                                 <td class="text-right d-none d-md-block"> <a href="remove_cart.php?id=<?= $row1['prdid'] ?>&uid=<?= $user ?>" class="btn btn-light" data-abc="true"> Remove</a> </td>
                                             </tr>
                                         <?php
+                                        $total += $total_price;
                                         }
-                                        $total = $total_price - $discount;
+                                        // $total = $total_price - ($discount / 10);
                                         $_SESSION['total_amount'] = $total;
                                         ?>
                                     </tbody>
@@ -101,16 +105,18 @@ include 'db.php';
                         <div class="card-body">
                             <dl class="dlist-align">
                                 <dt>Total price:</dt>
-                                <dd class="tot_price text-right ml-3">₹<?= $_ttot ?></dd>
+                                <dd class="tot_price text-right ml-3">₹<?= $_SESSION['total_amount']; ?></dd>
                             </dl>
                             <dl class="dlist-align">
                                 <dt>Discount:</dt>
                                 <dd class="text-right text-danger ml-3">₹<?= $discount ?></dd>
                             </dl>
+                            <div id="cart-summary">
                             <dl class="dlist-align">
                                 <dt>Total:</dt>
-                                <dd class="text-right text-dark b ml-3"><strong>₹<?= $total ?></strong></dd>
+                                <dd class="text-right text-dark b ml-3"><strong>₹<?= $_SESSION['total_amount']- $discount ?></strong></dd>
                             </dl>
+                            </div>
                             <hr> <a href="checkout.php" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Make Purchase </a>
                             <a href="product.php" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue Shopping</a>
                         </div>
@@ -125,14 +131,12 @@ include 'db.php';
 </body>
 
 <script>
-
-
-function isNumberKey(evt) {
-  var charCode = (evt.which) ? evt.which : evt.keyCode
-  if (charCode > 31 && (charCode < 48 || charCode > 57))
-    return false;
-  return true;
-}
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
     $(document).on('click', '.dec-btn', function(e) {
         e.preventDefault();
 
@@ -145,11 +149,20 @@ function isNumberKey(evt) {
                 'cart_id': cart_id
             },
             success: function(response) {
-                console.log(response)
-                // $('#delShow').show();
-                // location.href='cart.php'
-                $('#cart-table').load(location.href + " #cart-table");
-                $('#ttprice').load(location.href + " #ttprice");
+                var data = JSON.parse(response);
+                if (data.status === "success") {
+                    $('#cart-table').load(location.href + " #cart-table", function() {
+                        // Update the price for the corresponding cart item
+                        $('.ttprice[data-cartid="' + cart_id + '"]').html(data.newprice);
+                        <?php $total_price = '<span class="ttprice" data-cartid="'.$row['cart_id'].'">'.$newprice.'</span>'; ?>
+                        $('#cart-summary').load('your-url #cart-summary .dlist-align');
+                    });
+                } else {
+                    alert("Error occurred: " + response);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error(textStatus + ': ' + errorThrown);
             }
         });
     });
@@ -166,13 +179,24 @@ function isNumberKey(evt) {
                 'cart_id': cart_id
             },
             success: function(response) {
-                console.log(response)
-                // $('#delShow').show();
-                // location.href='cart.php'
-                $('#cart-table').load(location.href + " #cart-table");
+                var data = JSON.parse(response);
+                if (data.status === "success") {
+                    $('#cart-table').load(location.href + " #cart-table", function() {
+                        // Update the price for the corresponding cart item
+                        $('.ttprice[data-cartid="' + cart_id + '"]').html(data.newprice);
+                        <?php $total_price = '<span class="ttprice" data-cartid="'.$row['cart_id'].'">'.$newprice.'</span>'; ?>
+                        $('#cart-summary').load('cart_save.php #cart-summary .dlist-align');
+                    });
+                } else {
+                    alert("Error occurred: " + response);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error(textStatus + ': ' + errorThrown);
             }
         });
     });
+
 
     // function change(id, prid, usr_id) {
     //     $.ajax({
@@ -189,28 +213,27 @@ function isNumberKey(evt) {
     //         }
     //     });
 
-        var t = 0;
-        var quantity = document.getElementsByClassName('quant');
-        var price = document.getElementsByClassName('iprice');
-        // var val=document.getElementsByClassName('quant').value;
-        var tprice = document.getElementsByClassName('ttprice');
-        var gtotal = document
-        for (i = 0; i < quantity.length; i++) {
-            // alert(quantity[i].value);
-            // alert(price[i].value);
-            if (quantity[i].value <= 0) {
-                quantity[i].value = 1;
-            }
-            // else if(val[i].value)
-            t = (quantity[i].value) * (price[i].value);
-            // alert(t);
-            // .value=t;;
+    // var t = 0;
+    // var quantity = document.getElementsByClassName('quant');
+    // var price = document.getElementsByClassName('iprice');
+    // // var val=document.getElementsByClassName('quant').value;
+    // var tprice = document.getElementsByClassName('ttprice');
+    // var gtotal = document
+    // for (i = 0; i < quantity.length; i++) {
+    //     // alert(quantity[i].value);
+    //     // alert(price[i].value);
+    //     if (quantity[i].value <= 0) {
+    //         quantity[i].value = 1;
+    //     }
+    //     // else if(val[i].value)
+    //     t = (quantity[i].value) * (price[i].value);
+    //     // alert(t);
+    //     // .value=t;;
 
-            tprice[i].innerText = t;
-        }
-        // alert(quantity);
-        // alert(price);
-    
+    //     tprice[i].innerText = t;
+    // }
+    // alert(quantity);
+    // alert(price);
 </script>
 
 </html>

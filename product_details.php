@@ -9,6 +9,7 @@ $row = mysqli_fetch_array($result);
 $_SESSION['total_amount'] = $row['prdpr'];
 $user_id = $_SESSION['usr_id'];
 ?>
+
 <head>
     <title>STEPSOUT-PRODUCT DETAILS</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -28,7 +29,7 @@ $user_id = $_SESSION['usr_id'];
     <!--Latest compiled and minified JavaScript-->
     <script src="jquery.etalage.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+
     <script>
         $(document).ready(function() {
             $('.etalage').etalage({
@@ -45,7 +46,8 @@ $user_id = $_SESSION['usr_id'];
             padding: 0;
             margin-bottom: 20px;
         }
-        .badge{
+
+        .badge {
             background-color: #4caf50;
             font-size: larger;
         }
@@ -217,21 +219,49 @@ if (isset($_POST['review'])) {
                         <br>
 
                         <br>
-                     
-                    
+
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <strong>Size</strong>
+                                <br>
+                                <br>
+                                <button class="btn btn-default" style="color:#337ab7;border:1px dashed #337ab7;">6</button>
+                                <button class="btn btn-default">7</button>
+                                <button class="btn btn-default">8</button>
+                                <button class="btn btn-default">9</button>
+                                <button class="btn btn-default">10</button>
+                            </div>
+                        </div>
+
+                        <br><br>
+
+
+                        <!-- Product Size -->
+                        <?php
+                                $con = mysqli_connect("localhost", "root", "", "shoes");
+                                $sql = "SELECT * FROM `tbl_color`";
+                                $ab = mysqli_query($con, $sql);
+                                ?>
                         <div class="row">
                             <div class="col-sm-6">
                                 <strong>Color</strong>
                                 <br>
                                 <br>
-                                <button class="btn btn-default" style="color:#337ab7;border:1px dashed #337ab7;">Red</button>
-                                <button class="btn btn-default">Blue</button>
-                                <button class="btn btn-default">Black</button>
-                                <button class="btn btn-default">White</button>
-                                <button class="btn btn-default">Yellow</button>
+                                <?php
+                                while($a=mysqli_fetch_array($ab))
+                                    {
+                                    ?>
+                                <button class="btn btn-default" style="color:#337ab7;border:1px dashed #337ab7;"><?php echo $a['color_name']; ?> </button>
+                                <!-- // <button class="btn btn-default">7</button>
+                                // <button class="btn btn-default">8</button>
+                                // <button class="btn btn-default">9</button>
+                                // <button class="btn btn-default">10</button> -->
+                                <?php
+                                    }
+                                    ?>
                             </div>
                         </div>
-                      
                         <br><br>
 
 
@@ -246,7 +276,7 @@ if (isset($_POST['review'])) {
                             ?>
                         </div>
                         <br><br>
-                    
+
 
 
                     </div>
@@ -256,7 +286,7 @@ if (isset($_POST['review'])) {
                             <h4>Review <span class="label label-success"><span class="glyphicon glyphicon-star"></span><span id="avg_star"></span></span></h4>
                         </div>
 
-                        <table class="table table-active">
+                        <table class=" table table-bordered">
                             <thead>
                                 <tr>
                                     <!-- <th scope="col">Sno</th> -->

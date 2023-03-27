@@ -2,6 +2,8 @@
 session_start();
 error_reporting(E_ERROR | E_PARSE);
 $user = $_SESSION['usr_id'];
+$pro_ids = $_SESSION['order_details'];
+
 include 'db.php';
 $con = mysqli_connect("localhost", "root", "", "shoes");
 $sql = "SELECT * FROM `cart` WHERE `id` =$user AND `status` = 1";
@@ -12,6 +14,17 @@ while ($row = mysqli_fetch_array($result)) {
     $result1 = mysqli_query($con, $sql);
     $row1 = mysqli_fetch_array($result1);
 }
+
+$sql = "SELECT * FROM `tbl_order` WHERE `id` =$prdid";
+$result1 = mysqli_query($con, $sql);
+while ($ordertb = mysqli_fetch_array($result1)) {
+    $address = $ordertb['address'];
+    $address2 = $ordertb['address2'];
+}
+
+$pay_id = $_SESSION['OID'];
+$result = mysqli_query($con, "SELECT * FROM `payment` WHERE `pay_id` = $pay_id ");
+$paytb = mysqli_fetch_array($result);
 ?>
 <html>
 
@@ -37,11 +50,11 @@ while ($row = mysqli_fetch_array($result)) {
                             <div class="row">
                                 <div class="col-sm-6">
                                     <span>Payment No.</span>
-                                    <strong>434334343</strong>
+                                    <strong><?= $paytb['payment_id'] ?></strong>
                                 </div>
                                 <div class="col-sm-6 text-right">
                                     <span>Payment Date</span>
-                                    <strong>Jul 09, 2014 - 12:20 pm</strong>
+                                    <strong><?= $paytb['added_on'] ?></strong>
                                 </div>
                             </div>
                         </div>
@@ -49,33 +62,16 @@ while ($row = mysqli_fetch_array($result)) {
                             <div class="row">
                                 <div class="col-sm-6">
                                     <span>Client</span>
-                                    <strong>
-                                        Andres felipe posada
-                                    </strong>
-                                    <p>
-                                        989 5th Avenue <br>
-                                        City of monterrey <br>
-                                        55839 <br>
-                                        USA <br>
-                                        <a href="#">
-                                            <span class="__cf_email__" data-cfemail="3e54515050475a5b58587e59535f5752105d5153">[email&#160;protected]</span>
-                                        </a>
+                                    <p><?= $address ?>
                                     </p>
                                 </div>
                                 <div class="col-sm-6 text-right">
                                     <span>Payment To</span>
                                     <strong>
-                                        Juan fernando arias
+                                        VK
                                     </strong>
-                                    <p>
-                                        344 9th Avenue <br>
-                                        San Francisco <br>
-                                        99383 <br>
-                                        USA <br>
-                                        <a href="#">
-                                            <span class="__cf_email__" data-cfemail="cea4bbafa0a8abbc8ea9a3afa7a2e0ada1a3">[email&#160;protected]</span>
-                                        </a>
-                                    </p>
+                                    <p>SOUTH BAZAR<br> KANNUR<br>9525302595<br>vk@gmail.com</p>
+
                                 </div>
                             </div>
                         </div>
@@ -88,39 +84,29 @@ while ($row = mysqli_fetch_array($result)) {
                                 </div>
                             </div>
                             <div class="items">
-                                <div class="row item">
-                                    <div class="col-xs-4 desc">
-                                        Html theme
+                                <?php
+                                $subTotal = 0;
+                                foreach ($pro_ids as $prdid) {
+                                    $result_pro = mysqli_query($con, "SELECT * FROM `tbl_order` WHERE `oid` =  $prdid");
+                                    $ord_det = mysqli_fetch_array($result_pro); ?>
+                                    <div class="row item">
+                                        <div class="col-xs-4 desc">
+                                            <?= $ord_det['product'] ?>
+
+                                            <!-- product name -->
+                                        </div>
+                                        <div class="col-xs-3 qty">
+                                            <?= $ord_det['product'] ?>
+                                            <!-- product qi -->
+                                        </div>
+                                        <div class="col-xs-5 amount text-right">
+                                            <?= $ord_det['product'] ?>
+                                            <!-- product price -->
+                                        </div>
                                     </div>
-                                    <div class="col-xs-3 qty">
-                                        3
-                                    </div>
-                                    <div class="col-xs-5 amount text-right">
-                                        $60.00
-                                    </div>
-                                </div>
-                                <div class="row item">
-                                    <div class="col-xs-4 desc">
-                                        Bootstrap snippet
-                                    </div>
-                                    <div class="col-xs-3 qty">
-                                        1
-                                    </div>
-                                    <div class="col-xs-5 amount text-right">
-                                        $20.00
-                                    </div>
-                                </div>
-                                <div class="row item">
-                                    <div class="col-xs-4 desc">
-                                        Snippets on bootdey
-                                    </div>
-                                    <div class="col-xs-3 qty">
-                                        2
-                                    </div>
-                                    <div class="col-xs-5 amount text-right">
-                                        $18.00
-                                    </div>
-                                </div>
+                                <?php
+                                    // $subTotal= $subTotal+$ord_det['product_price'];
+                                } ?>
                             </div>
                             <div class="total text-right">
                                 <p class="extra-notes">
@@ -130,6 +116,7 @@ while ($row = mysqli_fetch_array($result)) {
                                 </p>
                                 <div class="field">
                                     Subtotal <span>$379.00</span>
+                                    <!-- Subtotal <span><?= $subTotal ?></span> -->
                                 </div>
                                 <div class="field">
                                     Shipping <span>$0.00</span>
@@ -141,12 +128,11 @@ while ($row = mysqli_fetch_array($result)) {
                                     Total <span>$312.00</span>
                                 </div>
                             </div>
-                            <div class="print">
-                                <a href="#">
-                                    <i class="fa fa-print"></i>
-                                    Print this receipt
-                                </a>
-                            </div>
+                           <div class="print">
+                                   <center><button class="print-ticket";>Print Ticket</button></center>
+                                    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+                            
+                        </div>
                         </div>
                     </div>
                     <div class="footer">
@@ -160,8 +146,13 @@ while ($row = mysqli_fetch_array($result)) {
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-
-
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.print-ticket').click(function() {
+                window.print();
+            });
+        });
     </script>
 </body>
 
