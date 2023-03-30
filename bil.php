@@ -87,7 +87,7 @@ $paytb = mysqli_fetch_array($result);
                                 <?php
                                 $subTotal = 0;
                                 foreach ($pro_ids as $prdid) {
-                                    $result_pro = mysqli_query($con, "SELECT * FROM `tbl_order` WHERE `oid` =  $prdid");
+                                    $result_pro = mysqli_query($con, "SELECT * FROM `tbl_order` WHERE `oid` = $prdid");
                                     $ord_det = mysqli_fetch_array($result_pro); ?>
                                     <div class="row item">
                                         <div class="col-xs-4 desc">
@@ -96,7 +96,7 @@ $paytb = mysqli_fetch_array($result);
                                             <!-- product name -->
                                         </div>
                                         <div class="col-xs-3 qty">
-                                            <?= $ord_det['product'] ?>
+                                            <?= $ord_det['product_price'] ?>
                                             <!-- product qi -->
                                         </div>
                                         <div class="col-xs-5 amount text-right">

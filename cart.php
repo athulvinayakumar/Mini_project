@@ -43,8 +43,7 @@ include 'db.php';
                                         $sql = "SELECT * FROM `cart` WHERE `id` =$user AND `status` = 1";
                                         $result = mysqli_query($con, $sql);
                                         while ($row = mysqli_fetch_array($result)) {
-                                            
-                                        $total_price=0;
+                                            $total_price=0;
                                             $prdid = $row['pid'];
                                             $sql = "SELECT * FROM `admins` WHERE `prdid` = $prdid ";
                                             $result1 = mysqli_query($con, $sql);
@@ -86,10 +85,12 @@ include 'db.php';
                                             </tr>
                                         <?php
                                         $total += $total_price;
+                                        // echo($total);
                                         }
                                         // $total = $total_price - ($discount / 10);
                                         $_SESSION['total_amount'] = $total;
                                         ?>
+                                        <input type="hidden" id="gtotal" value="<?php echo $total ?>">
                                     </tbody>
                                 </table>
                             </form>
@@ -103,6 +104,7 @@ include 'db.php';
                 <aside class="col-lg-3">
                     <div class="card">
                         <div class="card-body">
+                        <div id="cart-summary">
                             <dl class="dlist-align">
                                 <dt>Total price:</dt>
                                 <dd class="tot_price text-right ml-3">₹<?= $_SESSION['total_amount']; ?></dd>
@@ -111,12 +113,21 @@ include 'db.php';
                                 <dt>Discount:</dt>
                                 <dd class="text-right text-danger ml-3">₹<?= $discount ?></dd>
                             </dl>
-                            <div id="cart-summary">
                             <dl class="dlist-align">
                                 <dt>Total:</dt>
                                 <dd class="text-right text-dark b ml-3"><strong>₹<?= $_SESSION['total_amount']- $discount ?></strong></dd>
                             </dl>
                             </div>
+                            <!-- <dl class="dlist-align">
+                                <dt>Discount:</dt>
+                                <dd class="text-right text-danger ml-3">₹<?= $discount ?></dd>
+                            </dl>
+                            <div id="cart-summary">
+                            <dl class="dlist-align">
+                                <dt>Total:</dt>
+                                <dd class="text-right text-dark b ml-3"><strong>₹<?= $_SESSION['total_amount']- $discount ?></strong></dd>
+                            </dl>
+                            </div> -->
                             <hr> <a href="checkout.php" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Make Purchase </a>
                             <a href="product.php" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue Shopping</a>
                         </div>
@@ -155,7 +166,7 @@ include 'db.php';
                         // Update the price for the corresponding cart item
                         $('.ttprice[data-cartid="' + cart_id + '"]').html(data.newprice);
                         <?php $total_price = '<span class="ttprice" data-cartid="'.$row['cart_id'].'">'.$newprice.'</span>'; ?>
-                        $('#cart-summary').load('your-url #cart-summary .dlist-align');
+                        $('#cart-summary').load('cart.php #cart-summary .dlist-align');
                     });
                 } else {
                     alert("Error occurred: " + response);
@@ -185,7 +196,7 @@ include 'db.php';
                         // Update the price for the corresponding cart item
                         $('.ttprice[data-cartid="' + cart_id + '"]').html(data.newprice);
                         <?php $total_price = '<span class="ttprice" data-cartid="'.$row['cart_id'].'">'.$newprice.'</span>'; ?>
-                        $('#cart-summary').load('cart_save.php #cart-summary .dlist-align');
+                        $('#cart-summary').load('cart.php #cart-summary .dlist-align');
                     });
                 } else {
                     alert("Error occurred: " + response);
@@ -198,20 +209,12 @@ include 'db.php';
     });
 
 
-    // function change(id, prid, usr_id) {
-    //     $.ajax({
-    //         method: "post",
-    //         url: "cart_ajax.php",
-    //         data: {
-    //             id: id,
-    //             prid: prid,
-    //             usr_id: usr_id
-    //         },
-    //         success: function(result) {
-    //             console.log(result)
-    //             $(".tot_price").html(result);
-    //         }
-    //     });
+    function change() {
+        // alert("hi");
+        var gt=document.getElementById('gtotal').value;
+        document.getElementById('gt').innerText=gt;
+        // alert(gt);
+    }
 
     // var t = 0;
     // var quantity = document.getElementsByClassName('quant');

@@ -12,21 +12,23 @@ include('db.php');
 
 	<script>
 		// Fetch data from database
-		const data = [
+				const data = [
 			<?php
-			$sql = "SELECT prdnm,prqnt FROM `admins`";
+		    $con = mysqli_connect("localhost", "root", "", "shoes");
+			$sql = "SELECT brand,prqnt FROM `admins`";
 			$result = $con->query($sql);
 
 			if ($result->num_rows > 0) {
 			  while($row = $result->fetch_assoc()) {
 			    echo "{
-			      product: '{$row['prdnm']}',
+			      product: '{$row['brand']}',
 			      quantity: {$row['prqnt']}
 			    },";
 			  }
 			}
 			?>
 		];
+		
 
 		// Calculate scores
 		const products = {};

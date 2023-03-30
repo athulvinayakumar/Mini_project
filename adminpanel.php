@@ -77,7 +77,8 @@ if (!isset($_SESSION['Username'])) {
     <div class="col-md-6 " id="add-movies-container">
       <div class="p-5 bg-light">
         <div class="container">
-          <h1 class="display-3">Add new Items</h1>
+         <p><h1 class="display-3">Add new Items</h1>
+          <h2><a href="pi.php">Sales chart</a></h2></p>
           </p>
         </div>
 

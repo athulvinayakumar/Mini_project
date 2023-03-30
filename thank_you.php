@@ -1,11 +1,15 @@
 <?php
 session_start();
+echo $payment_id=$_GET['payment_id'];
 $usr_name = $_SESSION['Username'];
 $con = mysqli_connect("localhost", "root", "", "shoes");
 $sql = "SELECT * FROM `auth` where username ='$usr_name'";
 $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_array($result);
 $name = $row["username"];
+$prdid = $row['id'];
+$sql = "SELECT * FROM `tbl_order` WHERE `id` =$prdid";
+$result1 = mysqli_query($con, $sql);
 ?>
 <html lang="en">
 <head>

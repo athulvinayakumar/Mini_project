@@ -1,14 +1,15 @@
 <?php
 session_start();
 $i=0;
-$usr_name = $_SESSION['Username'];
+// $usr_name = $_SESSION['Username'];
 $con = mysqli_connect("localhost", "root", "", "shoes");
-$sql = "SELECT * FROM `auth` where username ='$usr_name'";
-$result = mysqli_query($con, $sql);
-$row = mysqli_fetch_array($result);
-$pr = $row['id'];
+// $sql = "SELECT * FROM `auth` where username ='$usr_name'";
+// $result = mysqli_query($con, $sql);
+// $row = mysqli_fetch_array($result);
+// $pr = $row['id'];
 $sql = "SELECT * FROM `cart` WHERE `id` =$pr";
 $result1 = mysqli_query($con, $sql);
+$row12=mysqli_fetch_assoc($result1);
 ?>
 <html>
 
@@ -148,18 +149,25 @@ $result1 = mysqli_query($con, $sql);
                 </div>
                 <?php
                 if (isset($_POST['checkout'])) {
+                    
                     $address = $_POST['address'];
                     $count=0;
                     $address1 = $_POST['address1'];
                     $product_ids = $_POST['product'];
                     $product_price=$_POST['price'];
-                    $product_quantity=$_POST['quantity'];
+                    $product_quantity=$_POST['quantity_'.$row12['prdid']];
                     $_SESSION['order_details']=$product_ids;
                     $price = $_SESSION['total_amount'];
                     $ord_id=[];
                     foreach ($product_ids as $prdid) {
                         $prod_price=$product_price[$count];
                         $prod_qty=$product_quantity[$count];
+                        $sql111="SELECT prqnt from admins WHERE prdid=$prdid ";
+                        $res111 = mysqli_query($con, $sql111);
+                        $row111=mysqli_fetch_assoc($result111);
+                        $qnn=$row111['prqnt'];
+                        $cc=$qnn-$product_quantity;
+                        mysqli_query($con,"UPDATE `admins` SET `prqnt`='$cc' WHERE oid='$ord_id' ");
                         $sql = "INSERT INTO `tbl_order`(`id`,`product`,`address`, `address2`, `price`) VALUES('$pr','$prdid','$address','$address1','$price')";
                         $res = mysqli_query($con, $sql);
                         $ord_id=mysqli_insert_id($con);
@@ -211,7 +219,7 @@ $result1 = mysqli_query($con, $sql);
                                             </div>
                                             <div class="item__quantity"><br>
                                                 Quantity:<b><?= $item_qty ?></b>
-                                            <input type="hidden" id="quantity" name="quantity[]" value="<?php echo $row['prqnt']; ?>">
+                                            <input type="hidden" id="quantity" name="quantity_<?php echo $row['prdid']?>" value="<?php echo $row['prqnt']; ?>">
 
                                             </div>
                                             <div class="item__description"> 

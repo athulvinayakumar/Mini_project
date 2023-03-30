@@ -1,7 +1,6 @@
 <?php
 session_start();
 include 'db.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -89,6 +88,8 @@ include 'db.php';
                             <li><a href="about.php ">About</a></li>
                             <li><a href="product.php">Products</a></li>
                             <li><a href="contact.php">Contact</a></li>
+                            
+                          
 
 
                             <?php if (isset($_SESSION['Username'])) { ?>
@@ -100,6 +101,7 @@ include 'db.php';
                                         <li><a class="dropdown-item" href="./profile.php">Profile</a></li>
                                         <li><a class="dropdown-item" href="changepsw.php">Change Password</a></li>
                                         <li><a class="dropdown-item" href="logout.php">logout</a></li>
+                                     
 
                                     </ul>
                                 </li>
@@ -139,6 +141,7 @@ include 'db.php';
             <h3 class="mb-4">Casual Shoes for Men</h3>
             <div class="ban-buttons">
                 <a href="product.php" class="btn">Shop Now</a>
+           
                 <!-- <a href="single.html" class="btn active">Read More</a> -->
 
             </div>
@@ -348,6 +351,7 @@ include 'db.php';
                                 </div> -->
                                 </div>
                             </div>
+    
 
 
                         </div>
@@ -367,6 +371,12 @@ include 'db.php';
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+                            <script >
+                                function loadGoogleTranslate(){
+                                   new google.translate.TranslateElement("google_element");
+                                }
+                            </script>
 
 <script>
     // $(".cart_btn").click(function() {
@@ -395,5 +405,7 @@ include 'db.php';
     }
 
 </script>
+
+<li><a id="google_element"></a></li>
 
 </html>

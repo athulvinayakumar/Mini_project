@@ -67,7 +67,7 @@ $result1 = mysqli_query($con, $sql);
         <div class="col-lg-3 text-right order-1 order-lg-2">
           <ul class="breadcrumb justify-content-lg-end">
             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-            <li class="breadcrumb-item"><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-orders.html">Orders</a></li>
+            <li class="breadcrumb-item"><a href="order.php">Orders</a></li>
             <li class="breadcrumb-item active">Order </li>
           </ul>
         </div>
@@ -83,7 +83,7 @@ $result1 = mysqli_query($con, $sql);
             <h5><?= $row['name'] ?></h5>
             <!-- <p class="text-muted text-small">Ostrava, Czech republic</p> -->
           </div>
-          <nav class="list-group customer-nav"><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-orders.html" class="active list-group-item d-flex justify-content-between align-items-center" style=" background: #4CAF50; border-color: #4CAF50;"><span><span class="icon icon-bag"></span>Orders</span><small class="badge badge-pill badge-light">5</small></a><a href="https://demo.bootstrapious.com/hub/1-4-2/customer-account.html" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-profile"></span>Profile</span></a><a href="" class="list-group-item d-flex justify-content-between align-items-center"></a>
+          <nav class="list-group customer-nav"><a href="#" class="active list-group-item d-flex justify-content-between align-items-center" style=" background: #4CAF50; border-color: #4CAF50;"><span><span class="icon icon-bag"></span>Orders</span></a><a href="edit_profile.php" class="list-group-item d-flex justify-content-between align-items-center"><span><span class="icon icon-profile"></span>Profile</span></a><a href="edit_profile.php" class="list-group-item d-flex justify-content-between align-items-center"></a>
           </nav>
         </div>
         <div class="col-lg-8 col-xl-9 pl-lg-3">
@@ -124,7 +124,15 @@ $result1 = mysqli_query($con, $sql);
                         </div>
                       </div>
                       <div class="col-2"><span><?= $row['prdpr'] ?></span></div>
-                      <div class="col-2"><?= $row['prqnt'] ?></div>
+                      <?php
+                      $product = $row['prdid'];
+                      $res_detail = mysqli_query($con, "SELECT *FROM cart WHERE pid='$product'");
+                      $item_data = mysqli_fetch_array($res_detail);
+                      if ($res_detail) {
+                        $item_qty = $item_data['quantity'];
+                      }
+                      ?>
+                      <div class="col-2"><?= $item_qty  ?></div>
 
                     </div>
                   </div>
