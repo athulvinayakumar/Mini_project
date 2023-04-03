@@ -4,18 +4,19 @@ error_reporting(E_ERROR | E_PARSE);
 $user = $_SESSION['usr_id'];
 $pro_ids = $_SESSION['order_details'];
 
-include 'db.php';
+
+// include 'db.php';
 $con = mysqli_connect("localhost", "root", "", "shoes");
-$sql = "SELECT * FROM `cart` WHERE `id` =$user AND `status` = 1";
+$sql = "SELECT * FROM `cart` WHERE id= $user AND `status` = '1'";
 $result = mysqli_query($con, $sql);
-while ($row = mysqli_fetch_array($result)) {
-    $prdid = $row['id'];
-    $sql = "SELECT * FROM `auth` WHERE `id` = $prdid ";
+while ($row = mysqli_fetch_assoc($result)) {
+  $prdid = $row['id'];
+   echo $sql = "SELECT * FROM `auth` WHERE `id` = $prdid ";
     $result1 = mysqli_query($con, $sql);
     $row1 = mysqli_fetch_array($result1);
 }
 
-$sql = "SELECT * FROM `tbl_order` WHERE `id` =$prdid";
+echo $sql = "SELECT * FROM `tbl_order` WHERE `id` =$prdid";
 $result1 = mysqli_query($con, $sql);
 while ($ordertb = mysqli_fetch_array($result1)) {
     $address = $ordertb['address'];
@@ -25,6 +26,19 @@ while ($ordertb = mysqli_fetch_array($result1)) {
 $pay_id = $_SESSION['OID'];
 $result = mysqli_query($con, "SELECT * FROM `payment` WHERE `pay_id` = $pay_id ");
 $paytb = mysqli_fetch_array($result);
+?>
+<?php
+if (isset($_POST['bill'])) {
+    $cart = $_SESSION['cart'];
+    $product_names = $cart['cart_id'];
+    $cartid = $_POST['bill'];
+$updatestatus = mysqli_query($con, "UPDATE tbl_order SET status = 'paid' WHERE oid='$cartid'");
+    foreach ($product_names as $cart_id) {
+        $display_value = $cart_id;
+        $sml = mysqli_query($con, "UPDATE `cart` SET `status`='0' WHERE cart_id='$display_value'");
+    }
+}
+
 ?>
 <html>
 
@@ -96,11 +110,11 @@ $paytb = mysqli_fetch_array($result);
                                             <!-- product name -->
                                         </div>
                                         <div class="col-xs-3 qty">
-                                            <?= $ord_det['product_price'] ?>
+                                            <?= $ord_det['quantity'] ?>
                                             <!-- product qi -->
                                         </div>
                                         <div class="col-xs-5 amount text-right">
-                                            <?= $ord_det['product'] ?>
+                                            <?= $ord_det['product_price'] ?>
                                             <!-- product price -->
                                         </div>
                                     </div>
@@ -128,11 +142,12 @@ $paytb = mysqli_fetch_array($result);
                                     Total <span>$312.00</span>
                                 </div>
                             </div>
-                           <div class="print">
-                                   <center><button class="print-ticket";>Print Ticket</button></center>
-                                    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-                            
-                        </div>
+                            <div class="print">
+                                <center><button class="print-ticket" ;>Print Ticket</button></center>
+                                <center><a href="index.php" class="btn btn-sucess">Home</a></center>
+                                <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+                            </div>
                         </div>
                     </div>
                     <div class="footer">

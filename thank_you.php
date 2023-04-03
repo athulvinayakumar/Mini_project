@@ -1,6 +1,5 @@
 <?php
 session_start();
-echo $payment_id=$_GET['payment_id'];
 $usr_name = $_SESSION['Username'];
 $con = mysqli_connect("localhost", "root", "", "shoes");
 $sql = "SELECT * FROM `auth` where username ='$usr_name'";

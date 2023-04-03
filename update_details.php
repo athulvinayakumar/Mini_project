@@ -43,11 +43,11 @@ $row = mysqli_fetch_array($result);
                 <td><div id="message2"></div></td>
             </tr>
            
-            <tr>
+            <!-- <tr>
                 <th>Product discription</th>
                 <td><textarea class="form-control" id="four" name="product_discription" type="text" onkeyup="ps()" value="<?php echo $row['discription']; ?>"></textarea></td>
                 <td><div id="message4"></div></td> 
-            </tr>
+            </tr> -->
             <tr>
                 <th>Product Image</th>
                 <td><input class="form-control" id="inputfileupload" name="product_img" type="file" onchange="fileValidation()" accept="image/x-png,image/gif,image/jpeg"></td>
@@ -66,16 +66,16 @@ if (isset($_POST['sub'])) {
     $product_name = $_POST['product'];
     $product_quantity = $_POST["product_quantity"];
     $product_price = $_POST['product_price'];
-    $product_discription = $_POST['product_discription'];
+    // $product_discription = $_POST['product_discription'];
     $product_img = $_FILES['product_img']['name'];
     if($product_img == null){
         $product_img=$row['image'];
     }
-    if ( $product_name == null || $product_price == null ||  $product_discription == null || $product_quantity == null || $product_img == null) {
+    if ( $product_name == null || $product_price == null ||$product_quantity == null || $product_img == null) {
         echo ("<script>alert('Enter Valid details')</script>");
     } else {
         $con = mysqli_connect("localhost", "root", "", "shoes");
-        $mysql = "UPDATE `admins` SET `prdnm`='$product_name',`prqnt`='$product_quantity',`prdpr`='$product_price',`discription`='$product_discription',`image`='$product_img' WHERE prdid='$val'";
+        $mysql = "UPDATE `admins` SET `prdnm`='$product_name',`prqnt`='$product_quantity',`prdpr`='$product_price',`image`='$product_img' WHERE prdid='$val'";
         mysqli_query($con, $mysql);
         $targetDir = "product_img/";
         $targetFilePath = $targetDir . $product_img;

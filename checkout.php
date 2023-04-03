@@ -1,14 +1,14 @@
 <?php
 session_start();
-$i=0;
+$i = 0;
 $usr_name = $_SESSION['Username'];
 $con = mysqli_connect("localhost", "root", "", "shoes");
 $sql = "SELECT * FROM `auth` where username ='$usr_name'";
 $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_array($result);
 $pr = $row['id'];
-$sql = "SELECT * FROM `cart` WHERE `id` =$pr";
-$result1 = mysqli_query($con, $sql);
+// $sql = "SELECT * FROM `cart` WHERE `id` =$pr and status='1'";
+// $result1 = mysqli_query($con, $sql);
 ?>
 <html>
 
@@ -59,11 +59,11 @@ $result1 = mysqli_query($con, $sql);
                                 <div class="row">
                                     <div class="mb-3">
                                         <label for="firstName">Name</label>
-                                        <input type="text" class="form-control" name="name" id="name" value="<?= $row['name'] ?>" required="">
+                                        <input type="text" class="form-control" name="name" id="name" value="<?= $row['name'] ?>" disabled required="">
                                     </div>
                                     <div class="mb-3">
                                         <label for="email">Email </label>
-                                        <input type="email" class="form-control" id="email" value="<?= $row['email'] ?>">
+                                        <input type="email" class="form-control" id="email" value="<?= $row['email'] ?>" disabled>
                                     </div>
                                     <div class="mb-3">
                                         <label for="address">Address</label>
@@ -115,7 +115,7 @@ $result1 = mysqli_query($con, $sql);
                                         <label class="custom-control-label" for="save-info" autocomplete="off">Save this information for next time</label>
                                     </div><br><br>
                                     <center>
-                                         <input type="submit" name="checkout" class="btn btn-primary btn-lg " value="checkout">
+                                        <input type="submit" name="checkout" class="btn btn-primary btn-lg " value="checkout">
                                         <button type="button" class="btn btn-danger  btn-lg" onclick="location.href='cart.php'">
                                             Cancel
                                         </button>
@@ -137,11 +137,11 @@ $result1 = mysqli_query($con, $sql);
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <h5>Price : <?=$_SESSION['total_amount']?></h5>
+                                <h5>Price : <?= $_SESSION['total_amount'] ?></h5>
                             </div>
                             <div class="modal-footer">
-                                <a  class="btn btn-secondary" href="checkout.php">Close</a>
-                                <a  type="submit" name="checkout"  id="rzp-button1" value="pay now" onclick="pay_now()" class="btn btn-primary">Pay Now</a>
+                                <a class="btn btn-secondary" href="checkout.php">Close</a>
+                                <a type="submit" name="checkout" id="rzp-button1" value="pay now" onclick="pay_now()" class="btn btn-primary">Pay Now</a>
                             </div>
                         </div>
                     </div>
@@ -149,26 +149,28 @@ $result1 = mysqli_query($con, $sql);
                 <?php
                 if (isset($_POST['checkout'])) {
                     $address = $_POST['address'];
-                    $count=0;
+                    $count = 0;
                     $address1 = $_POST['address1'];
                     $product_ids = $_POST['product'];
-                    $product_price=$_POST['price'];
-                    $product_quantity=$_POST['quantity'];
-                    $_SESSION['order_details']=$product_ids;
+                    $product_price = $_POST['price'];
+                    $product_quantity = $_POST['quantity'];
+                    $_SESSION['order_details'] = $product_ids;
                     $price = $_SESSION['total_amount'];
-                    $ord_id=[];
+                    $ord_id = [];
                     foreach ($product_ids as $prdid) {
-                        $prod_price=$product_price[$count];
-                        $prod_qty=$product_quantity[$count];
+                        $prod_price = $product_price[$count];
+                        $prod_qty = $product_quantity[$count];
                         $sql = "INSERT INTO `tbl_order`(`id`,`product`,`address`, `address2`, `price`) VALUES('$pr','$prdid','$address','$address1','$price')";
                         $res = mysqli_query($con, $sql);
-                        $ord_id=mysqli_insert_id($con);
-                        $sql_1 = mysqli_query($con,"UPDATE  `tbl_order` SET product_price='$prod_price' WHERE oid='$ord_id' ");
-                        $sql_2 = mysqli_query($con,"UPDATE  `tbl_order` SET quantity='$prod_qty' WHERE oid='$ord_id' ");
-                        $count=$count+1;
+                        $ord_id = mysqli_insert_id($con);
+                        $sql_1 = mysqli_query($con, "UPDATE  `tbl_order` SET product_price='$prod_price' WHERE oid='$ord_id' ");
+                        $sql_2 = mysqli_query($con, "UPDATE  `tbl_order` SET quantity='$prod_qty' WHERE oid='$ord_id' ");
+                        
+                        $sql_3 = mysqli_query($con, "UPDATE  `admins` SET prqnt=prqnt-'$prod_qty' WHERE prdid='$prdid' ");
+                        $count = $count + 1;
                     }
-                    
-                    $_SESSION['order_details']=$ord_id;
+
+                    $_SESSION['order_details'] = $ord_id;
                     if ($res && $sql_1 && $sql_2) {
                         // echo "<script>alert('Added successfully')</script>";
                         echo ("<script>document.getElementById('successBtn').click()</script>");
@@ -179,45 +181,36 @@ $result1 = mysqli_query($con, $sql);
                 <div class="col-4">
                     <div class="row">
                         <?php
-
-                        while ($row1 = mysqli_fetch_array($result1)) {
-                            $prdid = $row1['pid'];
-                            $sql = "SELECT * FROM `admins` WHERE `prdid` = $prdid ";
-                            $result2 = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result2);
+                        // while ($row1 = mysqli_fetch_array($result1)) {
+                            // $prdid = $row1['pid'];
+                            $SS = "SELECT a.image as image,a.prdid as py ,a.discription as dp,a.prdnm as pname,a.prdpr as pprice,c.quantity as qty, c.cart_id as id from cart c LEFT JOIN admins a ON a.prdid=c.pid  WHERE c.id='$pr' and c.status='1'";
+                            $result2 = mysqli_query($con, $SS);
+                            while ($row2 = mysqli_fetch_array($result2)) {
                         ?>
                             <div class="col-12" style="margin-bottom: 47%;">
                                 <div class="details shadow">
                                     <div class="details__item">
                                         <div class="item__image">
-                                            <img class="iphone" src="./product_img/<?= $row['image'] ?>" alt="">
+                                            <img class="iphone" src="./product_img/<?= $row2['image'] ?>" alt="">
                                         </div>
                                         <div class="item__details">
                                             <div class="item__title">
-                                                <b><?= $row['prdnm'] ?></b>
+                                                <b><?= $row2['pname'] ?></b>
                                             </div>
-                                            <?php
-                                            $product=$row['prdid'];
-                                            $res_detail=mysqli_query($con,"SELECT *FROM cart WHERE pid='$product'");
-                                            $item_data=mysqli_fetch_array($res_detail);
-                                            if($res_detail)
-                                            {
-                                              $item_qty=$item_data['quantity'];
-                                            }
-                                            ?>
+                                           
                                             <div class="item__price">
-                                                <b>$<?= $row['prdpr'] ?></b>
-                                            <input type="hidden" id="price" name="price[]" value="<?php echo $row['prdpr']; ?>">
+                                                <b>$<?= $row2['pprice'] ?></b>
+                                                <input type="hidden" id="price" name="price[]" value="<?php echo $row2['pprice']; ?>">
                                             </div>
                                             <div class="item__quantity"><br>
-                                                Quantity:<b><?= $item_qty ?></b>
-                                            <input type="hidden" id="quantity" name="quantity[]" value="<?php echo $row['prqnt']; ?>">
+                                                Quantity:<b><?php echo $row2['qty']; ?></b>
+                                                <input type="hidden" id="quantity" name="quantity[]" value="<?php echo $row2['qty']; ?>">
 
                                             </div>
-                                            <div class="item__description"> 
-                                                <?= $row['discription'] ?>
+                                            <div class="item__description">
+                                                <?= $row2['dp'] ?>
                                             </div>
-                                            <input type="hidden" value="<?php echo $row['prdid']; ?>" name="product[]" id="product">
+                                            <input type="hidden" value="<?php echo $row2['py']; ?>" name="product[]" id="product">
                                         </div>
                                     </div>
 
@@ -281,7 +274,7 @@ $result1 = mysqli_query($con, $sql);
                     data: "payment_id=" + response.razorpay_payment_id + "&amt=" + amt + "&name=" + name,
                     success: function(result) {
                         // console.log(result)
-                        window.location.href = "thank_you.php?payment_id=" + response.razorpay_payment_id ;
+                        window.location.href = "thank_you.php?payment_id=" + response.razorpay_payment_id;
                     }
 
                 })
@@ -299,3 +292,11 @@ $result1 = mysqli_query($con, $sql);
 </script>
 
 </html>
+
+<!-- <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip" aria-label="Remove item" data-mdb-original-title="Remove item" style="">
+                    <i class="fas fa-trash"></i>
+                  </button>
+
+                  <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip" aria-label="Move to the wish list" data-mdb-original-title="Move to the wish list" style="">
+                    <i class="fas fa-heart"></i>
+                  </button> -->

@@ -29,7 +29,8 @@ if(isset($_POST['increm-btn'])){
     $maxqnty = $quntycheck['prqnt'];
     if ($quntycheck['quantity'] >= $maxqnty) {
         // echo '<script>alert("reached");</script>';
-        echo 'qty';
+        // echo 'qty';
+        echo json_encode(array("status" => "max"));
     } else{
 
     

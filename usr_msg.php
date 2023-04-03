@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Update</title>
+    <title>User Messages</title>
     <!-- CSS only -->
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">

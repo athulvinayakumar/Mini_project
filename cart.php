@@ -19,7 +19,7 @@ include 'db.php';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
-<body onload="change();">
+<body onload="change()">
 
     <section>
         <div class="container-fluid">
@@ -39,8 +39,10 @@ include 'db.php';
                                     </thead>
                                     <tbody>
                                         <?php
+                                
                                         $con = mysqli_connect("localhost", "root", "", "shoes");
                                         $sql = "SELECT * FROM `cart` WHERE `id` =$user AND `status` = 1";
+                                        $_SESSION['cart_id']=$a;
                                         $result = mysqli_query($con, $sql);
                                         while ($row = mysqli_fetch_array($result)) {
                                             $total_price=0;
@@ -60,6 +62,7 @@ include 'db.php';
                                                             <p class="text-muted small"> Brand: <?= $row1['brand'] ?></p>
                                                         </figcaption>
                                                     </figure>
+                                                    <span id="maxlimit" style="color:red;display:none;">Max limit reached</span>
                                                 </td>
 
                                                 <td>
@@ -118,16 +121,6 @@ include 'db.php';
                                 <dd class="text-right text-dark b ml-3"><strong>₹<?= $_SESSION['total_amount']- $discount ?></strong></dd>
                             </dl>
                             </div>
-                            <!-- <dl class="dlist-align">
-                                <dt>Discount:</dt>
-                                <dd class="text-right text-danger ml-3">₹<?= $discount ?></dd>
-                            </dl>
-                            <div id="cart-summary">
-                            <dl class="dlist-align">
-                                <dt>Total:</dt>
-                                <dd class="text-right text-dark b ml-3"><strong>₹<?= $_SESSION['total_amount']- $discount ?></strong></dd>
-                            </dl>
-                            </div> -->
                             <hr> <a href="checkout.php" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Make Purchase </a>
                             <a href="product.php" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue Shopping</a>
                         </div>
@@ -149,6 +142,7 @@ include 'db.php';
         return true;
     }
     $(document).on('click', '.dec-btn', function(e) {
+       
         e.preventDefault();
 
         var cart_id = $(this).val();
@@ -178,6 +172,7 @@ include 'db.php';
         });
     });
     $(document).on('click', '.inc-btn', function(e) {
+        
         e.preventDefault();
 
         var cart_id = $(this).val();
@@ -199,7 +194,10 @@ include 'db.php';
                         $('#cart-summary').load('cart.php #cart-summary .dlist-align');
                     });
                 } else {
-                    alert("Error occurred: " + response);
+                    // alert("Error occurred: " + response);
+                }
+                if(data.status === "max"){
+                    document.getElementById("maxlimit").style.display = "block";
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {

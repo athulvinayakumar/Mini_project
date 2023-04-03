@@ -36,13 +36,13 @@ class PDF extends FPDF {
         $this->SetFont('Arial','I',8);
           
         // Page number
-        // $this->Cell(0,10,'Page ' . 
-        //     $this->PageNo() . '/{nb}',0,0,'C');
+        $this->Cell(0,10,'Page ' . 
+            $this->PageNo() . '/{nb}',0,0,'C');
     }
 }
 
 // Select data from MySQL database
-$select = "SELECT `name`,`username`,`mobile_number`,`email`,`address` FROM auth";
+$select = "SELECT * FROM `payment`";
 $result = $connection->query($select);
 
 // Create a new PDF object
@@ -53,7 +53,7 @@ $pdf->AddPage('P', 'A4');
 $pdf->Header();
 
 // Define column widths
-$width_cell=array(25,25,42,35,65);
+$width_cell=array(23,20,50,32,60);
 
 // Set font family and size
 $pdf->SetFont('Arial','',12);
@@ -66,29 +66,29 @@ $pdf->SetFillColor(193,229,252);
 // $pdf->Cell($width_cell[0],10,'image',1,0,'C',true); 
 
 $pdf->Cell($width_cell[0],10,'Name',1,0,'C',true);
-$pdf->Cell($width_cell[1],10,'Username',1,0,'C',true);
-$pdf->Cell($width_cell[2],10,'Address',1,0,'C',true); 
-$pdf->Cell($width_cell[3],10,'Phone',1,0,'C',true); 
-$pdf->Cell($width_cell[4],10,'Email id',1,1,'C',true); 
+$pdf->Cell($width_cell[1],10,'Amount',1,0,'C',true);
+$pdf->Cell($width_cell[2],10,'Payment Id',1,0,'C',true); 
+$pdf->Cell($width_cell[3],10,'Payment Status',1,0,'C',true); 
+$pdf->Cell($width_cell[4],10,'Date And Time',1,1,'C',true); 
 // $pdf->Cell($width_cell[5],10,'District',1,1,'C',true); 
 // $pdf->Cell($width_cell[5],10,'image',1,1,'C',true); 
 // Print data from MySQL
 while($row = $result->fetch_object()){
     // $id = $row->id;
     $name = $row->name;
-    $username = $row->username;
-    $address = $row->address;
-    $phone = $row->mobile_number;
-    $email = $row->email;
+    $amount = $row->amount;
+    $payment_id = $row->payment_id;
+    $payment_status= $row->payment_status;
+    $added_on = $row->added_on;
     
     // $pdf->Cell($width_cell[0],10,$id,1);
     // $pdf->Cell($width_cell[0], 10, $pdf->Image('dealers_photo/' . $image, $pdf->GetX(), $pdf->GetY(), 10), 1, 0, 'C', false);
 
     $pdf->Cell($width_cell[0],10,$name,1);
-    $pdf->Cell($width_cell[1],10,$username,1);
-    $pdf->Cell($width_cell[2],10,$address,1);
-    $pdf->Cell($width_cell[3],10,$phone,1);
-    $pdf->Cell($width_cell[4],10,$email,1);
+    $pdf->Cell($width_cell[1],10,$amount,1);
+    $pdf->Cell($width_cell[2],10,$payment_id,1);
+    $pdf->Cell($width_cell[3],10,$payment_status,1);
+    $pdf->Cell($width_cell[4],10,$added_on,1);
     // $pdf->Cell($width_cell[5],10,$district,1);
     // Add new cell for image
     

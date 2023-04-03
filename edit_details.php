@@ -92,6 +92,7 @@
     </form>
     <div class="d-flex justify-content-md-center">
         <a href="./adminpanel.php" class="btn btn-success">Back</a>
+        <a href="pie_chart.php" class="btn btn-success" style="margin-left: 10px;">Product graph view</a>
     </div>
 </body>
 

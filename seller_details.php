@@ -12,7 +12,7 @@
 <?php
 
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+    $id = $_GET['id'];  
 } else {
     $id = 0;
 }
@@ -65,7 +65,7 @@ if (isset($_POST['sub'])) {
     $product_name = $_POST['product'];
     $product_price = $_POST['product_price'];
     $product_qnt = $_POST["product_qnt"];
-  
+
     $product_img = $_FILES['product_img']['name'];
     if($product_img == null){
         $product_img=$row['s_image'];
@@ -74,7 +74,7 @@ if (isset($_POST['sub'])) {
         echo ("<script>alert('Enter Valid details')</script>");
     } else {
         $con = mysqli_connect("localhost", "root", "", "shoes");
-        $mysql = "UPDATE `tbl_seller` SET `s_name`='$product_name',`s_price`='$product_price',`s_qnt` = '$product_qnt',`s_image`='$product_img' WHERE p_id='$val'";
+        $mysql = "UPDATE `tbl_seller` SET `s_name`='$product_name',`s_price`='$product_price',``s_qnt` = '$product_qnt',`s_image`='$product_img' WHERE s.id='$val'";
         mysqli_query($con, $mysql);
         $targetDir = "product_img/";
         $targetFilePath = $targetDir . $product_img;

@@ -16,7 +16,7 @@ if (!isset($_SESSION['Username'])) {
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" /> -->
     <script src="js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <title>Admin panel</title>
+    <title>eller panel</title>
     <link rel="stylesheet" href="css/admin.css">
     <style>
         .panel_btns {
@@ -49,6 +49,9 @@ if (!isset($_SESSION['Username'])) {
                     </tr>
                     <tr>
                         <td> <button id='alert' class="panel_btns"><i class="fa fa-user-circle" aria-hidden="true"></i> Alerts</button></td>
+                    </tr>
+                    <tr>
+                        <td><button id='smsgs' class="panel_btns"><i class="fa fa-chevron-right" aria-hidden="true"></i> Send Messages</button></td>
                     </tr>
                     <tr>
                         <td><button id='logout' class="panel_btns"><i class="fa fa-chevron-right" aria-hidden="true"></i> Logout</button></td>
@@ -157,6 +160,9 @@ if (!isset($_SESSION['Username'])) {
 <script>
     $("#seller_product").click(function() {
         window.location.href = "seller_product.php";
+    })
+    $("#smsgs").click(function() {
+        window.location.href = "seller_msgs.php";
     })
     $("#logout").click(function() {
         window.location.href = "logout.php";

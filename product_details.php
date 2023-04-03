@@ -172,10 +172,10 @@ if (isset($_POST['review'])) {
                         <div class="caption">
                             <div class="row buttons">
 
-                                <a href="add_cart.php?id=<?= $row['prdid'] ?>" class="btn  col-sm-4 col-sm-offset-2 btn-lg" style="background-color:#ff9f00; color:#fff;font-size:1em;"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;ADD TO CART</a>
+                                <a href="add_cart.php?id=<?= $row['prdid'] ?>"  id="cart" class="btn  col-sm-4 col-sm-offset-2 btn-lg" style="background-color:#ff9f00; color:#fff;font-size:1em;"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;ADD TO CART</a>
 
 
-                                <a href="buy.php" class="btn col-sm-4 col-sm-offset-1 btn-lg" style="background-color:#fb641b; color:#fff;font-size:1em;"><i class="fa fa-bolt" style="font-size:1.2em;"></i> BUY NOW</a>
+                                <a href="checkout.php" class="btn col-sm-4 col-sm-offset-1 btn-lg" style="background-color:#fb641b; color:#fff;font-size:1em;"><i class="fa fa-bolt" style="font-size:1.2em;"></i> BUY NOW</a>
                             </div>
 
                         </div>
@@ -207,15 +207,7 @@ if (isset($_POST['review'])) {
                             <h3>Rs <?= $row['prdpr'] ?></h3>
                         </div>
 
-                        <div>
-                            <h5><span class="glyphicon glyphicon-calendar"></span> EMIs from <strong>Rs 3,070/month </strong><a href="">View Plans <i class="fa fa-chevron-right"></i></a></h5>
-
-                            <h5><span class="glyphicon glyphicon-tag"></span><strong> Bank Offer</strong> 5% Instant Discount on Visa Cards for First 3 Online Payments. <a href="">T&C</a></h5>
-
-                            <h5><span class="glyphicon glyphicon-tag"></span><strong> Bank Offer</strong> Extra 5% off* with Axis Bank Buzz Credit Card. <a href="">T&C</a></h5>
-
-                        </div>
-
+                       
                         <br>
 
                         <br>
@@ -272,8 +264,8 @@ if (isset($_POST['review'])) {
                             if ($row['prqnt'] > 0)
                                 echo "<h4><span class='badge text-bg-success'>Stock Available</span></h4>";
                             else
-                                echo "<h4><span class='badge text-bg-danger sizebadge'>Out of stock!</span></h4>";
-                            ?>
+                                echo "<h4><span class='badge text-bg-danger sizebadge'>Out of stock!</span></h4>";                        
+                                 ?>
                         </div>
                         <br><br>
 

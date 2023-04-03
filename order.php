@@ -5,9 +5,15 @@ $con = mysqli_connect("localhost", "root", "", "shoes");
 $sql = "SELECT * FROM `auth` where username ='$usr_name'";
 $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_array($result);
-$prdid = $row['id'];
-$sql = "SELECT * FROM `tbl_order` WHERE `id` =$prdid";
+$pd = $row['id'];
+$sql = "SELECT o.* ,c.*  from cart c LEFT JOIN tbl_order o ON o.id=c.id and o.product=c.pid  WHERE c.id='$pd' and c.status='1' and o.status!='paid'";
 $result1 = mysqli_query($con, $sql);
+$cc = 0;
+$my_array = array();
+$dates=date('d-m-Y');
+?>
+<?php
+
 ?>
 <html lang="en">
 
@@ -61,7 +67,7 @@ $result1 = mysqli_query($con, $sql);
       <div class="row d-flex">
         <div class="col-lg-9 order-2 order-lg-1">
           <h1>Orders</h1>
-          <p class="lead">Order was placed on <strong id="orderDate">22/06/2013</strong> and is currently <strong>Being prepared</strong>.</p>
+          <p class="lead">Order was placed on <strong  id="orderDate"><?=$dates?></strong> and is currently <strong>Being prepared</strong>.</p>
           <p class="text-muted">If you have any questions, please feel free to contact us/a>, our customer service center is working for you 24/7.</p>
         </div>
         <div class="col-lg-3 text-right order-1 order-lg-2">
@@ -105,48 +111,62 @@ $result1 = mysqli_query($con, $sql);
                 while ($row1 = mysqli_fetch_array($result1)) {
                   $date = $row1['Date'];
                   $ordDate = date('d-m-Y', strtotime($date));
+                  $ppid = $row1['product'];
                   echo ("<script>document.getElementById('orderDate').innerHTML='$ordDate'</script>");
                   $prdid = $row1['product'];
                   $address = $row1['address'];
                   $address2 = $row1['address2'];
-                  $sql = "SELECT * FROM `admins` WHERE `prdid` = $prdid ";
-                  $result2 = mysqli_query($con, $sql);
-                  $row = mysqli_fetch_array($result2);
+                  // echo$SS="SELECT a.image as image,a.prdnm as pname,a.prdpr as pprice,c.quantity as qty, c.cart_id as id from cart c LEFT JOIN admins a ON a.prdid=c.pid  WHERE c.id='$pd' and c.status='1'";
+                  $SS = "SELECT a.image as img,a.prdnm as name,a.prdpr as price,c.* from admins a LEFT JOIN cart c ON a.prdid=c.pid WHERE a.prdid='$ppid' and c.status='1' and c.id='$pd'";
+                  $result2 = mysqli_query($con, $SS);
+                  // print_r($row);
+                  $count = mysqli_num_rows($result2);
+                  if ($count > 0) {
+                    while ($row = mysqli_fetch_array($result2)) {
                 ?>
-                  <!-- Product-->
-                  <div class="item">
-                    <div class="row d-flex align-items-center">
-                      <div class="col-6">
-                        <div class="d-flex align-items-center"><img src="./product_img/<?= $row['image'] ?>" alt="..." class="img-fluid">
-                          <div class="title"><a href="https://demo.bootstrapious.com/hub/1-4-2/detail.html">
-                              <h6><?= $row['prdnm'] ?></h6><span class="text-muted"></span>
-                            </a></div>
+                      <div class="item">
+                        <div class="row d-flex align-items-center">
+                          <div class="col-6">
+                            <div class="d-flex align-items-center"><img src="./product_img/<?= $row['img'] ?>" alt="..." class="img-fluid">
+                              <div class="title"><a href="https://demo.bootstrapious.com/hub/1-4-2/detail.html">
+                                  <h6><?= $row['name'] ?></h6><span class="text-muted"></span>
+                                </a></div>
+                            </div>
+                          </div>
+                          <div class="col-2"><span><?= $row['price'] ?></span></div>
+                          <div class="col-2"><?= $row['quantity']  ?></div>
+
+                          <?php
+                          $my_array[$cc] = $row['cart_id'];
+                          $cc++;
+                          // $id=$row['id'];
+
+                          ?>
                         </div>
                       </div>
-                      <div class="col-2"><span><?= $row['prdpr'] ?></span></div>
-                      <?php
-                      $product = $row['prdid'];
-                      $res_detail = mysqli_query($con, "SELECT *FROM cart WHERE pid='$product'");
-                      $item_data = mysqli_fetch_array($res_detail);
-                      if ($res_detail) {
-                        $item_qty = $item_data['quantity'];
-                      }
-                      ?>
-                      <div class="col-2"><?= $item_qty  ?></div>
 
-                    </div>
-                  </div>
+                    <?php
+                    }
+                  } else { ?>
+                    <h1>no orders</h1>
+                  <?php
+                  }
+
+
+                  ?>
                   <!-- Product-->
-                <?php
-                }
-                ?>
+
+                  <!-- Product-->
               </div>
               <div class="row mt-4">
                 <div class="col-12 text-center">
                   <div class="customer-sidebar col-12 mb-md-5">
                     <div class="customer-profile"><a href="customer-order.html#" class="d-inline-block"></a>
-                      <h5>Billing <a href="bil.php" class="btn btn-primary btn-sm" style="background: #4CAF50;border-color: #4CAF50;">View</a></h5>
-                      <!-- <p class="text-muted text-small">Ostrava, Czech republic</p> -->
+                      <form method="POST" action="bil.php">
+                        <h5>Billing <Button type="submit" name="bill" class="btn btn-primary btn-sm" style="background: #4CAF50;border-color: #4CAF50;" value="<?php echo $row1['oid'] ?>">View</button></h5>
+                        <input type="hidden" name="id" id="id" value="<?php echo [$id] ?>">
+                        <?php $_SESSION['cart'] = array('cart_id' => $my_array) ?>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -175,6 +195,9 @@ $result1 = mysqli_query($con, $sql);
           </div>
         </div>
 
+        <?php
+                }
+                ?>
   </section>
   <!-- Footer-->
   <footer class="main-footer">

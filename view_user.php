@@ -61,27 +61,6 @@
 
                 </tr>
 
-
-                <!-- <?php
-                        // if($row['status']==1){
-                        //     echo '<p><a href="inactive.php?id='.$row['pid'].'$status=1">Disable</a></p>';
-                        // }
-                        // else{
-                        //     echo '<p><a href="active.php?id='.$row['pid'].'$status=0">Enable</a></p>';
-                        // }
-                        // 
-                        ?>
-                    // </td>
-                    // <td>
-                    //     <a href="productedit.php?pid=<?php echo $row['pid'] ?>">EDIT</a></td>
-                    //  </tr>";  <?php
-                                    //                      $cnt++;   }
-                                    //                   }     
-                                    // else{
-                                    //     echo "Query Error : " . "SELECT * FROM leaves WHERE status='Pending'" . "<br>" . mysqli_error($con);
-                                    // }
-                                    ?> -->
-
             <?php
             }
             ?>
@@ -89,9 +68,8 @@
     </form>
     <div class="d-flex justify-content-md-center">
         <a href="./adminpanel.php" class="btn btn-success">Back</a>
-        <a href="user_pdf.php" name="btn_pdf" id="btn_pdf" class="btn btn-danger ">Print The Report</a>
-        <!-- <input type="button" name="btn_pdf"  onclick="window.location.href = 'user_pdf.php'" value="Print The Report" /> -->
-
+        <a href="user_pdf.php" name="btn_pdf" id="btn_pdf" class="btn btn-primary" style="margin-left: 10px;">Print The Report</a>
+       
     </div>
 </body>
 

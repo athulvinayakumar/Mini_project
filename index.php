@@ -75,7 +75,7 @@ include 'db.php';
                     </div>
 
                     <div id="search_container">
-                        <input type="text" name="search_bar_input" onkeyup="searchFunc();" id="search_bar_input" placeholder="Search..">
+                        <input type="text" name="search_bar_input"  onkeyup="searchFunc();" id="search_bar_input" placeholder="Search..">
                         <!-- <span id="search_bar_searchbtn"><i class="fa fa-search"></i></span> -->
                         <div class="search_display_box search_hide" id="db_result_box">
 
@@ -88,7 +88,7 @@ include 'db.php';
                             <li><a href="about.php ">About</a></li>
                             <li><a href="product.php">Products</a></li>
                             <li><a href="contact.php">Contact</a></li>
-                            
+                       
                           
 
 
@@ -105,6 +105,7 @@ include 'db.php';
 
                                     </ul>
                                 </li>
+                              
 
                             <?php } else { ?>
                                 <li><a href="./login.php">Signin</a></li>
@@ -250,7 +251,8 @@ include 'db.php';
             <div class="row footer-top">
                 <div class="col-lg-4 footer-grid_section_w3layouts">
                     <h2 class="logo-2 mb-lg-4 mb-3">
-                        <a href="index.html">STEPSOUT</a>
+                        <a href="index.html">STEPSOUT</a><br>
+                        <a href="seller_signup.php">Become a Seller</a>
                     </h2>
                     <p></p>
                     <h4 class="sub-con-fo ad-info my-4">Catch on Social</h4>
