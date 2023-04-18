@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
             &emsp; <input type="text" class="text" id="second" size="60px" placeholder="MOBILE NUMBER" maxlength="10" autocomplete="off" onkeyup="numbers()" name="number"><br><br>
             <div id="msg3" style="color:red"></div>
             &emsp; <input type="text" class="text" id="third" size="60px" placeholder="ENTER MAIL ID" onkeyup="mails()" autocomplete="off" name="mail"><br><br>
-            &emsp; &emsp; <input type="file"  name="file" id="d"   onchange="un()"><br><br>
+            &emsp; &emsp; <input type="file"  name="file" id="d"   onchange="un()" style="background-color: white;margin-left: 3%;"><br><br>
             <div id="msg4" style="color:red"></div>
             &emsp; <input type="text" class="text" id="fourth" size="60px" placeholder="ENTER ADDRESS" onkeyup="adds()" autocomplete="off" name="address"><br>
             <div id="msg8" style="color:red"></div><br>

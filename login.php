@@ -21,13 +21,27 @@ if (isset($_POST['submit'])) {
                 } else if ($row["role"] == 2) {
                     $_SESSION['Username'] = $log_username;
                     header('Location: seller.php');
-                }else{
+                } else {
                     header('Location: index.php');
                 }
             }
         } else {
-            $errors['A'] = "Username or password is incorrect.";
-            $display['D'] = "block";
+            $log_check1 = "SELECT * FROM tbl_seller_reg WHERE username='" . $log_username . "' AND password='" . $log_password . "'";
+            $log_check_sql1 = mysqli_query($connection, $log_check1);
+
+
+            if (mysqli_num_rows($log_check_sql1) === 1) {
+                $row = mysqli_fetch_assoc($log_check_sql1);
+                $_SESSION['Username'] = $row['username'];
+                $_SESSION['usr_id'] = $row['id'];
+
+                if ($log_username === $row["username"] && $log_password === $row["password"]) {
+                    header('Location: seller.php');
+                }
+            } else {
+                $errors['A'] = "Username or password is incorrect.";
+                $display['D'] = "block";
+            }
         }
     }
 }

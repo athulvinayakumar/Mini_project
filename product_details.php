@@ -168,15 +168,25 @@ if (isset($_POST['review'])) {
                                 <img class="etalage_source_image" src="./images/<?= $row['image'] ?>">
                             </li>
                         </ul>
-
+                        <?php if ($row['prqnt'] > 0) {
+                            echo '
+                                <div class="caption">
+                                    <div class="row buttons">
+                                        <a href="add_cart.php?id=' . $row['prdid'] . '"  id="cart" class="btn  col-sm-4 col-sm-offset-2 btn-lg" style="background-color:#ff9f00; color:#fff;font-size:1em;"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;ADD TO CART</a>
+                                        <a href="checkout.php" class="btn col-sm-4 col-sm-offset-1 btn-lg" style="background-color:#fb641b; color:#fff;font-size:1em;"><i class="fa fa-bolt" style="font-size:1.2em;"></i> BUY NOW</a>
+                                    </div>
+                                </div>
+                            ';
+                        }
+                        ?>
                         <div class="caption">
-                            <div class="row buttons">
+                            <!-- <div class="row buttons">
 
-                                <a href="add_cart.php?id=<?= $row['prdid'] ?>"  id="cart" class="btn  col-sm-4 col-sm-offset-2 btn-lg" style="background-color:#ff9f00; color:#fff;font-size:1em;"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;ADD TO CART</a>
+                                <a href="add_cart.php?id=<?= $row['prdid'] ?>" id="cart" class="btn  col-sm-4 col-sm-offset-2 btn-lg" style="background-color:#ff9f00; color:#fff;font-size:1em;"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;ADD TO CART</a>
 
 
                                 <a href="checkout.php" class="btn col-sm-4 col-sm-offset-1 btn-lg" style="background-color:#fb641b; color:#fff;font-size:1em;"><i class="fa fa-bolt" style="font-size:1.2em;"></i> BUY NOW</a>
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>
@@ -207,7 +217,7 @@ if (isset($_POST['review'])) {
                             <h3>Rs <?= $row['prdpr'] ?></h3>
                         </div>
 
-                       
+
                         <br>
 
                         <br>
@@ -231,27 +241,26 @@ if (isset($_POST['review'])) {
 
                         <!-- Product Size -->
                         <?php
-                                $con = mysqli_connect("localhost", "root", "", "shoes");
-                                $sql = "SELECT * FROM `tbl_color`";
-                                $ab = mysqli_query($con, $sql);
-                                ?>
+                        $con = mysqli_connect("localhost", "root", "", "shoes");
+                        $sql = "SELECT * FROM `tbl_color`";
+                        $ab = mysqli_query($con, $sql);
+                        ?>
                         <div class="row">
                             <div class="col-sm-6">
                                 <strong>Color</strong>
                                 <br>
                                 <br>
                                 <?php
-                                while($a=mysqli_fetch_array($ab))
-                                    {
-                                    ?>
-                                <button class="btn btn-default" style="color:#337ab7;border:1px dashed #337ab7;"><?php echo $a['color_name']; ?> </button>
-                                <!-- // <button class="btn btn-default">7</button>
+                                while ($a = mysqli_fetch_array($ab)) {
+                                ?>
+                                    <button class="btn btn-default" style="color:#337ab7;border:1px dashed #337ab7;"><?php echo $a['color_name']; ?> </button>
+                                    <!-- // <button class="btn btn-default">7</button>
                                 // <button class="btn btn-default">8</button>
                                 // <button class="btn btn-default">9</button>
                                 // <button class="btn btn-default">10</button> -->
                                 <?php
-                                    }
-                                    ?>
+                                }
+                                ?>
                             </div>
                         </div>
                         <br><br>
@@ -264,8 +273,8 @@ if (isset($_POST['review'])) {
                             if ($row['prqnt'] > 0)
                                 echo "<h4><span class='badge text-bg-success'>Stock Available</span></h4>";
                             else
-                                echo "<h4><span class='badge text-bg-danger sizebadge'>Out of stock!</span></h4>";                        
-                                 ?>
+                                echo "<h4><span class='badge text-bg-danger sizebadge'>Out of stock!</span></h4>";
+                            ?>
                         </div>
                         <br><br>
 

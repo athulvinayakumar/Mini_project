@@ -8,7 +8,8 @@ if ($user == null) {
 } else {
     $cart_ids = $_GET['id'];
     $a = $_SESSION['cart_id'];
-    $sql = "SELECT * FROM cart WHERE `cart_id` ='$a' AND `pid`='$cart_ids' AND `id` = '$user'";
+    $sql = "SELECT * FROM cart WHERE `pid`='$cart_ids' AND `id` = '$user' AND status='1'";
+
     $result = mysqli_query($con, $sql);
     if ($result) {
         if (mysqli_num_rows($result) > 0) {

@@ -71,55 +71,55 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 											<th>Action</th>
 											
 										
-										</tr>
+										</tr>  
 									</thead>
 									<tbody>
 									<?php 
 // $email=$_SESSION['email'];
-$sqlq="SELECT id from auth";
+$sqlq="SELECT * from auth";
 $resu = mysqli_query($connection, $sqlq);
 $row= mysqli_fetch_assoc($resu);
 $logid= $row['id'];
 $cnt = 1;
-$sql_query= mysqli_query($con,"SELECT tbl_payment.payid, tbl_payment.nmae, orders.oid, orders.id, tbl_payment.amount
-FROM tbl_payment
-LEFT JOIN orders ON tbl_payment.payid = orders.payid
-WHERE orders.orderStatus = 'in Process' OR orders.orderStatus ='Delivered' OR orders.orderStatus IS NULL AND tbl_payment.payid=orders.payid AND orders.sellerid='$sellerid'");
+$sql_query= mysqli_query($connection,"SELECT payment.pay_id, payment.name, tbl_order.oid, tbl_order.id, payment.amount
+FROM payment
+LEFT JOIN tbl_order ON payment.pay_id = tbl_order.pay_id
+WHERE tbl_order.status = 'in Process' OR tbl_order.status ='Delivered' OR tbl_order.status IS NULL AND payment.pay_id=tbl_order.pay_id");
 
 while ($row = mysqli_fetch_assoc($sql_query))  {
 
 $data = array();
-$data['col1'] = $row['payid'];
+$data['col1'] = $row['pay_id'];
 $data['col2'] = $row['orderid'];
 $data['col3'] = $row['cart_id'];
 $data['col5'] = $row['logid'];
 
-$quant=mysqli_query($con,"select quantity,pid from tbl_cart where cart_id='{$data['col3']}' ");
+$quant=mysqli_query($connection,"select quantity,pid from cart where cart_id='{$data['col3']}' ");
 $row = mysqli_fetch_assoc($quant);
 //print_r($row); // check the contents of the $row array
 $quantity=$row['quantity'];
 $pid=$row['pid'];
 
 
-$quan=mysqli_query($con,"select pname,price2 from tbl_product where pid='$pid' ");
+$quan=mysqli_query($connection,"select prdnm,prdpr from admins where pid='$pid' ");
 $row = mysqli_fetch_assoc($quan);
 //print_r($row); // check the contents of the $row array
 
-$pname=$row['pname'];
-$price=$row['price2'];
+$pname=$row['prdnm'];
+$price=$row['prdpr'];
 
 
    
 	// Do something with the retrieved data
 
-	$quet=mysqli_query($con,"select orderDate,orderid from orders where payid='{$data['col1']}' and orderid='{$data['col2']}' ");
+	$quet=mysqli_query($connection,"select orderDate,orderid from orders where payid='{$data['col1']}' and orderid='{$data['col2']}' ");
     $row = mysqli_fetch_assoc($quet);
     $date=$row['orderDate'];
 	$orderid=$row['orderid'];
 
 
 
-    $qu=mysqli_query($con,"select userid from userreg where logid='{$data['col5']}'");
+    $qu=mysqli_query($connection,"select userid from userreg where logid='{$data['col5']}'");
     $row = mysqli_fetch_assoc($qu);
     $userid= $row['userid'];
 	// ...

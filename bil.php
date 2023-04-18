@@ -1,22 +1,27 @@
 <?php
 session_start();
-error_reporting(E_ERROR | E_PARSE);
+// error_reporting(E_ERROR | E_PARSE);
+$idsss = $_SESSION['order_details'];
+// foreach ($idsss as $u) {
+//     echo $u;
+// }
 $user = $_SESSION['usr_id'];
 $pro_ids = $_SESSION['order_details'];
-
+$cRiD = $_SESSION['cartId'];
+// echo("<script>alert('$cRiD[0]')</script>");
 
 // include 'db.php';
 $con = mysqli_connect("localhost", "root", "", "shoes");
 $sql = "SELECT * FROM `cart` WHERE id= $user AND `status` = '1'";
 $result = mysqli_query($con, $sql);
 while ($row = mysqli_fetch_assoc($result)) {
-  $prdid = $row['id'];
-   echo $sql = "SELECT * FROM `auth` WHERE `id` = $prdid ";
+    $prdid = $row['id'];
+    $v = $_SESSION['cart_id'];
+    $sql = "SELECT * FROM `auth` WHERE `id` = $prdid ";
     $result1 = mysqli_query($con, $sql);
     $row1 = mysqli_fetch_array($result1);
 }
-
-echo $sql = "SELECT * FROM `tbl_order` WHERE `id` =$prdid";
+$sql = "SELECT * FROM `tbl_order` WHERE `id` =$prdid";
 $result1 = mysqli_query($con, $sql);
 while ($ordertb = mysqli_fetch_array($result1)) {
     $address = $ordertb['address'];
@@ -32,12 +37,14 @@ if (isset($_POST['bill'])) {
     $cart = $_SESSION['cart'];
     $product_names = $cart['cart_id'];
     $cartid = $_POST['bill'];
-$updatestatus = mysqli_query($con, "UPDATE tbl_order SET status = 'paid' WHERE oid='$cartid'");
+    $_SESSION['cart_id'] = $cartid;
+    $updatestatus = mysqli_query($con, "UPDATE tbl_order SET status = 'paid' WHERE oid='$cartid'");
     foreach ($product_names as $cart_id) {
         $display_value = $cart_id;
         $sml = mysqli_query($con, "UPDATE `cart` SET `status`='0' WHERE cart_id='$display_value'");
     }
 }
+
 
 ?>
 <html>
@@ -100,29 +107,37 @@ $updatestatus = mysqli_query($con, "UPDATE tbl_order SET status = 'paid' WHERE o
                             <div class="items">
                                 <?php
                                 $subTotal = 0;
-                                foreach ($pro_ids as $prdid) {
-                                    $result_pro = mysqli_query($con, "SELECT * FROM `tbl_order` WHERE `oid` = $prdid");
-                                    $ord_det = mysqli_fetch_array($result_pro); ?>
-                                    <div class="row item">
-                                        <div class="col-xs-4 desc">
-                                            <?= $ord_det['product'] ?>
+                                // $idsss = $_SESSION['order_details'];
+                                foreach ($idsss as $u) {
+                                $result_pro = mysqli_query($con, "SELECT * FROM `tbl_order` WHERE `oid` = $u");
+                                $ord_det = mysqli_fetch_array($result_pro);
+                                $proIds=$ord_det['product'];
 
-                                            <!-- product name -->
-                                        </div>
-                                        <div class="col-xs-3 qty">
-                                            <?= $ord_det['quantity'] ?>
-                                            <!-- product qi -->
-                                        </div>
-                                        <div class="col-xs-5 amount text-right">
-                                            <?= $ord_det['product_price'] ?>
-                                            <!-- product price -->
-                                        </div>
+                                $result_pro1 = mysqli_query($con, "SELECT * FROM `admins` WHERE `prdid` = $proIds");
+                                $ord_det1 = mysqli_fetch_array($result_pro1);
+                                 ?>
+                                <div class="row item">
+                                    <div class="col-xs-4 desc">
+                                        <?= $ord_det1['discription'] ?>
+
+                                        <!-- product name -->
                                     </div>
+                                    <div class="col-xs-3 qty">
+                                        <?= $ord_det['quantity'] ?>
+                                        <!-- product qi -->
+                                    </div>
+                                    <div class="col-xs-5 amount text-right">
+                                        <?= $ord_det['product_price'] ?>
+                                        <!-- product price -->
+                                    </div>
+                                </div>
                                 <?php
-                                    // $subTotal= $subTotal+$ord_det['product_price'];
-                                } ?>
+                                }
+                                // }
+                                $subTotal = $subTotal + $ord_det['product_price'];
+                                ?>
                             </div>
-                            <div class="total text-right">
+                            <!-- <div class="total text-right">
                                 <p class="extra-notes">
                                     <strong>Extra Notes</strong>
                                     Please send all items at the same time to shipping address by next week.
@@ -130,7 +145,7 @@ $updatestatus = mysqli_query($con, "UPDATE tbl_order SET status = 'paid' WHERE o
                                 </p>
                                 <div class="field">
                                     Subtotal <span>$379.00</span>
-                                    <!-- Subtotal <span><?= $subTotal ?></span> -->
+                                    Subtotal <span><?= $subTotal ?></span>
                                 </div>
                                 <div class="field">
                                     Shipping <span>$0.00</span>
@@ -141,10 +156,9 @@ $updatestatus = mysqli_query($con, "UPDATE tbl_order SET status = 'paid' WHERE o
                                 <div class="field grand-total">
                                     Total <span>$312.00</span>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="print">
                                 <center><button class="print-ticket" ;>Print Ticket</button></center>
-                                <center><a href="index.php" class="btn btn-sucess">Home</a></center>
                                 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
                             </div>
