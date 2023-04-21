@@ -75,7 +75,7 @@ include 'db.php';
                     </div>
 
                     <div id="search_container">
-                        <input type="text" name="search_bar_input"  onkeyup="searchFunc();" id="search_bar_input" placeholder="Search..">
+                        <input type="text" name="search_bar_input" style="width: 25%;" onkeyup="searchFunc();" id="search_bar_input" placeholder="Search..">
                         <!-- <span id="search_bar_searchbtn"><i class="fa fa-search"></i></span> -->
                         <div class="search_display_box search_hide" id="db_result_box">
 

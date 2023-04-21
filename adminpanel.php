@@ -75,6 +75,12 @@ if (!isset($_SESSION['Username'])) {
             <td><button id='view_payment_details' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i> View payment Details</button></td>
           </tr>
           <tr>
+            <td><button id='stock' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i>Stock</button></td>
+          </tr>
+          <tr>
+            <td><button id='today' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i>Todays Order</button></td>
+          </tr>
+          <tr>
             <td><button id='home-page' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i> Home Page</button></td>
           </tr>
           <tr>
@@ -192,6 +198,9 @@ if (!isset($_SESSION['Username'])) {
   $("#logout").click(function() {
     window.location.href = "logout.php";
   })
+  $("#stock").click(function() {
+    window.location.href = "stock.php";
+  })
   $("#View").click(function() {
     window.location.href = "view_user.php";
   })
@@ -212,6 +221,9 @@ if (!isset($_SESSION['Username'])) {
   })
   $("#view_payment_details").click(function() {
     window.location.href = "view_payment.php";
+  })
+  $("#today").click(function() {
+    window.location.href = "todays_orders.php";
   })
 </script>
 

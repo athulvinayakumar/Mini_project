@@ -62,7 +62,11 @@ $lowestSalesProduct = '';
 // Loop through the query results and add data points to the array
 while ($row = mysqli_fetch_assoc($result)) {
 $quarter = ceil(date('n', strtotime($row['added_on'])) / 3); // Calculate the quarter of the year
-$productName = $row["product"].' - Q'.$quarter;
+// echo ("<script>console.log('$productName')</script>");
+$proIds=$row['product'];
+$proArr=mysqli_fetch_array(mysqli_query($connection,"SELECT * FROM `admins` WHERE `prdid` = $proIds"));
+$productName = $proArr['prdnm'] .' - Q'.$quarter;
+
 $price = $row["price"];
 $brand = $row["quantity"];
 // Update highest and lowest sales if necessary
@@ -96,7 +100,6 @@ $dataPoints[] = array(
 
 // Encode the data points array as JSON
 $dataPoints = json_encode($dataPoints, JSON_NUMERIC_CHECK);
-
 // HTML code for the chart container
 echo '<div id="chartContainer" style="height: 370px; width: 100%;"></div>';
 
