@@ -11,7 +11,7 @@ $cRiD = $_SESSION['cartId'];
 // echo("<script>alert('$cRiD[0]')</script>");
 
 // include 'db.php';
-$con = mysqli_connect("localhost", "root", "", "shoes");
+$con = mysqli_connect("localhost", "root", "", "shoess");
 $sql = "SELECT * FROM `cart` WHERE id= $user AND `status` = '1'";
 $result = mysqli_query($con, $sql);
 while ($row = mysqli_fetch_assoc($result)) {

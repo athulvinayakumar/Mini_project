@@ -1,6 +1,6 @@
 <?php
 session_start();
-$conn = mysqli_connect("localhost","root","","shoes");
+$conn = mysqli_connect("localhost","root","","shoess");
 if(isset($_POST["submit"]))
 {
   $name=$_POST['name'];

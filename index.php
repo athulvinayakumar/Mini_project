@@ -127,7 +127,7 @@ include 'db.php';
                                 <li><a href="login.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
                             <?php } ?>
 
-                            <?php if (isset($_SESSION['Username'])) { ?>
+                            <?php if (isset($_SESSION['Username'])) { ?>  
                                 <!-- <li>|</li>  -->
                                 <li><a href="myorders.php"><i class="bi bi-bag" style="font-size:20px;"></i></a></li>
                             <?php } else { ?>
@@ -164,7 +164,7 @@ include 'db.php';
             <form action="#" method="post">
                 <div class="row">
                     <?php
-                    $con = mysqli_connect("localhost", "root", "", "shoes");
+                    $con = mysqli_connect("localhost", "root", "", "shoess");
                     // $mysql = "SELECT * FROM `admins` WHERE status = '0'";
                     $mysql = " SELECT `prdid`, `prdnm`, `prdpr`, `discription`, `brand`, `image`, `status` FROM `admins` UNION SELECT `s_id`,`s_name`,`s_price`,`s_drs`,`s_brand`,`s_image`,`status` FROM `tbl_seller` WHERE status = '0'";
 
@@ -392,9 +392,13 @@ include 'db.php';
     //     alert("Success")
     // })
 
-    function searchFunc(){
+    function searchFunc(){  
         var search = document.getElementById("search_bar_input").value;
+       
         var element = document.getElementById("db_result_box");
+       
+
+    
         if(search!=""){
             element.classList.remove("search_hide");
             element.classList.add("search_show");

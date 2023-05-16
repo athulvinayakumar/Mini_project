@@ -14,7 +14,7 @@ include('db.php');
 		// Fetch data from database
 				const data = [
 			<?php
-		    $con = mysqli_connect("localhost", "root", "", "shoes");
+		    $con = mysqli_connect("localhost", "root", "", "shoess");
 			$sql = "SELECT brand,prqnt FROM `admins`";
 			$result = $con->query($sql);
 

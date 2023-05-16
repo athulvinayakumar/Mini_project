@@ -12,7 +12,7 @@ if (!isset($_SESSION['Username'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Today's Orders</title>
+    <title>STEPSOUT</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -102,7 +102,8 @@ if (!isset($_SESSION['Username'])) {
 
     // Close connection
     $connection->close();
-    ?>
+    ?><br>
+    <center> <a href="adminpanel.php" class="btn btn-success">Back</a></center>
 </body>
 
 </html>

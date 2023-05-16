@@ -4,8 +4,8 @@ include 'db.php';
 if (!isset($_SESSION['Username'])) {
     header('location:login.php');
 }
+$sid=$_SESSION['usr_id'];
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,12 +16,13 @@ if (!isset($_SESSION['Username'])) {
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" /> -->
     <script src="js/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <title>eller panel</title>
+    <title>STEPSOUT</title>
     <link rel="stylesheet" href="css/admin.css">
     <style>
         .panel_btns {
             background-color: #4e73df !important;
         }
+
         .panel_btns:hover {
             background-color: blue !important;
         }
@@ -38,7 +39,7 @@ if (!isset($_SESSION['Username'])) {
         <div class="col-md-2">
             <div class="side-pane">
                 <div class="page-header">
-                    <h1 style="color: white;">Seller</h1> 
+                    <h1 style="color: white;">Seller</h1>
                 </div>
                 <table style="width: 100%;">
                     <tr>
@@ -48,10 +49,19 @@ if (!isset($_SESSION['Username'])) {
                         <td> <button id='seller_product' class="panel_btns"><i class="fa fa-user-circle" aria-hidden="true"></i> Products</button></td>
                     </tr>
                     <tr>
+                        <td><button id='sellerGraph' class="panel_btns"><i class="fa fa-chevron-right" aria-hidden="true"></i> Seller Graph</button></td>
+                    </tr>
+                    <tr>
+                        <td><button id='order' class="panel_btns"><i class="fa fa-chevron-right" aria-hidden="true"></i> Orders</button></td>
+                    </tr>
+                    <tr>
                         <td> <button id='alert' class="panel_btns"><i class="fa fa-user-circle" aria-hidden="true"></i> Alerts</button></td>
                     </tr>
                     <tr>
                         <td><button id='smsgs' class="panel_btns"><i class="fa fa-chevron-right" aria-hidden="true"></i> Send Messages</button></td>
+                    </tr>
+                    <tr>
+                        <td><button id='pro' class="panel_btns"><i class="fa fa-chevron-right" aria-hidden="true"></i>Profile</button></td>
                     </tr>
                     <tr>
                         <td><button id='logout' class="panel_btns"><i class="fa fa-chevron-right" aria-hidden="true"></i> Logout</button></td>
@@ -141,7 +151,7 @@ if (!isset($_SESSION['Username'])) {
             $price = $_POST['ak'];
             $targetDir = "product_img/";
             $targetFilePath = $targetDir . $pimage;
-            $sql = "INSERT INTO `tbl_seller`(`s_name`,`name`,`s_qnt`,`s_price`, `s_drs`, `s_brand`, `s_image`) VALUES ('$pname','$sname', '$quantity','$price','$descrption','$brand','$pimage')";
+            $sql = "INSERT INTO `tbl_seller`(`s_id`,`s_name`,`name`,`s_qnt`,`s_price`, `s_drs`, `s_brand`, `s_image`) VALUES ('$sid','$pname','$sname', '$quantity','$price','$descrption','$brand','$pimage')";
             $query = mysqli_query($connection, $sql);
             move_uploaded_file($_FILES["img"]["tmp_name"], $targetFilePath);
             if ($query) {
@@ -172,6 +182,15 @@ if (!isset($_SESSION['Username'])) {
     })
     $("#alert").click(function() {
         window.location.href = "notify.php";
+    })
+    $("#pro").click(function() {
+        window.location.href = "seller_profile.php";
+    })
+    $("#sellerGraph").click(function() {
+        window.location.href = "seller_graph.php";
+    })
+    $("#order").click(function() {
+        window.location.href = "orders.php";
     })
 </script>
 

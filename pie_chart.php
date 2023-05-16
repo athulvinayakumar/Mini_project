@@ -1,6 +1,6 @@
 <?php
 include('db.php');
-$con = mysqli_connect("localhost", "root", "", "shoes");
+$con = mysqli_connect("localhost", "root", "", "shoess");
 $sql = "SELECT prdnm,prqnt FROM `admins`";
 $result = mysqli_query($con, $sql);
 $data = array();

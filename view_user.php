@@ -34,7 +34,7 @@
                 <th>Role</th>
             </tr>
             <?php
-            $con = mysqli_connect("localhost", "root", "", "shoes");
+            $con = mysqli_connect("localhost", "root", "", "shoess");
             $mysql = "SELECT * FROM `auth` ";
             $result = mysqli_query($con, $mysql);
             while ($row = mysqli_fetch_array($result)) {

@@ -1,12 +1,12 @@
 <?php
 session_start();
 $usr_name = $_SESSION['Username'];
-$con = mysqli_connect("localhost", "root", "", "shoes");
+$con = mysqli_connect("localhost", "root", "", "shoess");
 $sql = "SELECT * FROM `auth` where username ='$usr_name'";
 $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_array($result);
 $pd = $row['id'];
-$sql = "SELECT * FROM `tbl_order` WHERE `id` = $pd AND `status` = 'paid'";
+$sql = "SELECT * FROM `tbl_order` WHERE `id` = $pd";
 $result1 = mysqli_query($con, $sql);
 $cc = 0;
 $my_array = array();

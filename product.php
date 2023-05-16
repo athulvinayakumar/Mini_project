@@ -9,7 +9,7 @@ error_reporting(E_ERROR | E_PARSE);
 
 <head>
     <title>STEPSOUT</title>
-    <!-- Meta tag Keywords -->
+    <!-- Meta tag Keywords -->  
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8" />
     <meta name="keywords" content="" />
@@ -42,6 +42,28 @@ error_reporting(E_ERROR | E_PARSE);
     <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
     <link rel="stylesheet" href="./css/product.css">
+    <style>
+
+.product-new-top {
+    background: #ff2978;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 13px;
+    text-align: center;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+
+
+.product-new-top {
+        font-size: 12px;
+        padding: 10px 8px;
+    }
+
+        </style>
 </head>
 
 <body>
@@ -105,6 +127,13 @@ error_reporting(E_ERROR | E_PARSE);
                         <?php } else { ?>
                             <li><a href="login.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
                         <?php } ?>
+        
+                        <?php if (isset($_SESSION['Username'])) { ?>
+                                <!-- <li>|</li>  -->
+                                <li><a href="myorders.php"><i class="bi bi-bag" style="font-size:20px;"></i></a></li>
+                            <?php } else { ?>
+                                <li><a href="login.php"><i class="bi bi-bag" style="font-size:20px;"></i></a></li>
+                            <?php } ?>
 
 
 
@@ -132,8 +161,8 @@ error_reporting(E_ERROR | E_PARSE);
             </div>
             <div class="gallery-items">
                 <?php
-                $con = mysqli_connect("localhost", "root", "", "shoes");
-                $mysql = "SELECT * FROM `admins` WHERE status = '0'";
+                $con = mysqli_connect("localhost", "root", "", "shoess");
+                $mysql = "SELECT * FROM `admins`";
                 $result = mysqli_query($con, $mysql);
                 while ($row = mysqli_fetch_array($result)) {
                 ?>
@@ -142,8 +171,22 @@ error_reporting(E_ERROR | E_PARSE);
                             <div class="product-shoe-info shoe text-center">
                                 <div class="men-thumb-item">
                                     <img src="./product_img/<?= $row['image'] ?>" class="img-fluid" alt="">
-                                    <span class="product-new-top">New</span>
+                                    <?php
+                                        $sql12 = "SELECT prdnm FROM admins WHERE status = '4'";
+                                        $result12 = mysqli_query($con, $sql12);
+                                        while($row12 = mysqli_fetch_assoc($result12)){
+                                        $a=$row12['prdnm'];
+                                        if($row['prdnm']==$a)
+                                        {
+                                       ?>
+                                        <span class="product-new-top">Top product</span>
+                                        <?php
+                                        }}
+                                        ?>
+                                    <!-- <span class="product-new-top">New</span>
+                                 -->
                                 </div>
+                                
                                 <div class="item-info-product">
                                     <h4>
                                         <a href="#"><?= $row['prdnm'] ?></a>
@@ -163,7 +206,6 @@ error_reporting(E_ERROR | E_PARSE);
                 <?php
                 }
                 ?>
-            </div>
             <div class="pagination d-flex justify-content-center">
                 <div class="prev">Prev</div>
                 <div class="page">Page <span class="page-num"></span></div>

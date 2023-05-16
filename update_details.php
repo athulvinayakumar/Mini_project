@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
 } else {
     $id = 0;
 }
-$con = mysqli_connect("localhost", "root", "", "shoes");
+$con = mysqli_connect("localhost", "root", "", "shoess");
 $mysql = "SELECT * FROM `admins` where prdid=" . $id;
 $result = mysqli_query($con, $mysql);
 $row = mysqli_fetch_array($result);

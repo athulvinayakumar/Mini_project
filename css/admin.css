@@ -4,13 +4,14 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
         "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
         "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-       
+
 }
 
 body {
     overflow-x: hidden;
     position: relative;
 }
+
 .side-pane {
     background-color: #212529;
     padding: 6%;
@@ -62,21 +63,24 @@ body {
     overflow: scroll;
 }
 
-.btn-close{
+.btn-close {
     float: right;
 }
 
-#add-movies-container{
+#add-movies-container {
     position: absolute;
     margin-left: 16rem;
 }
-#view-movies-container{
+
+#view-movies-container {
     display: none;
 }
-#manage-user-container{
-display: none;
+
+#manage-user-container {
+    display: none;
 }
-.panel_btns{
+
+.panel_btns {
     text-decoration: none;
     color: white !important;
 }

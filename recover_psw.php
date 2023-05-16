@@ -115,7 +115,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "shoes";
+$database = "shoess";
 $connection = new mysqli($servername, $username, $password, $database);
 if (!$connection) {
   die("Database not connected !!");

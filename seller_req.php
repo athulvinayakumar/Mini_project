@@ -34,7 +34,7 @@
                 <th>Action</th>  
             </tr>
             <?php
-            $con = mysqli_connect("localhost", "root", "", "shoes");
+            $con = mysqli_connect("localhost", "root", "", "shoess");
             $mysql = "SELECT * FROM `tbl_seller_reg` ";
             $result = mysqli_query($con, $mysql);
             while ($row = mysqli_fetch_array($result)) {
@@ -43,10 +43,10 @@
                     <td><?= $row['name'] ?></td>
                     <td><?= $row['email'] ?></td>
                     <td><?= $row['phn_number'] ?></td>
-                    <td><?= $row['aadhar_card'] ?></td>
+                    <td><a href="./product_file/<?= $row['aadhar_card'] ?>" target="_blank"><?= $row['aadhar_card'] ?></a></td>
                     <td><?= $row['address'] ?></td>
-                    <td><a href="" class="btn btn-primary">Approve</a></td>
-                    <td><a href="" class="btn btn-danger">Reject</a></td>            
+                    <td><a href="seller_req_approve.php?id=<?= $row['sid'] ?>" class="btn btn-primary">Approve</a></td>
+                    <td><a href="seller_req_reject.php?id=<?= $row['sid'] ?>" class="btn btn-danger">Reject</a></td>            
                 </tr>
 
 

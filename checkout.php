@@ -2,7 +2,7 @@
 session_start();
 $i = 0;
 $usr_name = $_SESSION['Username'];
-$con = mysqli_connect("localhost", "root", "", "shoes");
+$con = mysqli_connect("localhost", "root", "", "shoess");
 $sql = "SELECT * FROM `auth` where username ='$usr_name'";
 $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_array($result);

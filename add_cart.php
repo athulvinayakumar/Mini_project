@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost", "root", "", "shoes");
+$con = mysqli_connect("localhost", "root", "", "shoess");
 error_reporting(E_ERROR | E_PARSE);
 $user = $_SESSION['usr_id'];
 if ($user == null) {

@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
 } else {
     $id = 0;
 }
-$con = mysqli_connect("localhost", "root", "", "shoes");
+$con = mysqli_connect("localhost", "root", "", "shoess");
 $mysql = "SELECT * FROM `tbl_seller` where s_id=" . $id;
 $result = mysqli_query($con, $mysql);
 $row = mysqli_fetch_array($result);
@@ -73,7 +73,7 @@ if (isset($_POST['sub'])) {
     if ( $product_name == null || $product_price == null ||  $product_qnt == null || $product_img == null) {
         echo ("<script>alert('Enter Valid details')</script>");
     } else {
-        $con = mysqli_connect("localhost", "root", "", "shoes");
+        $con = mysqli_connect("localhost", "root", "", "shoess");
         $mysql = "UPDATE `tbl_seller` SET `s_name`='$product_name',`s_price`='$product_price',``s_qnt` = '$product_qnt',`s_image`='$product_img' WHERE s.id='$val'";
         mysqli_query($con, $mysql);
         $targetDir = "product_img/";

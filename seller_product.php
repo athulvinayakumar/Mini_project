@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    $sid=$_SESSION['usr_id'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,8 +40,8 @@
                 <th>Action</th>
             </tr>
             <?php
-            $con = mysqli_connect("localhost", "root", "", "shoes");
-            $mysql = "SELECT * FROM `tbl_seller` ";
+            $con = mysqli_connect("localhost", "root", "", "shoess");
+            $mysql = "SELECT * FROM `tbl_seller` WHERE `s_id` =$sid ";
             $result = mysqli_query($con, $mysql);
             while ($row = mysqli_fetch_array($result)) {
             ?>

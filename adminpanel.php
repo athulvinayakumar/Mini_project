@@ -18,25 +18,42 @@ if (!isset($_SESSION['Username'])) {
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <title>Admin panel</title>
   <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <style>
     .display-3,
     a {
       display: inline-block;
+    }
+
+    .bg-nav-color {
+      background-color: #212529 !important;
+      margin-left: -3% !important;
+      margin-right: -2% !important;
+    }
+
+    .nav-link {
+      color: #fff !important;
     }
   </style>
 
 </head>
 
 <body>
+
   <div class="row">
     <div class="col-md-2">
       <div class="side-pane" style="height: 136vh;">
         <div class="page-header">
           <h1 style="color: white;">Admin</h1>
+
         </div>
         <table style="width: 100%;">
+
           <tr>
             <td><button id='Add-item' class="panel_btns"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Item</button></td>
+          </tr>
+          <tr>
+            <td><button id='history' class="panel_btns"><i class="fa fa-plus-circle" aria-hidden="true"></i>Overall Sales</button></td>
           </tr>
           <tr>
             <td><button id='Add-colour' class="panel_btns"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Color</button></td>
@@ -54,10 +71,25 @@ if (!isset($_SESSION['Username'])) {
             <td><button id='View' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> View Users</button></td>
           </tr>
           <tr>
+            <td>
+              <p>
+                <button class="panel_btns" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  Sales <i class="bi bi-caret-down-fill"></i>
+                </button>
+              </p>
+              <div class="collapse" id="collapseExample">
+                <div class="card card-body" style="background: #212529;border:none">
+                  <button id='stock' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i>Sales Graph</button>
+                  <button id='report' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i>Sales Report</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
             <td><button id='seller_products' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> Seller Products</button></td>
           </tr>
           <tr>
-            <td><button id='usr_msg' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> User Message</button></td>
+            <td><button id='usr_msg' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> Contact Message</button></td>
           </tr>
           <tr>
             <td><button id='sel_msg' class="panel_btns"><i class="fa fa-opencart" aria-hidden="true"></i> Seller Messages</button></td>
@@ -75,26 +107,49 @@ if (!isset($_SESSION['Username'])) {
             <td><button id='view_payment_details' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i> View payment Details</button></td>
           </tr>
           <tr>
-            <td><button id='stock' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i>Stock</button></td>
+            <td><button id='today' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i>Todays Orders</button></td>
           </tr>
           <tr>
-            <td><button id='today' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i>Todays Order</button></td>
+            <td><button id='pending' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i>Pending Orders</button></td>
           </tr>
           <tr>
             <td><button id='home-page' class="panel_btns"><i class="fa fa-home" aria-hidden="true"></i> Home Page</button></td>
           </tr>
-          <tr>
-            <td><button id='logout' class="panel_btns"><i class="fa fa-chevron-right" aria-hidden="true"></i> Logout</button></td>
-          </tr>
+
 
         </table>
       </div>
+
     </div>
 
 
     <!-- add  container -->
 
-    <div class="col-md-6 " id="add-movies-container">
+    <div class="col-md-10 " id="add-movies-container">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary bg-nav-color">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            </ul>
+            <form class="d-flex" role="search">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Admin
+                  </a>
+                  <ul class="dropdown-menu" style="background-color: #212529;">
+                    <li><button id='logout' class="panel_btns"><i class="fa fa-chevron-right" aria-hidden="true"></i> Logout</button></li>
+
+                  </ul>
+                </li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;</li>
+              </ul>
+            </form>
+          </div>
+        </div>
+      </nav>
       <div class="p-5 bg-light">
         <div class="container">
           <p>
@@ -106,7 +161,7 @@ if (!isset($_SESSION['Username'])) {
           <div class="mb-3">
             <h6>Select Category</h6>
             <label for="" class="form-label"></label>
-            <select name="category" class="form-control">
+            <select name="category" class="form-control" id="m">
               <?php
               $sql = "SELECT * FROM `tbl_category`";
               $result = mysqli_query($connection, $sql);
@@ -147,7 +202,7 @@ if (!isset($_SESSION['Username'])) {
           <div class="mb-3">
             <h6>Product Brand</h6>
             <label for="" class="form-label"></label>
-            <select name="p_brand" class="form-control">
+            <select name="p_brand" class="form-control" id="s">
               <?php
               $sql = "SELECT * FROM `bands`";
               $result = mysqli_query($connection, $sql);
@@ -180,6 +235,9 @@ if (!isset($_SESSION['Username'])) {
   $("#Product").click(function() {
     window.location.href = "edit_details.php";
   })
+  $("#history").click(function() {
+    window.location.href = "seminar.php";
+  })
   $("#Add-special").click(function() {
     window.location.href = "edit_special.php";
   })
@@ -195,11 +253,17 @@ if (!isset($_SESSION['Username'])) {
   $("#home-page").click(function() {
     window.location.href = "index.php";
   })
+  $("#pending").click(function() {
+    window.location.href = "pending_orders.php";
+  })
   $("#logout").click(function() {
     window.location.href = "logout.php";
   })
   $("#stock").click(function() {
-    window.location.href = "stock.php";
+    window.location.href = "sales_graph.php";
+  })
+  $("#report").click(function() {
+    window.location.href = "sales_report.php";
   })
   $("#View").click(function() {
     window.location.href = "view_user.php";
@@ -226,6 +290,6 @@ if (!isset($_SESSION['Username'])) {
     window.location.href = "todays_orders.php";
   })
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
 </html>

@@ -5,7 +5,7 @@ session_start();
 // error_reporting(E_ERROR | E_PARSE);
 include 'db.php';
 $user = $_SESSION['usr_id'];
-$con=mysqli_connect("localhost","root","","shoes");
+$con=mysqli_connect("localhost","root","","shoess");
 $sql="SELECT * FROM `auth` WHERE `id` = $user ";
 $result=mysqli_query($con,$sql);
 $row=mysqli_fetch_array($result);
@@ -42,34 +42,34 @@ $row=mysqli_fetch_array($result);
                                     <h4 class="mb-4 mt-0">Contact detail</h4>
                                     <div class="col-md-4">
                                         <label class="form-label">Name</label>
-                                        <input type="text" class="form-control" placeholder="" aria-label="Name"
+                                        <input type="text" id="name" class="form-control" placeholder="" aria-label="Name"
                                             value="<?= $row['name'] ?>" disabled>
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label">Username</label>
-                                        <input type="text" class="form-control" placeholder="" aria-label="Phone number"
+                                        <input type="text" id="username" class="form-control" placeholder="" aria-label="Phone number"
                                             value="<?= $row['username'] ?>" disabled>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="inputEmail4" 
+                                        <input type="email" id="mail" class="form-control" id="inputEmail4" 
                                             value="<?= $row['email'] ?>" disabled>
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label">Phone</label>
-                                        <input type="text" class="form-control" placeholder="" aria-label="Phone number"
+                                        <input type="text" id="phone" class="form-control" placeholder="" aria-label="Phone number"
                                             value="<?= $row['mobile_number'] ?>" disabled>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label">Address</label>
-                                        <input type="text" class="form-control" id="inputEmail4"
+                                        <input type="text" id="address" class="form-control" id="inputEmail4"
                                             value="<?= $row['address'] ?>" disabled>
                                     </div>
                                     
                                     
                                     <div class="col-md-4">
                                         <label for="inputEmail4" class="form-label text-light">w</label>
-                                        <a href="./edit_profile.php" class="form-control btn btn-primary">Update Your Profile</a>
+                                        <a href="./edit_profile.php" id="update" class="form-control btn btn-primary">Update Your Profile</a>
                                     </div>
                                 </div>
                             </div>

@@ -2,7 +2,7 @@
 <?php
 session_start();
 $pro_id = $_GET['id'];
-$con = mysqli_connect("localhost", "root", "", "shoes");
+$con = mysqli_connect("localhost", "root", "", "shoess");
 $mysql = "SELECT * FROM `admins` WHERE prdid = '$pro_id'";
 $result = mysqli_query($con, $mysql);
 $row = mysqli_fetch_array($result);
@@ -241,7 +241,7 @@ if (isset($_POST['review'])) {
 
                         <!-- Product Size -->
                         <?php
-                        $con = mysqli_connect("localhost", "root", "", "shoes");
+                        $con = mysqli_connect("localhost", "root", "", "shoess");
                         $sql = "SELECT * FROM `tbl_color`";
                         $ab = mysqli_query($con, $sql);
                         ?>
@@ -298,7 +298,7 @@ if (isset($_POST['review'])) {
                             </thead>
                             <tbody>
                                 <?php
-                                $con = mysqli_connect("localhost", "root", "", "shoes");
+                                $con = mysqli_connect("localhost", "root", "", "shoess");
                                 $sql = "SELECT * FROM `tbl_rating` where `prdid`=$pro_id";
                                 $result = mysqli_query($con, $sql);
                                 $count = mysqli_num_rows($result);

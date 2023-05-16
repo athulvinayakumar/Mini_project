@@ -1,10 +1,10 @@
 <?php
 include 'db.php';
 if (isset($_POST['submit'])) {
-    $sname = $_POST['sender_name'];
-    $semail = $_POST['sender_email'];
+    $sname = $_POST['seller_name'];
+    $semail = $_POST['seller_email'];
     $message = $_POST['message'];
-    $sql = "INSERT INTO tbl_smsgs (sender_name, sender_email,message) VALUES ('$sender_name', '$sender_email','$message')";
+    $sql = "INSERT INTO tbl_smsgs (seller_name,seller_email,message) VALUES ('$sname', '$semail','$message')";
     $res = mysqli_query($connection, $sql);
     if ($res) {
         echo "<script>alert('Messade sent successfully'); window.location='seller_msgs.php'; </script>";

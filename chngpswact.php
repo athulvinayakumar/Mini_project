@@ -1,5 +1,5 @@
 <?php
-$con = mysqli_connect("localhost","root","","shoes");
+$con = mysqli_connect("localhost","root","","shoess");
 $cp=$_POST['cp'];
 $np=$_POST['np'];
 $cnp=$_POST['cnp'];

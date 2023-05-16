@@ -36,7 +36,7 @@
                 <th>Update</th>
             </tr>
             <?php
-            $con = mysqli_connect("localhost", "root", "", "shoes");
+            $con = mysqli_connect("localhost", "root", "", "shoess");
             $mysql = "SELECT * FROM `admins` ";
             $result = mysqli_query($con, $mysql);
             while ($row = mysqli_fetch_array($result)) {
@@ -53,7 +53,7 @@
                     <?php
                     if ($row['status'] == 0) {
                     ?>
-                        <td><a href="inactive.php?id=<?= $row['prdid'] ?>" class="btn btn-primary status_btn">Disable</a></td>
+                        <td><a href="inactive.php?id=<?= $row['prdid'] ?>" class="btn btn-primary status_btn" id="a">Disable</a></td>
                     <?php
                     } elseif ($row['status'] == 1) {
                     ?>

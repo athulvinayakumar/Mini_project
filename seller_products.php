@@ -35,7 +35,7 @@
                 <th>Action</th>
             </tr>
             <?php
-            $con = mysqli_connect("localhost", "root", "", "shoes");
+            $con = mysqli_connect("localhost", "root", "", "shoess");
             $mysql = "SELECT * FROM `tbl_seller` WHERE `status` ='pending'";
             $result = mysqli_query($con, $mysql);
             while ($row = mysqli_fetch_array($result)) {

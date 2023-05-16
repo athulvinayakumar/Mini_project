@@ -12,7 +12,7 @@ if (!isset($_SESSION['Username'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pending Orders</title>
+    <title>STEPSOUTS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -54,6 +54,7 @@ if (!isset($_SESSION['Username'])) {
 </head>
 
 <body>
+
     <?php
     // Database connection credentials
     include "db.php";
@@ -74,7 +75,7 @@ if (!isset($_SESSION['Username'])) {
 
     // Display the order list in a table
     if ($result->num_rows > 0) {
-        echo "<h1>Today's Orders</h1>";
+        echo "<h1>Pending Orders</h1>";
         echo "<table>";
         echo "<tr><th>Order ID</th>
             <th>Customer Name</th>
@@ -101,7 +102,8 @@ if (!isset($_SESSION['Username'])) {
 
     // Close connection
     $connection->close();
-    ?>
+    ?><br>
+    <center> <a href="adminpanel.php" class="btn btn-success">Back</a></center>
 </body>
 
 </html>

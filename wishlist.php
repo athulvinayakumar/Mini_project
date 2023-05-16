@@ -28,7 +28,7 @@ include 'db.php';
                         </thead>
                         <tbody>
                             <?php
-                            $con = mysqli_connect("localhost", "root", "", "shoes");
+                            $con = mysqli_connect("localhost", "root", "", "shoess");
                             $sql = "SELECT * FROM `tbl_wishlist` WHERE `id` =$user AND status='1'";
                             $result = mysqli_query($con, $sql);
                             while ($row = mysqli_fetch_array($result)) {
@@ -38,6 +38,7 @@ include 'db.php';
                                 while ($row1 = mysqli_fetch_array($result1)) {?>
                                     <td><?php echo $row1['prdnm']; ?></td>
                                     <td><?php echo $row1['prdpr']; ?></td>
+                                    <td><?php echo $row1['prqnt']; ?></td>
                                     <td><?php echo $row1['brand']; ?></td>
                                     <td>''''</td>
                                     <td class="text-right d-none d-md-block"><a href="remove_wishlist.php?id=<?= $row1['prdid'] ?>&uid=<?= $user ?>" class="btn btn-light" data-abc="true"> Remove</a></td>

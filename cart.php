@@ -40,7 +40,7 @@ include 'db.php';
                                     <tbody>
                                         <?php
                                 
-                                        $con = mysqli_connect("localhost", "root", "", "shoes");
+                                        $con = mysqli_connect("localhost", "root", "", "shoess");
                                         $sql = "SELECT * FROM `cart` WHERE `id` =$user AND `status` = 1";
                                         $_SESSION['cart_id']=$a;
                                         $result = mysqli_query($con, $sql);

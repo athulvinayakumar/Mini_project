@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost", "root", "", "shoes");
+$con = mysqli_connect("localhost", "root", "", "shoess");
 $mysql = "SELECT * FROM `tbl_special`";
 $result = mysqli_query($con, $mysql);
 ?>

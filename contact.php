@@ -1,8 +1,10 @@
-<!-- <?php
+<?php
         session_start();
         include 'db.php';
-
-        ?> -->
+        if (!isset($_SESSION['Username'])) {
+            header('location:login.php');
+        }
+        ?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -182,6 +184,13 @@
                         <?php } else { ?>
                             <li><a href="login.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
                         <?php } ?>
+                        
+                        <?php if (isset($_SESSION['Username'])) { ?>
+                                <!-- <li>|</li>  -->
+                                <li><a href="myorders.php"><i class="bi bi-bag" style="font-size:20px;"></i></a></li>
+                            <?php } else { ?>
+                                <li><a href="login.php"><i class="bi bi-bag" style="font-size:20px;"></i></a></li>
+                            <?php } ?>
 
 
 
@@ -224,7 +233,7 @@
                         $msg = $_POST['Message'];
                         $usr_id = $_SESSION['usr_id'];
                         if ($name != null && $email != null && $phone != null && $msg != null) {
-                            $con = mysqli_connect("localhost", "root", "", "shoes");
+                            $con = mysqli_connect("localhost", "root", "", "shoess");
                             $sql = "INSERT INTO `contact`(`usr_id`, `usr_name`, `usr_email`, `usr_phone`, `usr_msg`) VALUES ('$usr_id','$name','$email','$phone','$msg')";
                             mysqli_query($con, $sql);
                             echo "<script>alert('Messages sent successfully')</script>";

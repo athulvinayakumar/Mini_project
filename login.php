@@ -11,15 +11,17 @@ if (isset($_POST['submit'])) {
 
         if (mysqli_num_rows($log_check_sql) === 1) {
             $row = mysqli_fetch_assoc($log_check_sql);
-            $_SESSION['Username'] = $row['username'];
+            $_SESSION['Username'] = $ruw['username'];
             $_SESSION['usr_id'] = $row['id'];
 
             if ($log_username === $row["username"] && $log_password === $row["password"]) {
                 if ($row["role"] == 1) {
                     $_SESSION['Username'] = $log_username;
+
                     header('Location: adminpanel.php');
                 } else if ($row["role"] == 2) {
                     $_SESSION['Username'] = $log_username;
+
                     header('Location: seller.php');
                 } else {
                     header('Location: index.php');
@@ -81,7 +83,7 @@ if (isset($_POST['submit'])) {
             <div id="message2"></div>
             <input type="password" id="ps" class="text" name="pswd" placeholder="PASSWORD" autocomplete="off" onkeyup="return validatepass();"><br><br>
             <span id="ords" style="color:white"></span>
-            <center><input type="submit" name="submit" value="LOGIN" class="button"></center><br>
+            <center><input type="submit" name="submit" id="subBtn" value="LOGIN" class="button"></center><br>
             <hr><br>
             <p id="paragraph1" style="margin-top: -58px;">If not registered <a href="signup.php">click here</a></p>
             <p id="paragraph2"><a href="recover_psw.php">Forgot password</a></p><br><br>

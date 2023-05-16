@@ -14,11 +14,12 @@ if (isset($_POST['submit'])) {
     $confirmPassword = $_POST["conpass"];
     $targetDir = "./product_file/";
     $targetFilePath = $targetDir . $aadhar;
+    move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath);
 
 
     if (!empty($name) && !empty($username) && !empty($passrd) && !empty($number) && !empty($email) && !empty($aadhar) && !empty($addr)) {
-
-         $sql = "INSERT INTO `tbl_seller_reg` VALUES (null,'$name','$username','$passrd','$number','$email','$aadhar','$addr',2)";
+        $sql="INSERT INTO `tbl_seller_reg`(`sid`, `name`, `username`, `password`, `phn_number`, `email`, `aadhar_card`, `address`, `role`, `status`) VALUES (null,'$name','$username','$passrd','$number','$email','$aadhar','$addr',2,0)";
+        //  $sql = "INSERT INTO `tbl_seller_reg` VALUES (null,'$name','$username','$passrd','$number','$email','$aadhar','$addr',2)";
         if ($connection->query($sql) === TRUE) {
             echo "New record created successfully";
             header('Location: login.php');

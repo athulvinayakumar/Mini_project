@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
             <div id="message4"></div>
             &emsp; <input type="text" class="text" id="fourth" size="60px" placeholder="ENTER ADDRESS" onkeyup="adds()" autocomplete="off" name="address"><br>
             <div id="message8"></div><br>
-            <center><input type="submit" value="REGISTER" class="button" name="submit"><br>
+            <center><input type="submit" value="REGISTER" class="button" id="btn" name="submit"><br>
                 <p id="paragraph1"><a href="login.php">Already have account</a></p>
             </center>
         </form>

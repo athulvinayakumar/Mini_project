@@ -171,7 +171,13 @@
                             <li><a href="wishlist.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
                         <?php } else { ?>
                             <li><a href="login.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
-                        <?php } ?>
+                        <?php } ?>  
+                        <?php if (isset($_SESSION['Username'])) { ?>
+                                <!-- <li>|</li>  -->
+                                <li><a href="myorders.php"><i class="bi bi-bag" style="font-size:20px;"></i></a></li>
+                            <?php } else { ?>
+                                <li><a href="login.php"><i class="bi bi-bag" style="font-size:20px;"></i></a></li>
+                            <?php } ?>
 
 
 
