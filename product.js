@@ -55,3 +55,6 @@ const galleryItems = document.querySelector(".gallery-items").children;
         showItems();
         check();
     }
+
+
+ 

@@ -107,7 +107,8 @@ if (isset($_POST['review'])) {
     if ($num > 0) {
         $sql = "UPDATE `tbl_rating` SET `r_number`='$star',`comments`='$msg' WHERE `id` =$user_id";
         mysqli_query($con, $sql);
-    } else {
+    } 
+    else {
         $sql = "INSERT INTO `tbl_rating`(`prdid`, `id`, `r_number`, `comments`) VALUES ('$pro_id','$user_id','$star','$msg')";
         mysqli_query($con, $sql);
     }
@@ -240,7 +241,7 @@ if (isset($_POST['review'])) {
 
 
                         <!-- Product Size -->
-                        <?php
+                        <!-- <?php
                         $con = mysqli_connect("localhost", "root", "", "shoess");
                         $sql = "SELECT * FROM `tbl_color`";
                         $ab = mysqli_query($con, $sql);
@@ -254,16 +255,13 @@ if (isset($_POST['review'])) {
                                 while ($a = mysqli_fetch_array($ab)) {
                                 ?>
                                     <button class="btn btn-default" style="color:#337ab7;border:1px dashed #337ab7;"><?php echo $a['color_name']; ?> </button>
-                                    <!-- // <button class="btn btn-default">7</button>
-                                // <button class="btn btn-default">8</button>
-                                // <button class="btn btn-default">9</button>
-                                // <button class="btn btn-default">10</button> -->
+                                
                                 <?php
                                 }
                                 ?>
                             </div>
                         </div>
-                        <br><br>
+                        <br><br> -->
 
 
                         <!-- Product Count -->

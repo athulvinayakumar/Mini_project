@@ -4,14 +4,14 @@ include 'db.php';
 
 if (isset($_POST['submit'])) {
     if (!empty($_POST['urnm']) && !empty($_POST['pswd'])) {
-        $log_username = $_POST['urnm'];
-        $log_password = $_POST['pswd'];
-        $log_check = "SELECT * FROM auth WHERE Username='" . $log_username . "' AND Password='" . $log_password . "'";
+         $log_username = $_POST['urnm'];
+         $log_password = $_POST['pswd'];
+         $log_check = "SELECT * FROM auth WHERE Username='" . $log_username . "' AND Password='" . $log_password . "'";
         $log_check_sql = mysqli_query($connection, $log_check);
 
         if (mysqli_num_rows($log_check_sql) === 1) {
             $row = mysqli_fetch_assoc($log_check_sql);
-            $_SESSION['Username'] = $ruw['username'];
+            $_SESSION['Username'] = $row['username'];
             $_SESSION['usr_id'] = $row['id'];
 
             if ($log_username === $row["username"] && $log_password === $row["password"]) {

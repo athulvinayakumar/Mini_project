@@ -97,7 +97,7 @@ if (!isset($_SESSION['Username'])) {
         }
         echo "</table>";
     } else {
-        echo "<div class='no-orders'>No orders found today.</div>";
+        echo "<div class='no-orders'>No pending orders</div>";
     }
 
     // Close connection

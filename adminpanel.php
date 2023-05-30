@@ -134,14 +134,16 @@ if (!isset($_SESSION['Username'])) {
             </ul>
             <form class="d-flex" role="search">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="product_charts.php">Sales chart</a>
+                </li>
+                <br>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Admin
                   </a>
                   <ul class="dropdown-menu" style="background-color: #212529;">
                     <li><button id='logout' class="panel_btns"><i class="fa fa-chevron-right" aria-hidden="true"></i> Logout</button></li>
-
                   </ul>
                 </li>
                 <li>&emsp;&emsp;&emsp;&emsp;&emsp;</li>
@@ -153,7 +155,7 @@ if (!isset($_SESSION['Username'])) {
       <div class="p-5 bg-light">
         <div class="container">
           <p>
-          <h1 class="display-3">Add new Items</h1><a href="product_charts.php">Sales chart</a></p>
+          <h1 class="display-3">Add new Items</h1>
           </p>
         </div>
 

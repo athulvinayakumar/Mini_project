@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <h4 style="text-align:center;">User Messages</h4>
+    <h4 style="text-align:center;">Seller Messages</h4>
     <form action="#" method="POST">
         <table class="table table-dark table-striped">
             <tr>

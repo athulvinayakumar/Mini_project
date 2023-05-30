@@ -30,6 +30,7 @@ $sid=$_SESSION['usr_id'];
         .side-pane {
             background-color: #4e73df !important;
         }
+
     </style>
 
 </head>
@@ -37,7 +38,7 @@ $sid=$_SESSION['usr_id'];
 <body>
     <div class="row">
         <div class="col-md-2">
-            <div class="side-pane">
+            <div class="side-pane" style="height: 136vh;">
                 <div class="page-header">
                     <h1 style="color: white;">Seller</h1>
                 </div>
@@ -71,11 +72,31 @@ $sid=$_SESSION['usr_id'];
             </div>
         </div>
 
-
         <!-- add movies container -->
-
-        <div class="col-md-6 " id="add-movies-container">
-            <div class="p-5 bg-light">
+    <div class="col-md-10 " id="add-movies-container">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary bg-nav-color">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            </ul>
+            <form class="d-flex" role="search">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <br>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Seller  
+                  </a>
+                  <ul class="dropdown-menu" style="background-color:#4e73df;">
+                    <li><button id='logout' class="panel_btns"><i class="fa fa-chevron-right" aria-hidden="true"></i> Logout</button></li>
+                  </ul>
+                </li>
+                <li>&emsp;&emsp;&emsp;&emsp;&emsp;</li>
+              </ul>
+            </form>
+          </div>
+        </div>
+      </nav>    
+          <div class="p-5 bg-light">
                 <div class="container">
                     <h1 class="display-3">Add new Items</h1>
                     </p>

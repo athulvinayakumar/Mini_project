@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <h4 style="text-align:center;"><P>PENDING REQUEST</P></h4>
+    <h4 style="text-align:center;"><P>SELLER REQUEST</P></h4>
     <form action="#" method="POST">
         <table class="table table-dark table-striped">
             <tr>

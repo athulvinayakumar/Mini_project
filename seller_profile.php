@@ -29,7 +29,7 @@ $row=mysqli_fetch_array($result);
                 <div class="my-5">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/shoes/index.php">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/shoes/seller.php">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">My Profile</li>
                         </ol>
                     </nav>

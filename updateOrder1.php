@@ -35,7 +35,7 @@ include "db.php";
         if ($status != null) {
             $result = mysqli_query($connection, "UPDATE `tbl_order` SET `status`='$status' WHERE `oid` = $oid");
             if ($result) {
-                echo ("<script>location.href='todays_orders.php'</script>");
+                echo ("<script>location.href='pending_orders.php'</script>");
             }
         }
     }

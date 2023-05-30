@@ -23,7 +23,7 @@ include 'db.php';
                                 <th width="15%">Unit Price</th>
                                 <th width="15%">Brand</th>
                                 <th width="15%">Stock Status</th>
-                                <th width="15%">Action</th> 
+                                <th width="15%">   Action</th> 
                             </tr>
                         </thead>
                         <tbody>
@@ -38,9 +38,8 @@ include 'db.php';
                                 while ($row1 = mysqli_fetch_array($result1)) {?>
                                     <td><?php echo $row1['prdnm']; ?></td>
                                     <td><?php echo $row1['prdpr']; ?></td>
-                                    <td><?php echo $row1['prqnt']; ?></td>
                                     <td><?php echo $row1['brand']; ?></td>
-                                    <td>''''</td>
+                                    <td><?php echo $row1['prqnt']; ?></td>
                                     <td class="text-right d-none d-md-block"><a href="remove_wishlist.php?id=<?= $row1['prdid'] ?>&uid=<?= $user ?>" class="btn btn-light" data-abc="true"> Remove</a></td>
 
 

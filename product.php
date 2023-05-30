@@ -9,7 +9,7 @@ error_reporting(E_ERROR | E_PARSE);
 
 <head>
     <title>STEPSOUT</title>
-    <!-- Meta tag Keywords -->  
+    <!-- Meta tag Keywords -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8" />
     <meta name="keywords" content="" />
@@ -43,27 +43,174 @@ error_reporting(E_ERROR | E_PARSE);
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
     <link rel="stylesheet" href="./css/product.css">
     <style>
+        .product-new-top {
+            background: #ff2978;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 13px;
+            text-align: center;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
 
-.product-new-top {
-    background: #ff2978;
-    color: #fff;
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 13px;
-    text-align: center;
-    padding: 4px 10px;
-    border-radius: 4px;
-}
+        .gallery-items {}
 
+        .product-new-top {
+            font-size: 12px;
+            padding: 10px 8px;
+        }
 
+        body {
+            background-color: #eee
+        }
 
-.product-new-top {
-        font-size: 12px;
-        padding: 10px 8px;
-    }
+        .t-products {
+            background-image: linear-gradient(to right top, #5629c0, #5625cb, #5620d5, #551ae0, #5412eb);
+            color: #fff;
+            border-radius: 3px
+        }
 
-        </style>
+        .processor {
+            background-color: #fff;
+            margin-top: 5px;
+            border-bottom: 1px solid #eee
+        }
+
+        .brand {
+            background-color: #fff;
+            border-bottom: 1px solid #eee
+        }
+
+        .type {
+            background-color: #fff
+        }
+
+        .product {
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            position: relative
+        }
+
+        .about span {
+            color: #5629c0;
+            font-size: 16px
+        }
+
+        .cart-button button {
+            font-size: 12px;
+            color: #fff;
+            background-color: #5629c0;
+            height: 38px
+        }
+
+        .cart-button button:focus,
+        button:active {
+            font-size: 12px;
+            color: #fff;
+            background-color: #5629c0;
+            box-shadow: none
+        }
+
+        .product_fav i {
+            line-height: 40px;
+            color: #5629c0;
+            font-size: 15px
+        }
+
+        .product_fav {
+            display: inline-block;
+            width: 36px;
+            height: 39px;
+            background: #FFFFFF;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 11%;
+            text-align: center;
+            cursor: pointer;
+            margin-left: 3px;
+            -webkit-transition: all 200ms ease;
+            -moz-transition: all 200ms ease;
+            -ms-transition: all 200ms ease;
+            -o-transition: all 200ms ease;
+            transition: all 200ms ease
+        }
+
+        .product_fav:hover {
+            background: #5629c0
+        }
+
+        .product_fav:hover i {
+            color: #fff
+        }
+
+        .about {
+            margin-top: 12px
+        }
+
+        .off {
+            position: absolute;
+            left: 65%;
+            top: 6%;
+            width: 80px;
+            text-align: center;
+            height: 30px;
+            line-height: 8px;
+            border-radius: 5px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff
+        }
+
+        .mainContainer {
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .price-filter {
+            display: flex;
+            align-items: center;
+        }
+
+        .price-filter label {
+            margin-right: 10px;
+        }
+
+        .price-filter input[type="range"] {
+            width: 200px;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 5px;
+            border-radius: 5px;
+            background-color: #ddd;
+            outline: none;
+        }
+
+        .price-filter input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            cursor: pointer;
+        }
+
+        .price-filter input[type="range"]::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            border: none;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -122,18 +269,18 @@ error_reporting(E_ERROR | E_PARSE);
                             <li><a href="login.php"><i class="bi bi-cart4 fa-10x" style="font-size:20px;"></i></a></li>
                         <?php } ?>
                         <?php if (isset($_SESSION['Username'])) { ?>
-                   
+
                             <li><a href="wishlist.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
                         <?php } else { ?>
                             <li><a href="login.php"><i class="bi bi-heart" style="font-size:20px;"></i></a></li>
                         <?php } ?>
-        
+
                         <?php if (isset($_SESSION['Username'])) { ?>
-                                <!-- <li>|</li>  -->
-                                <li><a href="myorders.php"><i class="bi bi-bag" style="font-size:20px;"></i></a></li>
-                            <?php } else { ?>
-                                <li><a href="login.php"><i class="bi bi-bag" style="font-size:20px;"></i></a></li>
-                            <?php } ?>
+                            <!-- <li>|</li>  -->
+                            <li><a href="myorders.php"><i class="bi bi-bag" style="font-size:20px;"></i></a></li>
+                        <?php } else { ?>
+                            <li><a href="login.php"><i class="bi bi-bag" style="font-size:20px;"></i></a></li>
+                        <?php } ?>
 
 
 
@@ -152,6 +299,9 @@ error_reporting(E_ERROR | E_PARSE);
         </div>
         <!--// banner-inner -->
 
+
+
+
     </div>
 
     <section class="gallery">
@@ -159,59 +309,203 @@ error_reporting(E_ERROR | E_PARSE);
             <div class="title">
                 <h1>Products</h1>
             </div>
-            <div class="gallery-items">
-                <?php
-                $con = mysqli_connect("localhost", "root", "", "shoess");
-                $mysql = "SELECT * FROM `admins`";
-                $result = mysqli_query($con, $mysql);
-                while ($row = mysqli_fetch_array($result)) {
-                ?>
-                    <a href="product_details.php?id=<?= $row['prdid'] ?>">
-                        <div class="item col-md-3 product-men my-5">
-                            <div class="product-shoe-info shoe text-center">
-                                <div class="men-thumb-item">
-                                    <img src="./product_img/<?= $row['image'] ?>" class="img-fluid" alt="">
-                                    <?php
-                                        $sql12 = "SELECT prdnm FROM admins WHERE status = '4'";
-                                        $result12 = mysqli_query($con, $sql12);
-                                        while($row12 = mysqli_fetch_assoc($result12)){
-                                        $a=$row12['prdnm'];
-                                        if($row['prdnm']==$a)
-                                        {
-                                       ?>
-                                        <span class="product-new-top">Top product</span>
-                                        <?php
-                                        }}
-                                        ?>
-                                    <!-- <span class="product-new-top">New</span>
-                                 -->
-                                </div>
-                                
-                                <div class="item-info-product">
-                                    <h4>
-                                        <a href="#"><?= $row['prdnm'] ?></a>
-                                    </h4>
 
-                                    <div class="product_price">
-                                        <div class="grid-price">
-                                            <span class="money">₹<?= $row['prdpr'] ?></span>
+
+            <div class="mainContainer">
+
+                <div class="newContainer">
+
+                    <div class="container-fluid mt-5 mb-5">
+                        <div class="row g-2" style="margin-right: -105px; margin-left: -132px;">
+                            <div class="col-md-3">
+                                <form method="GET" action="product.php">
+                                    <div class="processor p-2">
+                                   <h4 class="text-uppercase">FILTER</h4>
+                                    <br>
+                                        <div class="heading d-flex justify-content-between align-items-center">
+                                            <h6 class="text-uppercase">Category</h6>
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="category1" type="checkbox" value="Men" id="flexCheckDefault" onchange="this.form.submit()">
+                                                <label class="form-check-label" for="flexCheckDefault"> Men </label>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="category2" type="checkbox" value="Women" id="flexCheckChecked" onchange="this.form.submit()">
+                                                <label class="form-check-label" for="flexCheckChecked"> Women </label>
+                                            </div>
                                         </div>
                                     </div>
-                                    <!-- <a href="add_cart.php?id=<?= $row['prdid'] ?>" class="btn btn-success cart_btn">Add to Cart</a> -->
-                                    <a href="add_wishlist.php?id=<?= $row['prdid'] ?>" class="btn btn-primary cart_btn">Add to Wishlist</a>
+                                </form>
+                                <form class="brand p-2" method="GET" action="product.php">
+                                    <div class="heading d-flex justify-content-between align-items-center">
+                                        <h6 class="text-uppercase">Brand</h6>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="NikeVal" value="Nike" id="flexCheckDefault" onchange="this.form.submit()">
+                                            <label class="form-check-label" for="flexCheckDefault"> Nike </label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <div class="form-check"> <input class="form-check-input" name="JordanVal" type="checkbox" value="Jordan" id="flexCheckChecked" onchange="this.form.submit()">
+                                            <label class="form-check-label" for="flexCheckChecked"> Jordan </label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <div class="form-check"> <input class="form-check-input" type="checkbox" name="Dc" value="Dc" id="flexCheckChecked" onchange="this.form.submit()">
+                                            <label class="form-check-label" for="flexCheckChecked"> Dc </label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <div class="form-check"> <input class="form-check-input" type="checkbox" name="Puma" value="Puma" id="flexCheckChecked" onchange="this.form.submit()">
+                                            <label class="form-check-label" for="flexCheckChecked"> Puma </label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <div class="form-check"> <input class="form-check-input" type="checkbox" name="Adidas" value="Adidas" id="flexCheckChecked" onchange="this.form.submit()">
+                                            <label class="form-check-label" for="flexCheckChecked"> Adidas </label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <div class="form-check"> <input class="form-check-input" type="checkbox" name="Reebok" value="Reebok" id="flexCheckChecked" onchange="this.form.submit()">
+                                            <label class="form-check-label" for="flexCheckChecked"> Reebok </label>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <div class="form-check"> <input class="form-check-input" type="checkbox" name="Vans" value="Vans" id="flexCheckChecked" onchange="this.form.submit()">
+                                            <label class="form-check-label" for="flexCheckChecked"> Vans </label>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="type p-2 mb-2">
+                                    <!-- <div class="heading d-flex justify-content-between align-items-center">
+                                        <h6 class="text-uppercase">Price</h6>
+                                    </div>
+                                    <div class="price-filter">
+                                        <label for="price-range">Price Range:</label><br>
+                                        <input type="range" id="price-range" min="0" max="100" step="1" value="0">
+                                        <span id="selected-value">$0</span>
+                                    </div> -->
                                 </div>
                             </div>
+
                         </div>
-                    </a>
-                <?php
-                }
-                ?>
-            <div class="pagination d-flex justify-content-center">
-                <div class="prev">Prev</div>
-                <div class="page">Page <span class="page-num"></span></div>
-                <div class="next">Next</div>
+                    </div>
+                </div>
+
+                <div class="gallery-items">
+
+                    <?php
+                    $con = mysqli_connect("localhost", "root", "", "shoess");
+
+                    // Check if category is selected
+
+
+                    if (isset($_GET['category1']) || isset($_GET['category2'])) {
+                        if (isset($_GET['category1'])) {
+                            $selectedCategory = $_GET['category1'];
+                        } elseif (isset($_GET['category2'])) {
+                            $selectedCategory = $_GET['category2'];
+                        }
+
+                        $mysql = "SELECT * FROM `admins` WHERE cat = '$selectedCategory'";
+                    } elseif (isset($_GET['NikeVal']) || isset($_GET['JordanVal']) || isset($_GET['Dc']) || isset($_GET['Puma']) || isset($_GET['Adidas']) || isset($_GET['Reebok']) || isset($_GET['Vans'])) {
+
+                        if (isset($_GET['NikeVal'])) {
+                            $selectedCategory = $_GET['NikeVal'];
+                        } elseif (isset($_GET['JordanVal'])) {
+                            $selectedCategory = $_GET['JordanVal'];
+                        } elseif (isset($_GET['Dc'])) {
+                            $selectedCategory = $_GET['Dc'];
+                        } elseif (isset($_GET['Puma'])) {
+
+                            $selectedCategory = $_GET['Puma'];
+                        } elseif (isset($_GET['Adidas'])) {
+
+                            $selectedCategory = $_GET['Adidas'];
+                        } elseif (isset($_GET['Reebok'])) {
+
+
+                            $selectedCategory = $_GET['Reebok'];
+                        } elseif (isset($_GET['Vans'])) {
+
+                            $selectedCategory = $_GET['Vans'];
+                        }
+                        $mysql = "SELECT * FROM `admins` WHERE brand = '$selectedCategory'";
+                    } else {
+                        $mysql = "SELECT * FROM `admins`";
+                    }
+
+                    $result = mysqli_query($con, $mysql);
+
+                    // Check if records are found
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_array($result)) {
+                    ?>
+                            <a href="product_details.php?id=<?= $row['prdid'] ?>">
+                                <div class="item col-md-3 product-men my-5">
+                                    <div class="product-shoe-info shoe text-center">
+                                        <div class="men-thumb-item">
+                                            <img src="./product_img/<?= $row['image'] ?>" class="img-fluid" alt="">
+                                            <?php
+                                            $sql12 = "SELECT prdnm FROM admins WHERE status = '4'";
+                                            $result12 = mysqli_query($con, $sql12);
+                                            while ($row12 = mysqli_fetch_assoc($result12)) {
+                                                $a = $row12['prdnm'];
+                                                if ($row['prdnm'] == $a) {
+                                            ?>
+                                                    <span class="product-new-top">Top product</span>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+
+                                        <div class="item-info-product">
+                                            <h4>
+                                                <a href="#"><?= $row['prdnm'] ?></a>
+                                            </h4>
+
+                                            <div class="product_price">
+                                                <div class="grid-price">
+                                                    <span class="money">₹<?= $row['prdpr'] ?></span>
+                                                </div>
+                                            </div>
+                                            <a href="add_wishlist.php?id=<?= $row['prdid'] ?>" class="btn btn-primary cart_btn">Add to Wishlist</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                    <?php
+                        }
+                    } else {
+                        echo "No records found.";
+                    }
+
+                    ?>
+
+                    <div class="pagination d-flex justify-content-center">
+                        <div class="prev">Prev</div>
+                        <div class="page">Page <span class="page-num"></span></div>
+                        <div class="next">Next</div>
+                    </div>
+                </div>
+
+
+
+
             </div>
-        </div>
+
+
+
+
+
+
+
+
     </section>
     <!-- footer -->
     <footer>
@@ -334,6 +628,18 @@ error_reporting(E_ERROR | E_PARSE);
     <!-- //footer -->
 
 </body>
+
+
+<script>
+    const priceRangeInput = document.getElementById('price-range');
+    const selectedValueSpan = document.getElementById('selected-value');
+
+    priceRangeInput.addEventListener('input', function() {
+        const value = priceRangeInput.value;
+        selectedValueSpan.textContent = '$' + value;
+    });
+</script>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
